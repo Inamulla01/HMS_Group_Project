@@ -1,5 +1,5 @@
 
-package lk.avinam.gui.validation;
+package lk.avinam.validation;
 
 import javax.swing.JOptionPane;
 

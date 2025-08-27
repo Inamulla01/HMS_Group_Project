@@ -1,5 +1,5 @@
 
-package lk.avinam.gui.util;
+package lk.avinam.util;
 
 import java.awt.Image;
 import java.net.URL;
