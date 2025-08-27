@@ -1,1 +1,2 @@
-# HMS_Group_Project
+HMS ( Hospital Management System )
+Read Me File Added
