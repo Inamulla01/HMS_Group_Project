@@ -54,27 +54,30 @@ public class DoctorProfile extends javax.swing.JDialog {
         availabilityDate = new com.toedter.calendar.JDateChooser();
         availabilityTimeTo = new com.github.lgooddatepicker.components.TimePicker();
         availabilityTimeFrom = new com.github.lgooddatepicker.components.TimePicker();
-        EditBtn = new javax.swing.JButton();
         password = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        CancelBtn = new javax.swing.JButton();
+        editBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        slmcId.setFont(new java.awt.Font("Nunito ExtraLight", 1, 14)); // NOI18N
-        slmcId.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SLMC ID", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito ExtraLight", 1, 14))); // NOI18N
+        slmcId.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        slmcId.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SLMC ID", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
         slmcId.setEnabled(false);
 
-        fullName.setFont(new java.awt.Font("Nunito ExtraLight", 1, 14)); // NOI18N
-        fullName.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Full Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito ExtraLight", 1, 14))); // NOI18N
+        fullName.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        fullName.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Full Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
         fullName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fullNameActionPerformed(evt);
             }
         });
 
-        email.setFont(new java.awt.Font("Nunito ExtraLight", 1, 14)); // NOI18N
-        email.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito ExtraLight", 1, 14))); // NOI18N
+        email.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        email.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
         email.setDisabledTextColor(new java.awt.Color(153, 153, 153));
         email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,24 +85,24 @@ public class DoctorProfile extends javax.swing.JDialog {
             }
         });
 
-        qualification.setFont(new java.awt.Font("Nunito ExtraLight", 1, 14)); // NOI18N
-        qualification.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Qualification", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito ExtraLight", 1, 14))); // NOI18N
+        qualification.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        qualification.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Qualification", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
         qualification.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 qualificationActionPerformed(evt);
             }
         });
 
-        contact.setFont(new java.awt.Font("Nunito ExtraLight", 1, 14)); // NOI18N
-        contact.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contact No", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito ExtraLight", 1, 14))); // NOI18N
+        contact.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        contact.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contact No", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
         contact.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 contactActionPerformed(evt);
             }
         });
 
-        joinAt.setFont(new java.awt.Font("Nunito ExtraLight", 1, 14)); // NOI18N
-        joinAt.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Join At", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito ExtraLight", 1, 14))); // NOI18N
+        joinAt.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        joinAt.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Join At", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
         joinAt.setDisabledTextColor(new java.awt.Color(153, 153, 153));
         joinAt.setEnabled(false);
         joinAt.addActionListener(new java.awt.event.ActionListener() {
@@ -109,29 +112,24 @@ public class DoctorProfile extends javax.swing.JDialog {
         });
 
         spatialisedIn.setFont(new java.awt.Font("Nunito ExtraLight", 1, 14)); // NOI18N
-        spatialisedIn.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Spatialised In", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito ExtraLight", 1, 14))); // NOI18N
+        spatialisedIn.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Spatialised In", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
         spatialisedIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 spatialisedInActionPerformed(evt);
             }
         });
 
-        availabilityDate.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Availability Date", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito ExtraLight", 1, 14))); // NOI18N
+        availabilityDate.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Availability Date", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
         availabilityDate.setOpaque(false);
 
-        availabilityTimeTo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Availability Time To", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito ExtraLight", 1, 14))); // NOI18N
+        availabilityTimeTo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Availability Time To", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
         availabilityTimeTo.setOpaque(false);
 
-        availabilityTimeFrom.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Availability Time From", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito ExtraLight", 1, 14))); // NOI18N
+        availabilityTimeFrom.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Availability Time From", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
         availabilityTimeFrom.setOpaque(false);
 
-        EditBtn.setBackground(new java.awt.Color(3, 4, 94));
-        EditBtn.setFont(new java.awt.Font("Nunito ExtraLight", 1, 14)); // NOI18N
-        EditBtn.setForeground(new java.awt.Color(204, 255, 255));
-        EditBtn.setText("Edit");
-
-        password.setFont(new java.awt.Font("Nunito ExtraLight", 1, 14)); // NOI18N
-        password.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito ExtraLight", 1, 14))); // NOI18N
+        password.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        password.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
         password.setDisabledTextColor(new java.awt.Color(153, 153, 153));
         password.setEnabled(false);
         password.addActionListener(new java.awt.event.ActionListener() {
@@ -140,22 +138,39 @@ public class DoctorProfile extends javax.swing.JDialog {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Nunito ExtraBold", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(3, 4, 94));
+        jLabel3.setText("Doctor Profile");
+
+        CancelBtn.setBackground(new java.awt.Color(202, 240, 248));
+        CancelBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        CancelBtn.setForeground(new java.awt.Color(3, 4, 94));
+        CancelBtn.setText("Cancel");
+        CancelBtn.setFocusable(false);
+        CancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelBtnActionPerformed(evt);
+            }
+        });
+
+        editBtn.setBackground(new java.awt.Color(3, 4, 94));
+        editBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        editBtn.setForeground(new java.awt.Color(204, 255, 255));
+        editBtn.setText("Edit");
+        editBtn.setFocusable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(EditBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(availabilityTimeFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(availabilityTimeTo, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(joinAt, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
@@ -172,13 +187,29 @@ public class DoctorProfile extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(password)
                                 .addGap(18, 18, 18)
-                                .addComponent(contact, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(24, 24, 24))
+                                .addComponent(contact, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2))
+                            .addComponent(jSeparator1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(availabilityTimeFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(availabilityTimeTo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(CancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addGap(22, 22, 22))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(154, 154, 154)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(fullName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(slmcId, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -201,8 +232,10 @@ public class DoctorProfile extends javax.swing.JDialog {
                     .addComponent(availabilityTimeFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(availabilityTimeTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(EditBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -213,9 +246,7 @@ public class DoctorProfile extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -249,6 +280,10 @@ public class DoctorProfile extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordActionPerformed
 
+    private void CancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CancelBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -270,14 +305,17 @@ public class DoctorProfile extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton EditBtn;
+    private javax.swing.JButton CancelBtn;
     private com.toedter.calendar.JDateChooser availabilityDate;
     private com.github.lgooddatepicker.components.TimePicker availabilityTimeFrom;
     private com.github.lgooddatepicker.components.TimePicker availabilityTimeTo;
     private javax.swing.JTextField contact;
+    private javax.swing.JButton editBtn;
     private javax.swing.JTextField email;
     private javax.swing.JTextField fullName;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField joinAt;
     private javax.swing.JTextField password;
     private javax.swing.JTextField qualification;
