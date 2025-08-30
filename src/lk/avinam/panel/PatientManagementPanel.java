@@ -100,6 +100,9 @@ public class PatientManagementPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane4.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(5).setHeaderValue("Status");
+        }
 
         jButton2.setBackground(new java.awt.Color(0, 119, 182));
         jButton2.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
