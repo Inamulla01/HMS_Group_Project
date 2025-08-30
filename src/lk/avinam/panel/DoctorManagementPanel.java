@@ -12,12 +12,12 @@ import java.awt.Font;
  *
  * @author moham
  */
-public class DoctorDashboard extends javax.swing.JPanel {
+public class DoctorManagementPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form DoctorDashboard
      */
-    public DoctorDashboard() {
+    public DoctorManagementPanel() {
         initComponents();
         init();
     }
@@ -62,19 +62,19 @@ public class DoctorDashboard extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(0, 119, 182));
 
+        jLabel1.setText("Daily Appointments");
         jLabel1.setFont(new java.awt.Font("Nunito ExtraLight", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Daily Appointments");
 
+        jLabel2.setText("10");
         jLabel2.setFont(new java.awt.Font("Nunito ExtraLight", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("10");
 
+        jButton1.setText("All Appoinments");
         jButton1.setBackground(new java.awt.Color(3, 4, 94));
+        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton1.setFont(new java.awt.Font("Nunito ExtraLight", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(202, 240, 248));
-        jButton1.setText("All Appoinments");
-        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel3.setText("jLabel3");
 
@@ -110,9 +110,9 @@ public class DoctorDashboard extends javax.swing.JPanel {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        jLabel4.setText("Doctor Managment");
         jLabel4.setFont(new java.awt.Font("Nunito ExtraBold", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(3, 4, 94));
-        jLabel4.setText("Doctor Managment");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -141,22 +141,22 @@ public class DoctorDashboard extends javax.swing.JPanel {
         addBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         addBtn.setForeground(new java.awt.Color(204, 255, 255));
 
+        CancelBtn.setText("Delete");
         CancelBtn.setBackground(new java.awt.Color(0, 180, 216));
+        CancelBtn.setFocusable(false);
         CancelBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         CancelBtn.setForeground(new java.awt.Color(202, 240, 248));
-        CancelBtn.setText("Delete");
-        CancelBtn.setFocusable(false);
         CancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelBtnActionPerformed(evt);
             }
         });
 
+        CancelBtn1.setText("Update");
         CancelBtn1.setBackground(new java.awt.Color(0, 119, 182));
+        CancelBtn1.setFocusable(false);
         CancelBtn1.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         CancelBtn1.setForeground(new java.awt.Color(202, 240, 248));
-        CancelBtn1.setText("Update");
-        CancelBtn1.setFocusable(false);
         CancelBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelBtn1ActionPerformed(evt);
