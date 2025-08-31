@@ -62,19 +62,19 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(0, 119, 182));
 
-        jLabel1.setText("Daily Appointments");
         jLabel1.setFont(new java.awt.Font("Nunito ExtraLight", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Daily Appointments");
 
-        jLabel2.setText("10");
         jLabel2.setFont(new java.awt.Font("Nunito ExtraLight", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("10");
 
-        jButton1.setText("All Appoinments");
         jButton1.setBackground(new java.awt.Color(3, 4, 94));
-        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton1.setFont(new java.awt.Font("Nunito ExtraLight", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(202, 240, 248));
+        jButton1.setText("All Appoinments");
+        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel3.setText("jLabel3");
 
@@ -83,9 +83,9 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(50, 50, 50)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
@@ -101,8 +101,8 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
                 .addGap(31, 31, 31))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -110,23 +110,23 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jLabel4.setText("Doctor Managment");
         jLabel4.setFont(new java.awt.Font("Nunito ExtraBold", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(3, 4, 94));
+        jLabel4.setText("Doctor Managment");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "SLMC ID", "Full Name", "Email", "Mobile", "Join At", "Qualification", "Availability Date", "Availability Time From", "Availability Time To", "Spatialised In", "Status"
+                "SLMC ID", "Full Name", "Email", "Mobile", "Join At", "Qualification", "Spatialised In", "Action"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -135,28 +135,28 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        addBtn.setText("Add New Docter");
         addBtn.setBackground(new java.awt.Color(3, 4, 94));
-        addBtn.setFocusable(false);
         addBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         addBtn.setForeground(new java.awt.Color(204, 255, 255));
+        addBtn.setText("Add New Docter");
+        addBtn.setFocusable(false);
 
-        CancelBtn.setText("Delete");
         CancelBtn.setBackground(new java.awt.Color(0, 180, 216));
-        CancelBtn.setFocusable(false);
         CancelBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         CancelBtn.setForeground(new java.awt.Color(202, 240, 248));
+        CancelBtn.setText("Delete");
+        CancelBtn.setFocusable(false);
         CancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelBtnActionPerformed(evt);
             }
         });
 
-        CancelBtn1.setText("Update");
         CancelBtn1.setBackground(new java.awt.Color(0, 119, 182));
-        CancelBtn1.setFocusable(false);
         CancelBtn1.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         CancelBtn1.setForeground(new java.awt.Color(202, 240, 248));
+        CancelBtn1.setText("Update");
+        CancelBtn1.setFocusable(false);
         CancelBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelBtn1ActionPerformed(evt);
@@ -179,22 +179,22 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
             }
         });
 
-        CancelBtn2.setText("Search");
         CancelBtn2.setBackground(new java.awt.Color(0, 180, 216));
-        CancelBtn2.setFocusable(false);
         CancelBtn2.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         CancelBtn2.setForeground(new java.awt.Color(202, 240, 248));
+        CancelBtn2.setText("Search");
+        CancelBtn2.setFocusable(false);
         CancelBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelBtn2ActionPerformed(evt);
             }
         });
 
-        jRadioButton1.setText("Inactive");
         jRadioButton1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        jRadioButton1.setText("Inactive");
 
-        jRadioButton2.setText("Active");
         jRadioButton2.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        jRadioButton2.setText("Active");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -229,9 +229,9 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 902, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jTextField1)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(CancelBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
