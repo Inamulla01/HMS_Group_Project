@@ -132,7 +132,7 @@ public class ViewDoctor extends javax.swing.JDialog {
         });
 
         jLabel12.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        jLabel12.setText("Available Date : ");
+        jLabel12.setText("Available Day : ");
 
         jLabel13.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         jLabel13.setText("Available Time From : ");

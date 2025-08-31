@@ -331,7 +331,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Nunito SemiBold" size="16" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Available Date : "/>
+                    <Property name="text" type="java.lang.String" value="Available Day : "/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel13">
