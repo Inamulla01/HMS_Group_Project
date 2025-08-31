@@ -7,7 +7,6 @@ package lk.avinam.gui;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import javax.swing.JOptionPane;
-import lk.avinam.session.Session;
 
 /**
  *
@@ -155,23 +154,18 @@ public class loginScreen extends javax.swing.JFrame {
             System.out.println(passwordText);
 
             if (UserName.equals(labUser) && passwordText.equals(labPassword)) {
-                Session.getInstance().setUsername(UserName);
                 this.dispose();
                 new LaboratoryDashboard().setVisible(true);
             } else if (UserName.equals(adminUser) && passwordText.equals(adminPassword)) {
-                Session.getInstance().setUsername(UserName);
                 this.dispose();
                 new AdminDashboard().setVisible(true);
             } else if (UserName.equals(doctorUser) && passwordText.equals(doctorPassword)) {
-                Session.getInstance().setUsername(UserName);
                 this.dispose();
                 new DoctorDashboard().setVisible(true);
             } else if (UserName.equals(pharmaUser) && passwordText.equals(pharmaPassword)) {
-                Session.getInstance().setUsername(UserName);
                 this.dispose();
                 new PharmacistDashboard().setVisible(true);
             } else if (UserName.equals(staffUser) && passwordText.equals(staffPassword)) {
-                Session.getInstance().setUsername(UserName);
                 this.dispose();
                 new StaffDashboard().setVisible(true);
             } else {
