@@ -60,7 +60,7 @@ public class PharmacistDashboard extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Nunito ExtraBold", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(202, 240, 248));
-        jLabel1.setText("Pharmacist Dashboard");
+        jLabel1.setText("Admin Dashboard");
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
