@@ -5,11 +5,7 @@
 package lk.avinam.gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import java.awt.CardLayout;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-import lk.avinam.panel.DoctorDashboardPanel;
-import lk.avinam.panel.DoctorManagementPanel;
 
 /**
  *
@@ -17,35 +13,16 @@ import lk.avinam.panel.DoctorManagementPanel;
  */
 public class DoctorDashboard extends javax.swing.JFrame {
 
-    private DoctorDashboardPanel dashboardPanel;
-    private DoctorManagementPanel doctorManagementPanel;
-    private CardLayout contentPanelLayout;
-
     /**
      * Creates new form Dashboard
      */
     public DoctorDashboard() {
         initComponents();
         init();
-        loadPanels();
     }
-
-    private void init() {
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-    }
-
-    private void loadPanels() {
-        if (contentPanelLayout == null && contentPanel.getLayout() instanceof CardLayout) {
-            this.contentPanelLayout = (CardLayout) contentPanel.getLayout();    
-        } 
-       
-        this.dashboardPanel = new DoctorDashboardPanel();
-        this.doctorManagementPanel = new DoctorManagementPanel();
-        
-        this.contentPanel.add(dashboardPanel,"dashboard_panel");
-        this.contentPanel.add(doctorManagementPanel,"doctorManagement_panel");
-        SwingUtilities.updateComponentTreeUI(contentPanel);
+    
+    private void init(){
+    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     }
 
@@ -59,8 +36,6 @@ public class DoctorDashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         menuPanel = new javax.swing.JPanel();
-        doctorDashboardBtn = new javax.swing.JButton();
-        doctorManagementBtn = new javax.swing.JButton();
         headerPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -70,49 +45,15 @@ public class DoctorDashboard extends javax.swing.JFrame {
 
         menuPanel.setBackground(new java.awt.Color(3, 4, 94));
 
-        doctorDashboardBtn.setBackground(new java.awt.Color(202, 240, 248));
-        doctorDashboardBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        doctorDashboardBtn.setForeground(new java.awt.Color(3, 4, 94));
-        doctorDashboardBtn.setText("Dashboard");
-        doctorDashboardBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        doctorDashboardBtn.setMargin(new java.awt.Insets(2, 5, 3, 14));
-        doctorDashboardBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doctorDashboardBtnActionPerformed(evt);
-            }
-        });
-
-        doctorManagementBtn.setBackground(new java.awt.Color(202, 240, 248));
-        doctorManagementBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        doctorManagementBtn.setForeground(new java.awt.Color(3, 4, 94));
-        doctorManagementBtn.setText("Doctor Management");
-        doctorManagementBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        doctorManagementBtn.setMargin(new java.awt.Insets(2, 5, 3, 14));
-        doctorManagementBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doctorManagementBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(doctorDashboardBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(doctorManagementBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
-                .addContainerGap())
+            .addGap(0, 241, Short.MAX_VALUE)
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(doctorDashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(doctorManagementBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         headerPanel.setBackground(new java.awt.Color(3, 4, 94));
@@ -138,11 +79,19 @@ public class DoctorDashboard extends javax.swing.JFrame {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
         contentPanel.setBackground(new java.awt.Color(202, 240, 248));
-        contentPanel.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
+        contentPanel.setLayout(contentPanelLayout);
+        contentPanelLayout.setHorizontalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 658, Short.MAX_VALUE)
+        );
+        contentPanelLayout.setVerticalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 380, Short.MAX_VALUE)
+        );
+
         jScrollPane1.setViewportView(contentPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,16 +117,6 @@ public class DoctorDashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void doctorDashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorDashboardBtnActionPerformed
-        // TODO add your handling code here:
-this.contentPanelLayout.show(contentPanel, "dashboard_panel");
-    }//GEN-LAST:event_doctorDashboardBtnActionPerformed
-
-    private void doctorManagementBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorManagementBtnActionPerformed
-        // TODO add your handling code here:
-        this.contentPanelLayout.show(contentPanel, "doctorManagement_panel");
-    }//GEN-LAST:event_doctorManagementBtnActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -194,8 +133,6 @@ this.contentPanelLayout.show(contentPanel, "dashboard_panel");
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;
-    private javax.swing.JButton doctorDashboardBtn;
-    private javax.swing.JButton doctorManagementBtn;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
