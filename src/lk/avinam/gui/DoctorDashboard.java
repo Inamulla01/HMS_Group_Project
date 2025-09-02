@@ -112,14 +112,14 @@ public class DoctorDashboard extends javax.swing.JFrame {
                 .addComponent(doctorDashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(doctorManagementBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(267, Short.MAX_VALUE))
         );
 
         headerPanel.setBackground(new java.awt.Color(3, 4, 94));
 
         jLabel1.setFont(new java.awt.Font("Nunito ExtraBold", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(202, 240, 248));
-        jLabel1.setText("Doctor Dashboard");
+        jLabel1.setText("Docaaaa Dashboard");
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);

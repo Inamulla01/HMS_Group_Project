@@ -5,7 +5,11 @@
 package lk.avinam.gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.CardLayout;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import lk.avinam.panel.AdminDashboardPanel;
+import lk.avinam.panel.PatientManagementPanel;
 
 /**
  *
@@ -16,13 +20,32 @@ public class AdminDashboard extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard
      */
+    private AdminDashboardPanel dashboardPanel;
+    private PatientManagementPanel patientManagementPanel;
+    private CardLayout contentPanelLayout;
+    
     public AdminDashboard() {
         initComponents();
         init();
+         loadPanels();
     }
     
     private void init(){
     this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+    }
+    
+    private void loadPanels() {
+        if (contentPanelLayout == null && contentPanel.getLayout() instanceof CardLayout) {
+            this.contentPanelLayout = (CardLayout) contentPanel.getLayout();    
+        } 
+       
+        this.dashboardPanel = new AdminDashboardPanel();
+        this.patientManagementPanel = new PatientManagementPanel();
+        
+        this.contentPanel.add(dashboardPanel,"dashboard_panel");
+        this.contentPanel.add(patientManagementPanel,"patientManagement_panel");
+        SwingUtilities.updateComponentTreeUI(contentPanel);
 
     }
 
@@ -36,6 +59,8 @@ public class AdminDashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         menuPanel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         headerPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -45,15 +70,47 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         menuPanel.setBackground(new java.awt.Color(3, 4, 94));
 
+        jButton1.setBackground(new java.awt.Color(202, 240, 248));
+        jButton1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(3, 4, 94));
+        jButton1.setText("Dashboard");
+        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(202, 240, 248));
+        jButton2.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(3, 4, 94));
+        jButton2.setText("Patient Management");
+        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 241, Short.MAX_VALUE)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
+                .addContainerGap())
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addGap(151, 151, 151)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         headerPanel.setBackground(new java.awt.Color(3, 4, 94));
@@ -79,19 +136,10 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
         contentPanel.setBackground(new java.awt.Color(202, 240, 248));
-
-        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
-        contentPanel.setLayout(contentPanelLayout);
-        contentPanelLayout.setHorizontalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 658, Short.MAX_VALUE)
-        );
-        contentPanelLayout.setVerticalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 380, Short.MAX_VALUE)
-        );
-
+        contentPanel.setLayout(new java.awt.CardLayout());
         jScrollPane1.setViewportView(contentPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -117,6 +165,16 @@ public class AdminDashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.contentPanelLayout.show(contentPanel, "dashboard_panel");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.contentPanelLayout.show(contentPanel, "patientManagement_panel");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -134,6 +192,8 @@ public class AdminDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;
     private javax.swing.JPanel headerPanel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel menuPanel;
