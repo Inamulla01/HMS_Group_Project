@@ -140,26 +140,26 @@ public class DoctorProfile extends javax.swing.JDialog {
             }
         });
 
-        jLabel3.setText("Doctor Profile");
         jLabel3.setFont(new java.awt.Font("Nunito ExtraBold", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(3, 4, 94));
+        jLabel3.setText("Doctor Profile");
 
-        clearBtn.setText("Clear");
         clearBtn.setBackground(new java.awt.Color(202, 240, 248));
-        clearBtn.setFocusable(false);
         clearBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         clearBtn.setForeground(new java.awt.Color(3, 4, 94));
+        clearBtn.setText("Clear");
+        clearBtn.setFocusable(false);
         clearBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearBtnActionPerformed(evt);
             }
         });
 
-        editBtn.setText("Edit");
         editBtn.setBackground(new java.awt.Color(3, 4, 94));
-        editBtn.setFocusable(false);
         editBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         editBtn.setForeground(new java.awt.Color(204, 255, 255));
+        editBtn.setText("Edit");
+        editBtn.setFocusable(false);
 
         availableBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         availableBtn.setText("Add New Schedule");
@@ -245,9 +245,7 @@ public class DoctorProfile extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(qualification)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(contact, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addComponent(contact)))
                             .addComponent(email)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fullName, javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,10 +344,6 @@ public class DoctorProfile extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_joinAtActionPerformed
 
-    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordActionPerformed
-
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_clearBtnActionPerformed
@@ -364,6 +358,10 @@ public class DoctorProfile extends javax.swing.JDialog {
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordActionPerformed
 
     /**
      * @param args the command line arguments
