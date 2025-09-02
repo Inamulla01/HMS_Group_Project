@@ -150,10 +150,10 @@ public class AdminAndReceptionistDashboardAppointment extends javax.swing.JPanel
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(0, 180, 216));
         jButton5.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setForeground(new java.awt.Color(255, 0, 51));
         jButton5.setText("Cancel");
+        jButton5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
         jTextField1.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         jTextField1.setText("Search By Doctor");

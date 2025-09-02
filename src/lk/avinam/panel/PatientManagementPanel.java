@@ -107,10 +107,9 @@ public class PatientManagementPanel extends javax.swing.JPanel {
         jButton2.setText("Update Patient");
         jButton2.setPreferredSize(new java.awt.Dimension(184, 47));
 
-        jButton4.setBackground(new java.awt.Color(0, 180, 216));
         jButton4.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Delete Patient");
+        jButton4.setForeground(new java.awt.Color(0, 0, 153));
+        jButton4.setText("View All");
         jButton4.setPreferredSize(new java.awt.Dimension(184, 47));
 
         jTextField2.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
@@ -122,10 +121,10 @@ public class PatientManagementPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(202, 240, 248));
         jButton5.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(0, 119, 182));
-        jButton5.setText("View");
+        jButton5.setForeground(new java.awt.Color(255, 0, 51));
+        jButton5.setText("Delete");
+        jButton5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
         jButton5.setPreferredSize(new java.awt.Dimension(184, 47));
 
         jRadioButton1.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N

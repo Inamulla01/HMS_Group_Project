@@ -138,10 +138,10 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        updateAppointmentBtn.setBackground(new java.awt.Color(0, 119, 182));
         updateAppointmentBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        updateAppointmentBtn.setForeground(new java.awt.Color(202, 240, 248));
+        updateAppointmentBtn.setForeground(new java.awt.Color(255, 0, 51));
         updateAppointmentBtn.setText("Cancel");
+        updateAppointmentBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
         updateAppointmentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateAppointmentBtnActionPerformed(evt);
