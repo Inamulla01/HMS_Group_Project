@@ -35,11 +35,16 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/edit.svg", 20, 20);
         addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         updateBtn.setIcon(addIcon);
+<<<<<<< HEAD
                 FlatSVGIcon addIcon2 = new FlatSVGIcon("lk/avinam/icon/plus.svg", 20, 20);
         addIcon2.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         addBtn.setIcon(addIcon2);
         FlatSVGIcon addIcon1 = new FlatSVGIcon("lk/avinam/icon/delete.svg", 20, 20);
         addIcon1.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FFFFFF")));
+=======
+        FlatSVGIcon addIcon1 = new FlatSVGIcon("lk/avinam/icon/delete.svg", 20, 20);
+        addIcon1.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
+>>>>>>> origin/main
         deleteBtn.setIcon(addIcon1);
     }
 
@@ -154,19 +159,43 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         addBtn.setForeground(new java.awt.Color(144, 224, 239));
         addBtn.setText("Add New Docter");
         addBtn.setFocusable(false);
+<<<<<<< HEAD
         addBtn.addActionListener(new java.awt.event.ActionListener() {
+=======
+
+        deleteBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        deleteBtn.setForeground(new java.awt.Color(255, 0, 51));
+        deleteBtn.setText("Delete");
+        deleteBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
+        deleteBtn.setFocusable(false);
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+>>>>>>> origin/main
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+<<<<<<< HEAD
                 addBtnActionPerformed(evt);
+=======
+                deleteBtnActionPerformed(evt);
+>>>>>>> origin/main
             }
         });
 
+<<<<<<< HEAD
         deleteBtn.setBackground(new java.awt.Color(0, 180, 216));
         deleteBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         deleteBtn.setForeground(new java.awt.Color(202, 240, 248));
         deleteBtn.setText("Delete");
         deleteBtn.setFocusable(false);
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+=======
+        updateBtn.setBackground(new java.awt.Color(0, 119, 182));
+        updateBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        updateBtn.setForeground(new java.awt.Color(202, 240, 248));
+        updateBtn.setText("Update");
+        updateBtn.setFocusable(false);
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+>>>>>>> origin/main
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+<<<<<<< HEAD
                 deleteBtnActionPerformed(evt);
             }
         });
@@ -178,6 +207,8 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         updateBtn.setFocusable(false);
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+=======
+>>>>>>> origin/main
                 updateBtnActionPerformed(evt);
             }
         });
@@ -215,7 +246,10 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         jRadioButton2.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jRadioButton2.setText("Active");
 
+<<<<<<< HEAD
         viewBtn.setBackground(new java.awt.Color(202, 240, 248));
+=======
+>>>>>>> origin/main
         viewBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         viewBtn.setForeground(new java.awt.Color(3, 4, 94));
         viewBtn.setText("View All");
@@ -250,14 +284,31 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
+<<<<<<< HEAD
+=======
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jRadioButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButton1))
+>>>>>>> origin/main
+                            .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
+                                .addComponent(jRadioButton2)
+=======
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 902, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+>>>>>>> origin/main
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<<<<<<< HEAD
                                 .addComponent(jRadioButton1))
                             .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 902, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+=======
+>>>>>>> origin/main
                                 .addComponent(jTextField2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(CancelBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -317,6 +368,7 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_viewBtnActionPerformed
 
+<<<<<<< HEAD
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         AddDoctor dialog = new AddDoctor(parentFrame, true);
@@ -324,6 +376,8 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         dialog.setVisible(true);
     }//GEN-LAST:event_addBtnActionPerformed
 
+=======
+>>>>>>> origin/main
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelBtn2;
