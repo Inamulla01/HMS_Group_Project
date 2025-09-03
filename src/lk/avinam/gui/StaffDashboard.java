@@ -5,11 +5,7 @@
 package lk.avinam.gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import java.awt.CardLayout;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-import lk.avinam.panel.PatientManagementPanel;
-import lk.avinam.panel.StaffDashboardPanel;
 
 /**
  *
@@ -20,32 +16,13 @@ public class StaffDashboard extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard
      */
-    private StaffDashboardPanel dashboardPanel;
-    private PatientManagementPanel patientManagementPanel;
-    private CardLayout contentPanelLayout;
-
     public StaffDashboard() {
         initComponents();
         init();
-        loadPanels();
     }
-
-    private void init() {
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-    }
-
-    private void loadPanels() {
-        if (contentPanelLayout == null && contentPanel.getLayout() instanceof CardLayout) {
-            this.contentPanelLayout = (CardLayout) contentPanel.getLayout();
-        }
-
-        this.dashboardPanel = new StaffDashboardPanel();
-        this.patientManagementPanel = new PatientManagementPanel();
-
-        this.contentPanel.add(dashboardPanel, "dashboard_panel");
-        this.contentPanel.add(patientManagementPanel, "patientManagement_panel");
-        SwingUtilities.updateComponentTreeUI(contentPanel);
+    
+    private void init(){
+    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     }
 
@@ -59,8 +36,6 @@ public class StaffDashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         menuPanel = new javax.swing.JPanel();
-        staffDashboardBtn = new javax.swing.JButton();
-        staffPatientManageBtn = new javax.swing.JButton();
         headerPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -70,47 +45,15 @@ public class StaffDashboard extends javax.swing.JFrame {
 
         menuPanel.setBackground(new java.awt.Color(3, 4, 94));
 
-        staffDashboardBtn.setBackground(new java.awt.Color(202, 240, 248));
-        staffDashboardBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        staffDashboardBtn.setForeground(new java.awt.Color(3, 4, 94));
-        staffDashboardBtn.setText("Dashboard");
-        staffDashboardBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        staffDashboardBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffDashboardBtnActionPerformed(evt);
-            }
-        });
-
-        staffPatientManageBtn.setBackground(new java.awt.Color(202, 240, 248));
-        staffPatientManageBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        staffPatientManageBtn.setForeground(new java.awt.Color(3, 4, 94));
-        staffPatientManageBtn.setText("Patient Management");
-        staffPatientManageBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        staffPatientManageBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffPatientManageBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(staffDashboardBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(staffPatientManageBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
-                .addContainerGap())
+            .addGap(0, 241, Short.MAX_VALUE)
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addGap(149, 149, 149)
-                .addComponent(staffDashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(staffPatientManageBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         headerPanel.setBackground(new java.awt.Color(3, 4, 94));
@@ -136,10 +79,19 @@ public class StaffDashboard extends javax.swing.JFrame {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
         contentPanel.setBackground(new java.awt.Color(202, 240, 248));
-        contentPanel.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
+        contentPanel.setLayout(contentPanelLayout);
+        contentPanelLayout.setHorizontalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 658, Short.MAX_VALUE)
+        );
+        contentPanelLayout.setVerticalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 380, Short.MAX_VALUE)
+        );
+
         jScrollPane1.setViewportView(contentPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -165,22 +117,12 @@ public class StaffDashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void staffDashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffDashboardBtnActionPerformed
-        // TODO add your handling code here:
-          this.contentPanelLayout.show(contentPanel, "dashboard_panel");
-    }//GEN-LAST:event_staffDashboardBtnActionPerformed
-
-    private void staffPatientManageBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffPatientManageBtnActionPerformed
-        // TODO add your handling code here:
-          this.contentPanelLayout.show(contentPanel, "patientManagement_panel");
-    }//GEN-LAST:event_staffPatientManageBtnActionPerformed
-
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        FlatLightLaf.setup();
-
+         FlatLightLaf.setup();
+      
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -196,7 +138,5 @@ public class StaffDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel menuPanel;
-    private javax.swing.JButton staffDashboardBtn;
-    private javax.swing.JButton staffPatientManageBtn;
     // End of variables declaration//GEN-END:variables
 }
