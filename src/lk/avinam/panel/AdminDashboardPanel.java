@@ -8,12 +8,12 @@ package lk.avinam.panel;
  *
  * @author Inaamul Hasan
  */
-public class DoctorDashboardPanel extends javax.swing.JPanel {
+public class AdminDashboardPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form DoctorDashboardPanel
      */
-    public DoctorDashboardPanel() {
+    public AdminDashboardPanel() {
         initComponents();
     }
 
