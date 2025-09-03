@@ -4,6 +4,9 @@
  */
 package lk.avinam.dialog;
 
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author abesi
