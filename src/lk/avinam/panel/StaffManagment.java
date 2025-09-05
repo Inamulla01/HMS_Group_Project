@@ -12,12 +12,12 @@ import java.awt.Font;
  *
  * @author abesi
  */
-public class AdminStaffManagment extends javax.swing.JPanel {
+public class StaffManagment extends javax.swing.JPanel {
 
     /**
      * Creates new form AdminStaffManagment
      */
-    public AdminStaffManagment() {
+    public StaffManagment() {
         initComponents();
         init();
        
