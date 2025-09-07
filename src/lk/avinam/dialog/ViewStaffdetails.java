@@ -41,7 +41,6 @@ public class ViewStaffdetails extends javax.swing.JDialog {
         jScrollBar1 = new javax.swing.JScrollBar();
         availableBtn = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -159,9 +158,6 @@ public class ViewStaffdetails extends javax.swing.JDialog {
         jLabel11.setForeground(new java.awt.Color(3, 4, 94));
         jLabel11.setText("Staff Shift Details");
 
-        jLabel7.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        jLabel7.setText("Mobile Number : ");
-
         jLabel10.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         jLabel10.setText("Join At : ");
 
@@ -239,9 +235,7 @@ public class ViewStaffdetails extends javax.swing.JDialog {
                         .addContainerGap(12, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(99, 99, 99)
-                    .addComponent(jLabel7)
-                    .addGap(176, 176, 176)
+                    .addGap(406, 406, 406)
                     .addComponent(jLabel10)
                     .addContainerGap(130, Short.MAX_VALUE)))
         );
@@ -284,9 +278,7 @@ public class ViewStaffdetails extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(369, 369, 369)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel10))
+                    .addComponent(jLabel10)
                     .addContainerGap(106, Short.MAX_VALUE)))
         );
 
@@ -381,7 +373,6 @@ public class ViewStaffdetails extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
