@@ -1,21 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package lk.avinam.session;
 
-/**
- *
- * @author Inaamul Hasan
- */
 public class Session {
 
     private static Session instance;
-    private String username; // changed from email to username
+    private String username; 
 
     private Session() {
     }
-
     public static Session getInstance() {
         if (instance == null) {
             instance = new Session();
@@ -34,5 +26,4 @@ public class Session {
     public void clear() {
         username = null;
     }
-
 }
