@@ -6,6 +6,7 @@ package lk.avinam.gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.JFrame;
+import lk.avinam.panel.LaboratoryDashboardPanel;
 
 /**
  *
@@ -13,6 +14,10 @@ import javax.swing.JFrame;
  */
 public class LaboratoryDashboard extends javax.swing.JFrame {
 
+    private LaboratoryDashboardPanel laboratoryDashboardPanel;
+    
+    
+    
     /**
      * Creates new form Dashboard
      */
