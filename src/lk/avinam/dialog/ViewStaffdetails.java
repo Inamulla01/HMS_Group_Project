@@ -59,7 +59,7 @@ public class ViewStaffdetails extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Nunito ExtraBold", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(3, 4, 94));
-        jLabel1.setText("View Staff Details");
+        jLabel1.setText("View  Staff Details");
 
         jSeparator1.setForeground(new java.awt.Color(3, 4, 94));
 
