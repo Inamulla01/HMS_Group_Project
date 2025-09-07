@@ -68,7 +68,7 @@ public class ViewNurseDetails extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Nunito ExtraBold", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(3, 4, 94));
-        jLabel1.setText("View  Nurse Details");
+        jLabel1.setText("View Nurse Details");
 
         availableBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         availableBtn.setText("Add New Shift");
@@ -228,7 +228,7 @@ public class ViewNurseDetails extends javax.swing.JDialog {
                                     .addGap(195, 195, 195)
                                     .addComponent(availableBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(15, Short.MAX_VALUE))))
+                        .addContainerGap(22, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
