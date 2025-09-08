@@ -56,14 +56,15 @@ public class ViewMorePatient extends javax.swing.JDialog {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         editBtn = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -132,20 +133,8 @@ public class ViewMorePatient extends javax.swing.JDialog {
         jSeparator4.setBackground(new java.awt.Color(3, 4, 94));
         jSeparator4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        jLabel16.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(3, 4, 94));
-        jLabel16.setText("Medicine Name :");
-
-        jLabel17.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(3, 4, 94));
-        jLabel17.setText("Brand : ");
-
         jLabel18.setFont(new java.awt.Font("Nunito ExtraBold", 1, 24)); // NOI18N
         jLabel18.setText("Lab Test Details");
-
-        jLabel19.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(3, 4, 94));
-        jLabel19.setText("Quantity :");
 
         jSeparator5.setBackground(new java.awt.Color(3, 4, 94));
         jSeparator5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -165,6 +154,44 @@ public class ViewMorePatient extends javax.swing.JDialog {
                 editBtnActionPerformed(evt);
             }
         });
+
+        jLabel16.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(3, 4, 94));
+        jLabel16.setText("Medicine Name :");
+
+        jLabel19.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(3, 4, 94));
+        jLabel19.setText("Quantity :");
+
+        jLabel17.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(3, 4, 94));
+        jLabel17.setText("Brand : ");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(155, 155, 155)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(195, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -198,27 +225,21 @@ public class ViewMorePatient extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel12)
                                 .addComponent(jLabel15)
-                                .addComponent(jLabel18)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGap(11, 11, 11)
                                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(182, 182, 182)
-                                    .addComponent(jLabel13))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(12, 12, 12)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel19)
-                                        .addComponent(jLabel16))
-                                    .addGap(156, 156, 156)
-                                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel13)))
                             .addGap(0, 179, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -265,17 +286,13 @@ public class ViewMorePatient extends javax.swing.JDialog {
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -352,6 +369,7 @@ public class ViewMorePatient extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
