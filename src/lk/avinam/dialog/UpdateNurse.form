@@ -266,7 +266,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Nunito SemiBold" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Add New Schedule"/>
+            <Property name="text" type="java.lang.String" value="Add New Shift"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder/>

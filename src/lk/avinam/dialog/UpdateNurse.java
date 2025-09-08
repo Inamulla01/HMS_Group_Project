@@ -121,7 +121,7 @@ init();
         editBtn.setText("Save");
 
         availableBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        availableBtn.setText("Add New Schedule");
+        availableBtn.setText("Add New Shift");
         availableBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         availableBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         availableBtn.addActionListener(new java.awt.event.ActionListener() {
