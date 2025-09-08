@@ -67,7 +67,7 @@ public class NewAppoinmentRoom extends javax.swing.JDialog {
 
         addBtn.setBackground(new java.awt.Color(3, 4, 94));
         addBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        addBtn.setForeground(new java.awt.Color(144, 224, 239));
+        addBtn.setForeground(new java.awt.Color(202, 240, 248));
         addBtn.setText("Save");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
