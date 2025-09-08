@@ -39,30 +39,40 @@
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jRadioButton4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jRadioButton3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jTextField1" max="32767" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton3" min="-2" pref="184" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="283" max="32767" attributes="0"/>
-                                  <Component id="jButton7" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton4" min="-2" pref="155" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton5" min="-2" pref="167" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton6" min="-2" pref="213" max="-2" attributes="0"/>
-                              </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel2" min="-2" pref="382" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="604" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="jButton7" pref="182" max="32767" attributes="0"/>
+                                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButton8" pref="184" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jRadioButton4" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jRadioButton3" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jTextField1" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jButton3" min="-2" pref="184" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jButton4" pref="186" max="32767" attributes="0"/>
+                                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButton5" max="32767" attributes="0"/>
+                                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButton6" pref="209" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -78,29 +88,30 @@
                   <Component id="jLabel2" min="-2" pref="41" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="3" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jButton3" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                          <Component id="jRadioButton4" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="jTextField1" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                          <Component id="jRadioButton2" alignment="3" max="32767" attributes="0"/>
-                          <Component id="jRadioButton3" alignment="3" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton6" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                       <Component id="jButton5" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                       <Component id="jButton4" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="jButton8" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                       <Component id="jButton7" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="418" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jButton3" pref="47" max="32767" attributes="0"/>
+                      <Component id="jRadioButton2" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jRadioButton3" max="32767" attributes="0"/>
+                              <Component id="jRadioButton4" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="392" max="-2" attributes="0"/>
+                  <EmptySpace pref="15" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -155,7 +166,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="View All"/>
+            <Property name="text" type="java.lang.String" value="Attendance"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton5">
@@ -169,7 +180,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f8" green="f0" red="ca" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Update"/>
+            <Property name="text" type="java.lang.String" value="Shift Schedule"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton6">
@@ -208,6 +219,27 @@
               </Border>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton8">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Nunito SemiBold" size="16" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="5e" green="4" red="3" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Update"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder>
+                  <Color PropertyName="color" blue="5e" green="4" red="3" type="rgb"/>
+                </LineBorder>
+              </Border>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField1">
           <Properties>
@@ -265,28 +297,16 @@
             <Component class="javax.swing.JTable" name="jTable1">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="7" rowCount="4">
-                    <Column editable="false" title="NIC" type="java.lang.Object"/>
+                  <Table columnCount="5" rowCount="4">
+                    <Column editable="false" title="Nic" type="java.lang.Object"/>
                     <Column editable="false" title="Name" type="java.lang.Object"/>
-                    <Column editable="false" title="Contact" type="java.lang.Object"/>
                     <Column editable="false" title="Emaill" type="java.lang.Object"/>
                     <Column editable="false" title="Role" type="java.lang.Object"/>
-                    <Column editable="false" title="Gender" type="java.lang.Object"/>
-                    <Column editable="false" title="Status" type="java.lang.Object"/>
+                    <Column editable="false" title="Shift" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
