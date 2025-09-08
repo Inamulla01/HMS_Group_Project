@@ -6,14 +6,14 @@ package lk.avinam.panel;
 
 /**
  *
- * @author Inaamul Hasan
+ * @author User
  */
-public class StaffDashboardPanel extends javax.swing.JPanel {
+public class PharmacistDashboardPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form DoctorDashboardPanel
+     * Creates new form PharmacistDashboardPanel
      */
-    public StaffDashboardPanel() {
+    public PharmacistDashboardPanel() {
         initComponents();
     }
 
@@ -29,26 +29,27 @@ public class StaffDashboardPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(202, 240, 248));
 
-        jLabel1.setText("Dashboard Panel Loaded");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Dashboard Loaded");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(329, 329, 329)
+                .addGap(338, 338, 338)
                 .addComponent(jLabel1)
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addContainerGap(278, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(114, 114, 114)
+                .addGap(113, 113, 113)
                 .addComponent(jLabel1)
-                .addContainerGap(333, Short.MAX_VALUE))
+                .addContainerGap(373, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

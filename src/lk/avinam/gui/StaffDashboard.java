@@ -5,7 +5,9 @@
 package lk.avinam.gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.CardLayout;
 import javax.swing.JFrame;
+import lk.avinam.panel.StaffDashboardPanel;
 
 /**
  *
@@ -13,17 +15,31 @@ import javax.swing.JFrame;
  */
 public class StaffDashboard extends javax.swing.JFrame {
 
+    private StaffDashboardPanel staffDashboardPanel;
+    private CardLayout contentPanelLayout;
+
     /**
      * Creates new form Dashboard
      */
     public StaffDashboard() {
         initComponents();
         init();
+        loadPanels();
     }
-    
-    private void init(){
-    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
+    private void init() {
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        contentPanel.setLayout(new CardLayout());
+    }
+
+    private void loadPanels() {
+
+        if (contentPanelLayout == null && contentPanel.getLayout() instanceof CardLayout) {
+            this.contentPanelLayout = (CardLayout) contentPanel.getLayout();
+        }
+
+        this.staffDashboardPanel = new StaffDashboardPanel();
+        this.contentPanel.add(staffDashboardPanel, "dashboard_panel");
     }
 
     /**
@@ -36,6 +52,7 @@ public class StaffDashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         menuPanel = new javax.swing.JPanel();
+        pharmaDashboardBtn = new javax.swing.JButton();
         headerPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -45,15 +62,36 @@ public class StaffDashboard extends javax.swing.JFrame {
 
         menuPanel.setBackground(new java.awt.Color(3, 4, 94));
 
+        pharmaDashboardBtn.setBackground(new java.awt.Color(144, 224, 239));
+        pharmaDashboardBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        pharmaDashboardBtn.setForeground(new java.awt.Color(3, 4, 94));
+        pharmaDashboardBtn.setText("Dashboard");
+        pharmaDashboardBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        pharmaDashboardBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pharmaDashboardBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 241, Short.MAX_VALUE)
+            .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(menuPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(pharmaDashboardBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 507, Short.MAX_VALUE)
+            .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(menuPanelLayout.createSequentialGroup()
+                    .addGap(147, 147, 147)
+                    .addComponent(pharmaDashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(318, Short.MAX_VALUE)))
         );
 
         headerPanel.setBackground(new java.awt.Color(3, 4, 94));
@@ -117,17 +155,23 @@ public class StaffDashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void pharmaDashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pharmaDashboardBtnActionPerformed
+        // TODO add your handling code here:
+
+        this.contentPanelLayout.show(contentPanel, "dashboard_panel");
+    }//GEN-LAST:event_pharmaDashboardBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-         FlatLightLaf.setup();
-      
+        FlatLightLaf.setup();
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DoctorDashboard().setVisible(true);
+                new StaffDashboard().setVisible(true);
             }
         });
     }
@@ -138,5 +182,6 @@ public class StaffDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JButton pharmaDashboardBtn;
     // End of variables declaration//GEN-END:variables
 }
