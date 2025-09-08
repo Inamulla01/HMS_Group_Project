@@ -6,23 +6,7 @@ package lk.avinam.dialog;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
-import static java.awt.Color.white;
-import java.awt.Font;
-import java.awt.Frame;
-import java.util.Date;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.border.TitledBorder;
 
 /**
  *
