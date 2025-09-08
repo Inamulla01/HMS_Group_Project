@@ -60,7 +60,10 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="qualification" max="32767" attributes="0"/>
-                                      <Component id="contact" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="contact" min="-2" pref="358" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                               <Component id="email" alignment="1" max="32767" attributes="0"/>
