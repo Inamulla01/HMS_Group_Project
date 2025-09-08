@@ -41,7 +41,7 @@ public class ReceptionDashboard extends javax.swing.JFrame {
         }
 
         this.dashboardPanel = new StaffDashboardPanel();
-        this.patientManagementPanel = new PatientManagementPanel(null);
+        this.patientManagementPanel = new PatientManagementPanel();
 
         this.contentPanel.add(dashboardPanel, "dashboard_panel");
         this.contentPanel.add(patientManagementPanel, "patientManagement_panel");
