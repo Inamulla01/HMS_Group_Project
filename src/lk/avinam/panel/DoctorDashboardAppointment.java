@@ -51,7 +51,6 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
         newAppointmentBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        updateAppointmentBtn = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -138,16 +137,6 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        updateAppointmentBtn.setBackground(new java.awt.Color(0, 119, 182));
-        updateAppointmentBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        updateAppointmentBtn.setForeground(new java.awt.Color(202, 240, 248));
-        updateAppointmentBtn.setText("Cancel");
-        updateAppointmentBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateAppointmentBtnActionPerformed(evt);
-            }
-        });
-
         jTextField1.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         jTextField1.setText("Search By Patient");
 
@@ -173,8 +162,7 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
                                 .addComponent(jRadioButton3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jRadioButton4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
-                                .addComponent(updateAppointmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 416, Short.MAX_VALUE))
                             .addComponent(jTextField1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -199,7 +187,6 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
                     .addComponent(jRadioButton2)
                     .addComponent(jRadioButton3)
                     .addComponent(jRadioButton4)
-                    .addComponent(updateAppointmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(newAppointmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
@@ -231,10 +218,6 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
         
     }//GEN-LAST:event_newAppointmentBtnActionPerformed
 
-    private void updateAppointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAppointmentBtnActionPerformed
-        
-    }//GEN-LAST:event_updateAppointmentBtnActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -248,6 +231,5 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton newAppointmentBtn;
-    private javax.swing.JButton updateAppointmentBtn;
     // End of variables declaration//GEN-END:variables
 }

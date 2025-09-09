@@ -18,7 +18,7 @@ import lk.avinam.panel.DoctorManagementPanel;
 public class DoctorDashboard extends javax.swing.JFrame {
 
     private DoctorDashboardPanel dashboardPanel;
-    private DoctorManagementPanel doctorManagementPanel;
+
     private CardLayout contentPanelLayout;
 
     /**
@@ -41,10 +41,9 @@ public class DoctorDashboard extends javax.swing.JFrame {
         } 
        
         this.dashboardPanel = new DoctorDashboardPanel();
-        this.doctorManagementPanel = new DoctorManagementPanel();
+
         
         this.contentPanel.add(dashboardPanel,"dashboard_panel");
-        this.contentPanel.add(doctorManagementPanel,"doctorManagement_panel");
         SwingUtilities.updateComponentTreeUI(contentPanel);
 
     }
@@ -71,7 +70,7 @@ public class DoctorDashboard extends javax.swing.JFrame {
         menuPanel.setBackground(new java.awt.Color(3, 4, 94));
 
         doctorDashboardBtn.setBackground(new java.awt.Color(202, 240, 248));
-        doctorDashboardBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        doctorDashboardBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         doctorDashboardBtn.setForeground(new java.awt.Color(3, 4, 94));
         doctorDashboardBtn.setText("Dashboard");
         doctorDashboardBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -85,7 +84,7 @@ public class DoctorDashboard extends javax.swing.JFrame {
         doctorManagementBtn.setBackground(new java.awt.Color(202, 240, 248));
         doctorManagementBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         doctorManagementBtn.setForeground(new java.awt.Color(3, 4, 94));
-        doctorManagementBtn.setText("Doctor Management");
+        doctorManagementBtn.setText("N/A");
         doctorManagementBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         doctorManagementBtn.setMargin(new java.awt.Insets(2, 5, 3, 14));
         doctorManagementBtn.addActionListener(new java.awt.event.ActionListener() {
