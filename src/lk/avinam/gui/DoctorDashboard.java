@@ -18,7 +18,7 @@ import lk.avinam.panel.DoctorManagementPanel;
 public class DoctorDashboard extends javax.swing.JFrame {
 
     private DoctorDashboardPanel dashboardPanel;
-    private DoctorManagementPanel doctorManagementPanel;
+
     private CardLayout contentPanelLayout;
 
     /**
@@ -41,10 +41,9 @@ public class DoctorDashboard extends javax.swing.JFrame {
         } 
        
         this.dashboardPanel = new DoctorDashboardPanel();
-        this.doctorManagementPanel = new DoctorManagementPanel();
+
         
         this.contentPanel.add(dashboardPanel,"dashboard_panel");
-        this.contentPanel.add(doctorManagementPanel,"doctorManagement_panel");
         SwingUtilities.updateComponentTreeUI(contentPanel);
 
     }
@@ -71,7 +70,7 @@ public class DoctorDashboard extends javax.swing.JFrame {
         menuPanel.setBackground(new java.awt.Color(3, 4, 94));
 
         doctorDashboardBtn.setBackground(new java.awt.Color(202, 240, 248));
-        doctorDashboardBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        doctorDashboardBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         doctorDashboardBtn.setForeground(new java.awt.Color(3, 4, 94));
         doctorDashboardBtn.setText("Dashboard");
         doctorDashboardBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -85,7 +84,7 @@ public class DoctorDashboard extends javax.swing.JFrame {
         doctorManagementBtn.setBackground(new java.awt.Color(202, 240, 248));
         doctorManagementBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         doctorManagementBtn.setForeground(new java.awt.Color(3, 4, 94));
-        doctorManagementBtn.setText("Doctor Management");
+        doctorManagementBtn.setText("N/A");
         doctorManagementBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         doctorManagementBtn.setMargin(new java.awt.Insets(2, 5, 3, 14));
         doctorManagementBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -101,18 +100,18 @@ public class DoctorDashboard extends javax.swing.JFrame {
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(doctorDashboardBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(doctorManagementBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
+                    .addComponent(doctorManagementBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(doctorDashboardBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addGap(150, 150, 150)
-                .addComponent(doctorDashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(doctorDashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(doctorManagementBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(267, Short.MAX_VALUE))
         );
 
         headerPanel.setBackground(new java.awt.Color(3, 4, 94));

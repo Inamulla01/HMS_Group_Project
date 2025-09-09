@@ -96,7 +96,7 @@ public class AddAppointment extends javax.swing.JDialog {
 
         addBtn.setBackground(new java.awt.Color(3, 4, 94));
         addBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        addBtn.setForeground(new java.awt.Color(202, 240, 248));
+        addBtn.setForeground(new java.awt.Color(144, 224, 239));
         addBtn.setText("Save");
 
         jButton4.setBackground(new java.awt.Color(202, 240, 248));
