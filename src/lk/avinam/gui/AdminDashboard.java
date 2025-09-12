@@ -8,7 +8,14 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import lk.avinam.panel.AdminAndReceptionistDashboardAppointment;
 import lk.avinam.panel.AdminDashboardPanel;
+import lk.avinam.panel.AppointmentRoomManagement;
+import lk.avinam.panel.DoctorManagementPanel;
+import lk.avinam.panel.NurseManagment;
+import lk.avinam.panel.PatientManagementPanel;
+import lk.avinam.panel.StaffManagment;
+import lk.avinam.panel.wardandRoomManagement;
 
 /**
  *
@@ -17,6 +24,13 @@ import lk.avinam.panel.AdminDashboardPanel;
 public class AdminDashboard extends javax.swing.JFrame {
 
     private AdminDashboardPanel adminDashboardPanel;
+    private StaffManagment staffManagmentPanel;
+    private DoctorManagementPanel doctorManagementPanel;
+    private NurseManagment nurseManagementPanel;
+    private PatientManagementPanel patientManagementPanel;
+    private wardandRoomManagement wardNroomManagementPanel;
+    private AdminAndReceptionistDashboardAppointment appointmentManagementPanel;
+    private AppointmentRoomManagement appointmentRoomManagementPanel;
     private CardLayout contentPanelLayout;
 
     /**
@@ -42,6 +56,27 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         this.adminDashboardPanel = new AdminDashboardPanel();
         this.contentPanel.add(adminDashboardPanel, "dashboard_panel");
+        
+        this.staffManagmentPanel = new StaffManagment();
+        this.contentPanel.add(staffManagmentPanel, "staff_panel");
+        
+        this.doctorManagementPanel = new DoctorManagementPanel();
+        this.contentPanel.add(doctorManagementPanel, "doctor_panel");
+        
+        this.nurseManagementPanel = new NurseManagment();
+        this.contentPanel.add(nurseManagementPanel, "nurse_panel");
+        
+        this.patientManagementPanel = new PatientManagementPanel();
+        this.contentPanel.add(patientManagementPanel, "patient_panel");
+        
+        this.wardNroomManagementPanel = new wardandRoomManagement();
+        this.contentPanel.add(wardNroomManagementPanel, "ward_panel");
+        
+           this.appointmentRoomManagementPanel = new AppointmentRoomManagement(); 
+        this.contentPanel.add(appointmentRoomManagementPanel, "appointmentRoomManagement_panel");
+        
+        this.appointmentManagementPanel = new AdminAndReceptionistDashboardAppointment();
+        this.contentPanel.add(appointmentManagementPanel, "appointment_panel");
 
         SwingUtilities.updateComponentTreeUI(contentPanel);
 
@@ -58,6 +93,14 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         menuPanel = new javax.swing.JPanel();
         adminDashboardBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         headerPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -68,7 +111,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         menuPanel.setBackground(new java.awt.Color(3, 4, 94));
 
         adminDashboardBtn.setBackground(new java.awt.Color(144, 224, 239));
-        adminDashboardBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        adminDashboardBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         adminDashboardBtn.setForeground(new java.awt.Color(3, 4, 94));
         adminDashboardBtn.setText("Dashboard");
         adminDashboardBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -78,11 +121,109 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(144, 224, 239));
+        jButton1.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(3, 4, 94));
+        jButton1.setText("Staff Management");
+        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(144, 224, 239));
+        jButton2.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(3, 4, 94));
+        jButton2.setText("Doctor Management");
+        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(144, 224, 239));
+        jButton3.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(3, 4, 94));
+        jButton3.setText("Nurse Management");
+        jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setBackground(new java.awt.Color(144, 224, 239));
+        jButton4.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(3, 4, 94));
+        jButton4.setText("Patient Management");
+        jButton4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setBackground(new java.awt.Color(144, 224, 239));
+        jButton5.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(3, 4, 94));
+        jButton5.setText("Ward & Room Management");
+        jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setBackground(new java.awt.Color(144, 224, 239));
+        jButton6.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(3, 4, 94));
+        jButton6.setText("Appointment Management");
+        jButton6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setBackground(new java.awt.Color(144, 224, 239));
+        jButton7.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(3, 4, 94));
+        jButton7.setText("Log Out");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jButton8.setBackground(new java.awt.Color(144, 224, 239));
+        jButton8.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(3, 4, 94));
+        jButton8.setText("Appointment Room");
+        jButton8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 241, Short.MAX_VALUE)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(menuPanelLayout.createSequentialGroup()
                     .addContainerGap()
@@ -91,12 +232,29 @@ public class AdminDashboard extends javax.swing.JFrame {
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 507, Short.MAX_VALUE)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addGap(197, 197, 197)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(menuPanelLayout.createSequentialGroup()
                     .addGap(147, 147, 147)
-                    .addComponent(adminDashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(318, Short.MAX_VALUE)))
+                    .addComponent(adminDashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(319, Short.MAX_VALUE)))
         );
 
         headerPanel.setBackground(new java.awt.Color(3, 4, 94));
@@ -143,7 +301,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(headerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE))
+                .addComponent(jScrollPane1))
         );
 
         pack();
@@ -154,6 +312,45 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         this.contentPanelLayout.show(contentPanel, "dashboard_panel");
     }//GEN-LAST:event_adminDashboardBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+           this.contentPanelLayout.show(contentPanel, "staff_panel");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.contentPanelLayout.show(contentPanel, "doctor_panel");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.contentPanelLayout.show(contentPanel, "nurse_panel");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        this.contentPanelLayout.show(contentPanel, "patient_panel");
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        this.contentPanelLayout.show(contentPanel, "ward_panel");
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        this.contentPanelLayout.show(contentPanel, "appointment_panel");
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+          this.contentPanelLayout.show(contentPanel, "appointmentRoomManagement_panel");
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,6 +370,14 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JButton adminDashboardBtn;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JPanel headerPanel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel menuPanel;

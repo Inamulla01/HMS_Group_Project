@@ -70,7 +70,7 @@ public class LaboratoryDashboard extends javax.swing.JFrame {
         menuPanel.setBackground(new java.awt.Color(3, 4, 94));
 
         labDashboardBtn.setBackground(new java.awt.Color(144, 224, 239));
-        labDashboardBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        labDashboardBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         labDashboardBtn.setForeground(new java.awt.Color(3, 4, 94));
         labDashboardBtn.setText("Dashboard");
         labDashboardBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -81,13 +81,13 @@ public class LaboratoryDashboard extends javax.swing.JFrame {
         });
 
         jButton2.setBackground(new java.awt.Color(144, 224, 239));
-        jButton2.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(3, 4, 94));
         jButton2.setText("jButton1");
         jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         jButton3.setBackground(new java.awt.Color(144, 224, 239));
-        jButton3.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(3, 4, 94));
         jButton3.setText("jButton1");
         jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
