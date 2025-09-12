@@ -167,7 +167,7 @@ public class loginScreen extends javax.swing.JFrame {
                 new PharmacistDashboard().setVisible(true);
             } else if (UserName.equals(staffUser) && passwordText.equals(staffPassword)) {
                 this.dispose();
-                new StaffDashboard().setVisible(true);
+            
             } else {
                 JOptionPane.showMessageDialog(
                         this,
