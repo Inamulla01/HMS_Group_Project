@@ -109,7 +109,7 @@ public class wardandRoomManagement extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Room Number", "Nurse ID", "Patiend ID", "Price", "Status"
+                "Room Number", "Nurse ID", "Patient ID", "Price", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -123,7 +123,12 @@ public class wardandRoomManagement extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jTextField2.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        jTextField2.setText("Search By Room");
+        jTextField2.setText("Search By Ward");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jButton6.setBackground(new java.awt.Color(0, 180, 216));
         jButton6.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
@@ -204,6 +209,10 @@ public class wardandRoomManagement extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

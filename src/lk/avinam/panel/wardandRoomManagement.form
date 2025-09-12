@@ -246,7 +246,7 @@
                   <Table columnCount="5" rowCount="4">
                     <Column editable="false" title="Room Number" type="java.lang.Object"/>
                     <Column editable="false" title="Nurse ID" type="java.lang.Object"/>
-                    <Column editable="false" title="Patiend ID" type="java.lang.Object"/>
+                    <Column editable="false" title="Patient ID" type="java.lang.Object"/>
                     <Column editable="false" title="Price" type="java.lang.Object"/>
                     <Column editable="false" title="Status" type="java.lang.Object"/>
                   </Table>
@@ -292,8 +292,11 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Nunito SemiBold" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Search By Room"/>
+            <Property name="text" type="java.lang.String" value="Search By Ward"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton6">
           <Properties>
