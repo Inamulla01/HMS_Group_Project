@@ -5,7 +5,13 @@
 package lk.avinam.gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.CardLayout;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import lk.avinam.panel.Medicine;
+import lk.avinam.panel.MedicineSales;
+import lk.avinam.panel.PharmacistDashboardPanel;
+import lk.avinam.panel.SuplierList;
 
 /**
  *
@@ -13,17 +19,43 @@ import javax.swing.JFrame;
  */
 public class PharmacistDashboard extends javax.swing.JFrame {
 
+    private PharmacistDashboardPanel pharmaDashboardPanel;
+    private Medicine medicineListPanel;
+    private MedicineSales medicineSales;
+    private SuplierList supplierList;
+    private CardLayout contentPanelLayout;
+
     /**
      * Creates new form Dashboard
      */
     public PharmacistDashboard() {
         initComponents();
         init();
+        loadPanels();
     }
-    
-    private void init(){
-    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
+    private void init() {
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+       
+    }
+
+    private void loadPanels() {
+        if (contentPanelLayout == null && contentPanel.getLayout() instanceof CardLayout) {
+            this.contentPanelLayout = (CardLayout) contentPanel.getLayout();
+        }
+        this.pharmaDashboardPanel = new PharmacistDashboardPanel();
+        this.contentPanel.add(pharmaDashboardPanel, "dashboard_panel");
+        
+        this.medicineListPanel = new Medicine();
+        this.contentPanel.add(medicineListPanel, "medicine_panel");
+        
+        this.medicineSales = new MedicineSales();
+        this.contentPanel.add(medicineSales, "sales_panel");
+        
+        this.supplierList = new SuplierList();
+        this.contentPanel.add(supplierList, "supplier_panel");
+
+        SwingUtilities.updateComponentTreeUI(contentPanel);
     }
 
     /**
@@ -36,6 +68,11 @@ public class PharmacistDashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         menuPanel = new javax.swing.JPanel();
+        pharmaDashboardBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         headerPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -45,15 +82,90 @@ public class PharmacistDashboard extends javax.swing.JFrame {
 
         menuPanel.setBackground(new java.awt.Color(3, 4, 94));
 
+        pharmaDashboardBtn.setBackground(new java.awt.Color(144, 224, 239));
+        pharmaDashboardBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        pharmaDashboardBtn.setForeground(new java.awt.Color(3, 4, 94));
+        pharmaDashboardBtn.setText("Dashboard");
+        pharmaDashboardBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        pharmaDashboardBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pharmaDashboardBtnActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(144, 224, 239));
+        jButton1.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(3, 4, 94));
+        jButton1.setText("Medicine List");
+        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(144, 224, 239));
+        jButton2.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(3, 4, 94));
+        jButton2.setText("Medicine Sales List");
+        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(144, 224, 239));
+        jButton3.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(3, 4, 94));
+        jButton3.setText("Supplier List");
+        jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setBackground(new java.awt.Color(144, 224, 239));
+        jButton4.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(3, 4, 94));
+        jButton4.setText("Log Out");
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 241, Short.MAX_VALUE)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(menuPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(pharmaDashboardBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addGap(199, 199, 199)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+            .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(menuPanelLayout.createSequentialGroup()
+                    .addGap(147, 147, 147)
+                    .addComponent(pharmaDashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(318, Short.MAX_VALUE)))
         );
 
         headerPanel.setBackground(new java.awt.Color(3, 4, 94));
@@ -80,18 +192,7 @@ public class PharmacistDashboard extends javax.swing.JFrame {
         );
 
         contentPanel.setBackground(new java.awt.Color(202, 240, 248));
-
-        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
-        contentPanel.setLayout(contentPanelLayout);
-        contentPanelLayout.setHorizontalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 658, Short.MAX_VALUE)
-        );
-        contentPanelLayout.setVerticalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 380, Short.MAX_VALUE)
-        );
-
+        contentPanel.setLayout(new java.awt.CardLayout());
         jScrollPane1.setViewportView(contentPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -117,6 +218,28 @@ public class PharmacistDashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void pharmaDashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pharmaDashboardBtnActionPerformed
+        // TODO add your handling code here:
+
+        this.contentPanelLayout.show(contentPanel, "dashboard_panel");
+    }//GEN-LAST:event_pharmaDashboardBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.contentPanelLayout.show(contentPanel, "medicine_panel");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        this.contentPanelLayout.show(contentPanel, "sales_panel");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.contentPanelLayout.show(contentPanel, "supplier_panel");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -134,8 +257,13 @@ public class PharmacistDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;
     private javax.swing.JPanel headerPanel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JButton pharmaDashboardBtn;
     // End of variables declaration//GEN-END:variables
 }
