@@ -14,12 +14,12 @@ import javax.swing.SwingUtilities;
  *
  * @author abesi
  */
-public class UpdateStaffe extends javax.swing.JDialog {
+public class UpdateStaff extends javax.swing.JDialog {
 
     /**
      * Creates new form AddStaffeUpdate
      */
-    public UpdateStaffe(java.awt.Frame parent, boolean modal) {
+    public UpdateStaff(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 init();
@@ -351,7 +351,7 @@ init();
         FlatIntelliJLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                UpdateStaffe dialog = new UpdateStaffe(new javax.swing.JFrame(), true);
+                UpdateStaff dialog = new UpdateStaff(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
