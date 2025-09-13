@@ -4,18 +4,21 @@
  */
 package lk.avinam.dialog;
 
+import com.formdev.flatlaf.extras.FlatSVGIcon;
+
 /**
  *
  * @author HP
  */
-public class brandAdd extends javax.swing.JDialog {
+public class AddBrand extends javax.swing.JDialog {
 
     /**
      * Creates new form brandAdd
      */
-    public brandAdd(java.awt.Frame parent, boolean modal) {
+    public AddBrand(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        addBtn.setIcon(new FlatSVGIcon("lk/avinam/icon/plus.svg", 20, 20));
     }
 
     /**
@@ -30,28 +33,30 @@ public class brandAdd extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        addBtn = new javax.swing.JButton();
         jTextField6 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Nunito ExtraBold", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(3, 4, 94));
         jLabel1.setText("Add Brand");
         jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
         jButton1.setBackground(new java.awt.Color(202, 240, 248));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
         jButton1.setForeground(new java.awt.Color(3, 3, 94));
         jButton1.setText("Cancel");
 
-        jButton2.setBackground(new java.awt.Color(3, 3, 94));
-        jButton2.setForeground(new java.awt.Color(202, 240, 248));
-        jButton2.setText("Add");
+        addBtn.setBackground(new java.awt.Color(3, 3, 94));
+        addBtn.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
+        addBtn.setForeground(new java.awt.Color(202, 240, 248));
+        addBtn.setText("Add");
 
-        jTextField6.setBorder(javax.swing.BorderFactory.createTitledBorder("Brand Name"));
+        jTextField6.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        jTextField6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Brand Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -63,7 +68,7 @@ public class brandAdd extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -77,7 +82,7 @@ public class brandAdd extends javax.swing.JDialog {
                 .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -113,21 +118,23 @@ public class brandAdd extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(brandAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddBrand.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(brandAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddBrand.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(brandAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddBrand.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(brandAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddBrand.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                brandAdd dialog = new brandAdd(new javax.swing.JFrame(), true);
+                AddBrand dialog = new AddBrand(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -140,8 +147,8 @@ public class brandAdd extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField6;

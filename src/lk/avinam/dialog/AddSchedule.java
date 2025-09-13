@@ -55,19 +55,22 @@ public class AddSchedule extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jSeparator1.setForeground(new java.awt.Color(3, 4, 94));
+
         jLabel2.setText("Add New Schedule");
         jLabel2.setFont(new java.awt.Font("Nunito ExtraBold", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(3, 4, 94));
 
         jLabel1.setText("Available Day");
         jLabel1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(3, 4, 94));
 
         availabilityFrom.setBackground(new java.awt.Color(255, 255, 255));
-        availabilityFrom.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Availability From", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
+        availabilityFrom.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Availability From", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
         availabilityFrom.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
 
         availabilityTo.setBackground(new java.awt.Color(255, 255, 255));
-        availabilityTo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Availability To", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
+        availabilityTo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Availability To", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
         availabilityTo.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
 
         addBtn.setText("Add");
@@ -76,7 +79,7 @@ public class AddSchedule extends javax.swing.JDialog {
         addBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         addBtn.setForeground(new java.awt.Color(204, 255, 255));
 
-        ClearBtn.setText("Clear");
+        ClearBtn.setText("Cancel");
         ClearBtn.setBackground(new java.awt.Color(202, 240, 248));
         ClearBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ClearBtn.setFocusable(false);
@@ -88,9 +91,10 @@ public class AddSchedule extends javax.swing.JDialog {
             }
         });
 
-        price.setFont(new java.awt.Font("Nunito ExtraLight", 1, 14)); // NOI18N
-        price.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Price", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
+        price.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Price", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
         price.setDisabledTextColor(new java.awt.Color(153, 153, 153));
+        price.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        price.setForeground(new java.awt.Color(3, 4, 94));
         price.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 priceActionPerformed(evt);
@@ -102,7 +106,7 @@ public class AddSchedule extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(availabilityDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -115,7 +119,7 @@ public class AddSchedule extends javax.swing.JDialog {
                     .addComponent(availabilityFrom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                     .addComponent(availabilityTo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(price))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,11 +138,11 @@ public class AddSchedule extends javax.swing.JDialog {
                 .addComponent(availabilityTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ClearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

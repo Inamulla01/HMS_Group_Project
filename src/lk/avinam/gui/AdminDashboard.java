@@ -15,7 +15,7 @@ import lk.avinam.panel.DoctorManagementPanel;
 import lk.avinam.panel.NurseManagment;
 import lk.avinam.panel.PatientManagementPanel;
 import lk.avinam.panel.StaffManagment;
-import lk.avinam.panel.wardandRoomManagement;
+import lk.avinam.panel.RoomManagement;
 
 /**
  *
@@ -28,7 +28,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     private DoctorManagementPanel doctorManagementPanel;
     private NurseManagment nurseManagementPanel;
     private PatientManagementPanel patientManagementPanel;
-    private wardandRoomManagement wardNroomManagementPanel;
+    private RoomManagement wardNroomManagementPanel;
     private AdminAndReceptionistDashboardAppointment appointmentManagementPanel;
     private AppointmentRoomManagement appointmentRoomManagementPanel;
     private CardLayout contentPanelLayout;
@@ -69,7 +69,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         this.patientManagementPanel = new PatientManagementPanel();
         this.contentPanel.add(patientManagementPanel, "patient_panel");
         
-        this.wardNroomManagementPanel = new wardandRoomManagement();
+        this.wardNroomManagementPanel = new RoomManagement();
         this.contentPanel.add(wardNroomManagementPanel, "ward_panel");
         
            this.appointmentRoomManagementPanel = new AppointmentRoomManagement(); 
