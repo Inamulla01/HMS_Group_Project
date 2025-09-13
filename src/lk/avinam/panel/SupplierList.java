@@ -13,12 +13,12 @@ import java.awt.Font;
  *
  * @author HP
  */
-public class SuplierList extends javax.swing.JPanel {
+public class SupplierList extends javax.swing.JPanel {
 
     /**
      * Creates new form SuplierList
      */
-    public SuplierList() {
+    public SupplierList() {
         initComponents();
         init();
         updateBtn.setIcon(new FlatSVGIcon("lk/avinam/icon/edit.svg", 20, 20));
