@@ -8,10 +8,10 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-//import lk.avinam.panel.Medicine;
-//import lk.avinam.panel.MedicineSales;
-//import lk.avinam.panel.PharmacistDashboardPanel;
-//import lk.avinam.panel.SuplierList;
+import lk.avinam.panel.Medicine;
+import lk.avinam.panel.MedicineSales;
+import lk.avinam.panel.PharmacistDashboardPanel;
+import lk.avinam.panel.SupplierList;
 
 /**
  *
@@ -19,6 +19,11 @@ import javax.swing.SwingUtilities;
  */
 public class PharmacistDashboard extends javax.swing.JFrame {
 
+    private PharmacistDashboardPanel pharmaDashboardPanel;
+    private Medicine medicineListPanel;
+    private MedicineSales medicineSales;
+    private SupplierList supplierList;
+    private CardLayout contentPanelLayout;
     
 
     /**
@@ -36,22 +41,22 @@ public class PharmacistDashboard extends javax.swing.JFrame {
     }
 
     private void loadPanels() {
-//        if (contentPanelLayout == null && contentPanel.getLayout() instanceof CardLayout) {
-//            this.contentPanelLayout = (CardLayout) contentPanel.getLayout();
-//        }
-//        this.pharmaDashboardPanel = new PharmacistDashboardPanel();
-//        this.contentPanel.add(pharmaDashboardPanel, "dashboard_panel");
-//        
-//        this.medicineListPanel = new Medicine();
-//        this.contentPanel.add(medicineListPanel, "medicine_panel");
-//        
-//        this.medicineSales = new MedicineSales();
-//        this.contentPanel.add(medicineSales, "sales_panel");
-//        
-//        this.supplierList = new SuplierList();
-//        this.contentPanel.add(supplierList, "supplier_panel");
-//
-//        SwingUtilities.updateComponentTreeUI(contentPanel);
+        if (contentPanelLayout == null && contentPanel.getLayout() instanceof CardLayout) {
+            this.contentPanelLayout = (CardLayout) contentPanel.getLayout();
+        }
+        this.pharmaDashboardPanel = new PharmacistDashboardPanel();
+        this.contentPanel.add(pharmaDashboardPanel, "dashboard_panel");
+        
+        this.medicineListPanel = new Medicine();
+        this.contentPanel.add(medicineListPanel, "medicine_panel");
+        
+        this.medicineSales = new MedicineSales();
+        this.contentPanel.add(medicineSales, "sales_panel");
+        
+        this.supplierList = new SupplierList();
+        this.contentPanel.add(supplierList, "supplier_panel");
+
+        SwingUtilities.updateComponentTreeUI(contentPanel);
     }
 
     /**
