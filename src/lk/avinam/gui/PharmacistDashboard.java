@@ -222,23 +222,23 @@ public class PharmacistDashboard extends javax.swing.JFrame {
     private void pharmaDashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pharmaDashboardBtnActionPerformed
         // TODO add your handling code here:
 
-//        this.contentPanelLayout.show(contentPanel, "dashboard_panel");
+      this.contentPanelLayout.show(contentPanel, "dashboard_panel");
     }//GEN-LAST:event_pharmaDashboardBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-//        this.contentPanelLayout.show(contentPanel, "medicine_panel");
+        this.contentPanelLayout.show(contentPanel, "medicine_panel");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-//        this.contentPanelLayout.show(contentPanel, "sales_panel");
+        this.contentPanelLayout.show(contentPanel, "sales_panel");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-//        this.contentPanelLayout.show(contentPanel, "supplier_panel");
+        this.contentPanelLayout.show(contentPanel, "supplier_panel");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
