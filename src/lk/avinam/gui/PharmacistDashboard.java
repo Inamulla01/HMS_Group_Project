@@ -8,10 +8,10 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import lk.avinam.panel.Medicine;
-import lk.avinam.panel.MedicineSales;
-import lk.avinam.panel.PharmacistDashboardPanel;
-import lk.avinam.panel.SuplierList;
+//import lk.avinam.panel.Medicine;
+//import lk.avinam.panel.MedicineSales;
+//import lk.avinam.panel.PharmacistDashboardPanel;
+//import lk.avinam.panel.SuplierList;
 
 /**
  *
@@ -19,11 +19,7 @@ import lk.avinam.panel.SuplierList;
  */
 public class PharmacistDashboard extends javax.swing.JFrame {
 
-    private PharmacistDashboardPanel pharmaDashboardPanel;
-    private Medicine medicineListPanel;
-    private MedicineSales medicineSales;
-    private SuplierList supplierList;
-    private CardLayout contentPanelLayout;
+    
 
     /**
      * Creates new form Dashboard
@@ -40,22 +36,22 @@ public class PharmacistDashboard extends javax.swing.JFrame {
     }
 
     private void loadPanels() {
-        if (contentPanelLayout == null && contentPanel.getLayout() instanceof CardLayout) {
-            this.contentPanelLayout = (CardLayout) contentPanel.getLayout();
-        }
-        this.pharmaDashboardPanel = new PharmacistDashboardPanel();
-        this.contentPanel.add(pharmaDashboardPanel, "dashboard_panel");
-        
-        this.medicineListPanel = new Medicine();
-        this.contentPanel.add(medicineListPanel, "medicine_panel");
-        
-        this.medicineSales = new MedicineSales();
-        this.contentPanel.add(medicineSales, "sales_panel");
-        
-        this.supplierList = new SuplierList();
-        this.contentPanel.add(supplierList, "supplier_panel");
-
-        SwingUtilities.updateComponentTreeUI(contentPanel);
+//        if (contentPanelLayout == null && contentPanel.getLayout() instanceof CardLayout) {
+//            this.contentPanelLayout = (CardLayout) contentPanel.getLayout();
+//        }
+//        this.pharmaDashboardPanel = new PharmacistDashboardPanel();
+//        this.contentPanel.add(pharmaDashboardPanel, "dashboard_panel");
+//        
+//        this.medicineListPanel = new Medicine();
+//        this.contentPanel.add(medicineListPanel, "medicine_panel");
+//        
+//        this.medicineSales = new MedicineSales();
+//        this.contentPanel.add(medicineSales, "sales_panel");
+//        
+//        this.supplierList = new SuplierList();
+//        this.contentPanel.add(supplierList, "supplier_panel");
+//
+//        SwingUtilities.updateComponentTreeUI(contentPanel);
     }
 
     /**
@@ -221,23 +217,23 @@ public class PharmacistDashboard extends javax.swing.JFrame {
     private void pharmaDashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pharmaDashboardBtnActionPerformed
         // TODO add your handling code here:
 
-        this.contentPanelLayout.show(contentPanel, "dashboard_panel");
+//        this.contentPanelLayout.show(contentPanel, "dashboard_panel");
     }//GEN-LAST:event_pharmaDashboardBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.contentPanelLayout.show(contentPanel, "medicine_panel");
+//        this.contentPanelLayout.show(contentPanel, "medicine_panel");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-        this.contentPanelLayout.show(contentPanel, "sales_panel");
+//        this.contentPanelLayout.show(contentPanel, "sales_panel");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        this.contentPanelLayout.show(contentPanel, "supplier_panel");
+//        this.contentPanelLayout.show(contentPanel, "supplier_panel");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

@@ -62,6 +62,7 @@ public class AddStaffShift extends javax.swing.JDialog {
         jSeparator1.setForeground(new java.awt.Color(3, 4, 94));
 
         jLabel2.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(3, 4, 94));
         jLabel2.setText("Select Date");
 
         addBtn.setBackground(new java.awt.Color(3, 4, 94));
@@ -72,10 +73,11 @@ public class AddStaffShift extends javax.swing.JDialog {
         jButton2.setBackground(new java.awt.Color(202, 240, 248));
         jButton2.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         jButton2.setForeground(new java.awt.Color(3, 4, 94));
-        jButton2.setText("Cancle");
+        jButton2.setText("Cancel");
 
+        jComboBox2.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Shift", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
+        jComboBox2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Shift", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

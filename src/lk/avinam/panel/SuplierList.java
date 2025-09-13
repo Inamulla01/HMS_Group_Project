@@ -4,6 +4,7 @@
  */
 package lk.avinam.panel;
 
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -20,6 +21,8 @@ public class SuplierList extends javax.swing.JPanel {
     public SuplierList() {
         initComponents();
         init();
+        updateBtn.setIcon(new FlatSVGIcon("lk/avinam/icon/edit.svg", 20, 20));
+         addBtn.setIcon(new FlatSVGIcon("lk/avinam/icon/plus.svg", 20, 20));
     }
 
     private void init() {
@@ -48,12 +51,12 @@ public class SuplierList extends javax.swing.JPanel {
         jTextField2 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        updateBtn = new javax.swing.JButton();
+        addBtn = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Nunito ExtraBold", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(3, 4, 94));
         jLabel1.setText("Supplier List");
         jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
@@ -79,30 +82,36 @@ public class SuplierList extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        jTextField2.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
+
         jButton3.setBackground(new java.awt.Color(0, 180, 216));
+        jButton3.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
         jButton3.setForeground(new java.awt.Color(202, 240, 248));
         jButton3.setText("Search");
 
+        jButton4.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
         jButton4.setForeground(new java.awt.Color(204, 0, 0));
         jButton4.setText("Delete");
         jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
-        jButton5.setBackground(new java.awt.Color(0, 119, 182));
-        jButton5.setForeground(new java.awt.Color(202, 240, 248));
-        jButton5.setText("Update");
-        jButton5.setBorder(null);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        updateBtn.setBackground(new java.awt.Color(0, 119, 182));
+        updateBtn.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
+        updateBtn.setForeground(new java.awt.Color(202, 240, 248));
+        updateBtn.setText("Update");
+        updateBtn.setBorder(null);
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                updateBtnActionPerformed(evt);
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(3, 4, 94));
-        jButton6.setForeground(new java.awt.Color(202, 240, 248));
-        jButton6.setText("New Medicine");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        addBtn.setBackground(new java.awt.Color(3, 4, 94));
+        addBtn.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
+        addBtn.setForeground(new java.awt.Color(202, 240, 248));
+        addBtn.setText("New Medicine");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                addBtnActionPerformed(evt);
             }
         });
 
@@ -119,9 +128,9 @@ public class SuplierList extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jTextField2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -138,11 +147,11 @@ public class SuplierList extends javax.swing.JPanel {
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -154,28 +163,30 @@ public class SuplierList extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_updateBtnActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_addBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addBtn;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }

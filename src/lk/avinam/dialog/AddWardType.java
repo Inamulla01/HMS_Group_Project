@@ -48,8 +48,8 @@ public class AddWardType extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(3, 4, 94));
         jLabel2.setText("Add New Ward");
 
-        price1.setFont(new java.awt.Font("Nunito ExtraLight", 1, 14)); // NOI18N
-        price1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ward Type", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
+        price1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        price1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ward Type", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
         price1.setDisabledTextColor(new java.awt.Color(153, 153, 153));
         price1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
