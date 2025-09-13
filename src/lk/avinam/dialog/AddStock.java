@@ -4,7 +4,9 @@
  */
 package lk.avinam.dialog;
 
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Color;
 
 /**
  *
@@ -19,11 +21,20 @@ public class AddStock extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        availableBtn.setIcon(new FlatSVGIcon("lk/avinam/icon/plus.svg", 20, 20));
-        addBtn.setIcon(new FlatSVGIcon("lk/avinam/icon/plus.svg", 20, 20));
+
+   init();
 
     }
 
+    private void init() {
+availableBtn.setIcon(new FlatSVGIcon("lk/avinam/icon/plus.svg", 20, 20));
+        FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
+        addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
+        addBtn.setIcon(addIcon);
+                FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+        cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        cancelBtn.setIcon(cancelIcon);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,7 +48,7 @@ public class AddStock extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
         addBtn = new javax.swing.JButton();
         jComboBox3 = new javax.swing.JComboBox<>();
         jSpinner1 = new javax.swing.JSpinner();
@@ -60,10 +71,10 @@ public class AddStock extends javax.swing.JDialog {
         jComboBox1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jComboBox1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Supplier", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(202, 240, 248));
-        jButton1.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(3, 3, 94));
-        jButton1.setText("Cancel");
+        cancelBtn.setBackground(new java.awt.Color(202, 240, 248));
+        cancelBtn.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(3, 3, 94));
+        cancelBtn.setText("Cancel");
 
         addBtn.setBackground(new java.awt.Color(3, 3, 94));
         addBtn.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
@@ -110,7 +121,7 @@ public class AddStock extends javax.swing.JDialog {
                                         .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                                         .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE))
@@ -141,7 +152,7 @@ public class AddStock extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(availableBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -164,30 +175,7 @@ public class AddStock extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
+FlatIntelliJLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 AddStock dialog = new AddStock(new javax.swing.JFrame(), true);
@@ -205,7 +193,7 @@ public class AddStock extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
     private javax.swing.JButton availableBtn;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton cancelBtn;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;

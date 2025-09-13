@@ -18,14 +18,17 @@ public class AddDoctor extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        init();
+   init();
 
     }
 
     private void init() {
-        FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 20, 20);
+        FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
         addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         addBtn.setIcon(addIcon);
+                FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+        cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        cancelBtn.setIcon(cancelIcon);
     }
 
     @SuppressWarnings("unchecked")
@@ -46,7 +49,7 @@ public class AddDoctor extends javax.swing.JDialog {
         email1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        ClearBtn = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
 
@@ -129,15 +132,15 @@ public class AddDoctor extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(3, 4, 94));
         jLabel2.setText("Add New Doctor");
 
-        ClearBtn.setBackground(new java.awt.Color(202, 240, 248));
-        ClearBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
-        ClearBtn.setForeground(new java.awt.Color(3, 4, 94));
-        ClearBtn.setText("Cancel");
-        ClearBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ClearBtn.setFocusable(false);
-        ClearBtn.addActionListener(new java.awt.event.ActionListener() {
+        cancelBtn.setBackground(new java.awt.Color(202, 240, 248));
+        cancelBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(3, 4, 94));
+        cancelBtn.setText("Cancel");
+        cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelBtn.setFocusable(false);
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ClearBtnActionPerformed(evt);
+                cancelBtnActionPerformed(evt);
             }
         });
 
@@ -191,7 +194,7 @@ public class AddDoctor extends javax.swing.JDialog {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(24, 24, 24)
-                                        .addComponent(ClearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -237,7 +240,7 @@ public class AddDoctor extends javax.swing.JDialog {
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(13, 13, 13)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ClearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
@@ -257,9 +260,9 @@ public class AddDoctor extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearBtnActionPerformed
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ClearBtnActionPerformed
+    }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void lastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameActionPerformed
         // TODO add your handling code here:
@@ -306,8 +309,8 @@ public class AddDoctor extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ClearBtn;
     private javax.swing.JButton addBtn;
+    private javax.swing.JButton cancelBtn;
     private javax.swing.JTextField contact;
     private javax.swing.JTextField email1;
     private javax.swing.JRadioButton female;

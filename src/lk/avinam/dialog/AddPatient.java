@@ -20,15 +20,17 @@ public class AddPatient extends javax.swing.JDialog {
     public AddPatient(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        init();
+   init();
+
     }
 
-    public void init() {
-
-        FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 20, 20);
+    private void init() {
+        FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
         addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         addBtn.setIcon(addIcon);
-
+                FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+        cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        cancelBtn.setIcon(cancelIcon);
 
     }
     @SuppressWarnings("unchecked")
@@ -41,7 +43,7 @@ public class AddPatient extends javax.swing.JDialog {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         addBtn = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
@@ -74,10 +76,10 @@ public class AddPatient extends javax.swing.JDialog {
         addBtn.setForeground(new java.awt.Color(144, 224, 239));
         addBtn.setText("Save");
 
-        jButton4.setBackground(new java.awt.Color(202, 240, 248));
-        jButton4.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(3, 4, 94));
-        jButton4.setText("Cancel");
+        cancelBtn.setBackground(new java.awt.Color(202, 240, 248));
+        cancelBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(3, 4, 94));
+        cancelBtn.setText("Cancel");
 
         jTextField3.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jTextField3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Phone No 2", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
@@ -164,7 +166,7 @@ public class AddPatient extends javax.swing.JDialog {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -202,7 +204,7 @@ public class AddPatient extends javax.swing.JDialog {
                 .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
@@ -245,7 +247,7 @@ public class AddPatient extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton cancelBtn;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private com.toedter.calendar.JDateChooser jDateChooser1;

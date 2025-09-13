@@ -37,13 +37,18 @@ public class DoctorProfile extends javax.swing.JDialog {
     }
 
     private void init() {
-        availableBtn.setIcon(new FlatSVGIcon("lk/avinam/icon/plus.svg", 20, 20));
+        availableBtn.setIcon(new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15));
         FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/edit.svg", 20, 20);
         addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         editBtn.setIcon(addIcon);
         FlatSVGIcon addIcon1 = new FlatSVGIcon("lk/avinam/icon/delete.svg", 20, 20);
         addIcon1.setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.RED));
         deleteBtn.setIcon(addIcon1);
+                availableBtn1.setIcon(new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15));
+
+        FlatSVGIcon addIcon2 = new FlatSVGIcon("lk/avinam/icon/delete.svg", 20, 20);
+        addIcon2.setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.RED));
+        deleteBtn1.setIcon(addIcon2);
     }
 
     @SuppressWarnings("unchecked")

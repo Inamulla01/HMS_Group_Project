@@ -50,7 +50,7 @@
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="jButton3" min="-2" pref="110" max="-2" attributes="0"/>
+                          <Component id="cancelBtn" min="-2" pref="110" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="addBtn" min="-2" pref="110" max="-2" attributes="0"/>
                       </Group>
@@ -80,7 +80,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="addBtn" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="jButton3" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="cancelBtn" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
@@ -193,7 +193,7 @@
             <Property name="text" type="java.lang.String" value="Save"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="cancelBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f8" green="f0" red="ca" type="rgb"/>

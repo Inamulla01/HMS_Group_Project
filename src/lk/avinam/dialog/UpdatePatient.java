@@ -28,6 +28,9 @@ init();
         FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/edit.svg", 20, 20);
         addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         editBtn.setIcon(addIcon);
+                              FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+        cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        cancelBtn.setIcon(cancelIcon);
 
     }
     /**
@@ -74,7 +77,7 @@ init();
         editBtn.setBackground(new java.awt.Color(3, 4, 94));
         editBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         editBtn.setForeground(new java.awt.Color(144, 224, 239));
-        editBtn.setText("Save");
+        editBtn.setText("Update");
 
         cancelBtn.setBackground(new java.awt.Color(202, 240, 248));
         cancelBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N

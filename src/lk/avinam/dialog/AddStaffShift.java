@@ -20,14 +20,17 @@ public class AddStaffShift extends javax.swing.JDialog {
     public AddStaffShift(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        init();
+   init();
+
     }
 
-    public void init() {
-
-        FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 20, 20);
+    private void init() {
+        FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
         addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         addBtn.setIcon(addIcon);
+                FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+        cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        cancelBtn.setIcon(cancelIcon);
 
         staffShift.setMinSelectableDate(new java.util.Date());
 
@@ -48,7 +51,7 @@ public class AddStaffShift extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         addBtn = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -70,10 +73,10 @@ public class AddStaffShift extends javax.swing.JDialog {
         addBtn.setForeground(new java.awt.Color(144, 224, 239));
         addBtn.setText("Save");
 
-        jButton2.setBackground(new java.awt.Color(202, 240, 248));
-        jButton2.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(3, 4, 94));
-        jButton2.setText("Cancel");
+        cancelBtn.setBackground(new java.awt.Color(202, 240, 248));
+        cancelBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(3, 4, 94));
+        cancelBtn.setText("Cancel");
 
         jComboBox2.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -89,7 +92,7 @@ public class AddStaffShift extends javax.swing.JDialog {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -114,7 +117,7 @@ public class AddStaffShift extends javax.swing.JDialog {
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
         );
@@ -155,7 +158,7 @@ FlatIntelliJLaf.setup();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cancelBtn;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

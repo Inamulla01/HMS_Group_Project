@@ -48,7 +48,7 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="availabilityDate" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="ClearBtn" min="-2" pref="130" max="-2" attributes="0"/>
+                          <Component id="cancelBtn" min="-2" pref="130" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="addBtn" min="-2" pref="140" max="-2" attributes="0"/>
                       </Group>
@@ -82,7 +82,7 @@
                   <Component id="price" min="-2" pref="47" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="ClearBtn" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="cancelBtn" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                       <Component id="addBtn" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
@@ -171,7 +171,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="ClearBtn">
+        <Component class="javax.swing.JButton" name="cancelBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancel"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -189,7 +189,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ClearBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelBtnActionPerformed"/>
           </Events>
         </Component>
         <Component class="com.toedter.calendar.JDayChooser" name="availabilityDate">

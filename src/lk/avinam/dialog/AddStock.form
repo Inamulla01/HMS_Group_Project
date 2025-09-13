@@ -65,7 +65,7 @@
                                           <Component id="jComboBox3" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
-                                          <Component id="jButton1" min="-2" pref="111" max="-2" attributes="0"/>
+                                          <Component id="cancelBtn" min="-2" pref="111" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="addBtn" min="-2" pref="111" max="-2" attributes="0"/>
                                       </Group>
@@ -108,7 +108,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="addBtn" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                          <Component id="cancelBtn" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                       </Group>
                       <Component id="availableBtn" min="-2" pref="46" max="-2" attributes="0"/>
                   </Group>
@@ -178,7 +178,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="cancelBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f8" green="f0" red="ca" type="rgb"/>

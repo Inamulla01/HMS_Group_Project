@@ -31,9 +31,13 @@ init();
         FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/edit.svg", 20, 20);
         addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         editBtn.setIcon(addIcon);
+        editBtn1.setIcon(addIcon);
         FlatSVGIcon addIcon1 = new FlatSVGIcon("lk/avinam/icon/delete.svg", 20, 20);
         addIcon1.setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.RED));
         deleteBtn.setIcon(addIcon1);
+                              FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+        cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        cancelBtn.setIcon(cancelIcon);
     }
 
     /**
@@ -64,7 +68,7 @@ init();
         jLabel24 = new javax.swing.JLabel();
         deleteBtn = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
         editBtn1 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         editBtn = new javax.swing.JButton();
@@ -185,10 +189,10 @@ init();
         jLabel12.setForeground(new java.awt.Color(3, 4, 94));
         jLabel12.setText("Staff Schedule Details");
 
-        jButton3.setBackground(new java.awt.Color(202, 240, 248));
-        jButton3.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(3, 4, 94));
-        jButton3.setText("Cancel");
+        cancelBtn.setBackground(new java.awt.Color(202, 240, 248));
+        cancelBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(3, 4, 94));
+        cancelBtn.setText("Cancel");
 
         editBtn1.setBackground(new java.awt.Color(3, 4, 94));
         editBtn1.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
@@ -204,7 +208,7 @@ init();
 
         editBtn.setBackground(new java.awt.Color(3, 4, 94));
         editBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
-        editBtn.setForeground(new java.awt.Color(255, 255, 255));
+        editBtn.setForeground(new java.awt.Color(202, 240, 248));
         editBtn.setText("Edit");
         editBtn.setFocusable(false);
         editBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -245,7 +249,7 @@ init();
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(editBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -301,7 +305,7 @@ init();
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
@@ -312,7 +316,7 @@ init();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,10 +372,10 @@ init();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton availableBtn;
+    private javax.swing.JButton cancelBtn;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JButton editBtn;
     private javax.swing.JButton editBtn1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel23;

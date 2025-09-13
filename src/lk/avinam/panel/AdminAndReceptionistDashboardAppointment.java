@@ -4,6 +4,7 @@
  */
 package lk.avinam.panel;
 
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import lk.avinam.dialog.AddAppointment;
 import lk.avinam.dialog.UpdateAppointment;
 import java.awt.Color;
@@ -29,6 +30,17 @@ public class AdminAndReceptionistDashboardAppointment extends javax.swing.JPanel
        jTable1.getTableHeader().setBackground(Color.decode("#00B4D8"));
        jTable1.getTableHeader().setForeground( Color.decode("#CAF0F8"));
        jTable1.getTableHeader().setPreferredSize(new Dimension(0, 47));
+       
+        FlatSVGIcon addIcon2 = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
+        addIcon2.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
+        addBtn.setIcon(addIcon2);
+        FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/edit.svg", 20, 20);
+        addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
+        editBtn.setIcon(addIcon);
+
+                              FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+        cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        cancelBtn.setIcon(cancelIcon);
 
     }
     
@@ -44,11 +56,11 @@ public class AdminAndReceptionistDashboardAppointment extends javax.swing.JPanel
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
-        newAppointmentBtn = new javax.swing.JButton();
+        addBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        updateAppointmentBtn = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        editBtn = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
@@ -75,13 +87,13 @@ public class AdminAndReceptionistDashboardAppointment extends javax.swing.JPanel
             }
         });
 
-        newAppointmentBtn.setBackground(new java.awt.Color(3, 4, 94));
-        newAppointmentBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        newAppointmentBtn.setForeground(new java.awt.Color(144, 224, 239));
-        newAppointmentBtn.setText("New Appointment");
-        newAppointmentBtn.addActionListener(new java.awt.event.ActionListener() {
+        addBtn.setBackground(new java.awt.Color(3, 4, 94));
+        addBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
+        addBtn.setForeground(new java.awt.Color(144, 224, 239));
+        addBtn.setText("New Appointment");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newAppointmentBtnActionPerformed(evt);
+                addBtnActionPerformed(evt);
             }
         });
 
@@ -104,20 +116,20 @@ public class AdminAndReceptionistDashboardAppointment extends javax.swing.JPanel
         });
         jScrollPane1.setViewportView(jTable1);
 
-        updateAppointmentBtn.setBackground(new java.awt.Color(0, 119, 182));
-        updateAppointmentBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        updateAppointmentBtn.setForeground(new java.awt.Color(202, 240, 248));
-        updateAppointmentBtn.setText("Update");
-        updateAppointmentBtn.addActionListener(new java.awt.event.ActionListener() {
+        editBtn.setBackground(new java.awt.Color(0, 119, 182));
+        editBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
+        editBtn.setForeground(new java.awt.Color(202, 240, 248));
+        editBtn.setText("Update");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateAppointmentBtnActionPerformed(evt);
+                editBtnActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(0, 180, 216));
-        jButton5.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Cancel");
+        cancelBtn.setBackground(new java.awt.Color(0, 180, 216));
+        cancelBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
+        cancelBtn.setText("Cancel");
 
         jTextField1.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         jTextField1.setText("Search By Doctor");
@@ -155,23 +167,21 @@ public class AdminAndReceptionistDashboardAppointment extends javax.swing.JPanel
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton4)
-                                .addGap(81, 81, 81)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(updateAppointmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                            .addComponent(newAppointmentBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jTextField2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton4)
+                        .addGap(48, 48, 48)
+                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
@@ -190,9 +200,9 @@ public class AdminAndReceptionistDashboardAppointment extends javax.swing.JPanel
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(updateAppointmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(newAppointmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jRadioButton4)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
@@ -204,13 +214,13 @@ public class AdminAndReceptionistDashboardAppointment extends javax.swing.JPanel
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void newAppointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAppointmentBtnActionPerformed
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         
-    }//GEN-LAST:event_newAppointmentBtnActionPerformed
+    }//GEN-LAST:event_addBtnActionPerformed
 
-    private void updateAppointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAppointmentBtnActionPerformed
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         
-    }//GEN-LAST:event_updateAppointmentBtnActionPerformed
+    }//GEN-LAST:event_editBtnActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
         // TODO add your handling code here:
@@ -222,8 +232,10 @@ public class AdminAndReceptionistDashboardAppointment extends javax.swing.JPanel
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addBtn;
+    private javax.swing.JButton cancelBtn;
+    private javax.swing.JButton editBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton5;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton jRadioButton4;
@@ -232,7 +244,5 @@ public class AdminAndReceptionistDashboardAppointment extends javax.swing.JPanel
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JButton newAppointmentBtn;
-    private javax.swing.JButton updateAppointmentBtn;
     // End of variables declaration//GEN-END:variables
 }
