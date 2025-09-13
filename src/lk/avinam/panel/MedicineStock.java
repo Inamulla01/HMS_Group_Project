@@ -5,6 +5,7 @@
 package lk.avinam.panel;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Color;
 
 /**
  *
@@ -17,9 +18,25 @@ public class MedicineStock extends javax.swing.JPanel {
      */
     public MedicineStock() {
         initComponents();
-        updateBtn.setIcon(new FlatSVGIcon("lk/avinam/icon/edit.svg", 20, 20));
-         addBtn.setIcon(new FlatSVGIcon("lk/avinam/icon/plus.svg", 20, 20));
-         addBtn1.setIcon(new FlatSVGIcon("lk/avinam/icon/plus.svg", 20, 20));
+        init();
+    }
+    
+    private void init(){
+        FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
+        addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
+        brandBtn.setIcon(addIcon);
+        
+        FlatSVGIcon searchIcon = new FlatSVGIcon("lk/avinam/icon/search.svg", 15, 15);
+        searchIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FFFFFF")));
+        searchBtn.setIcon(searchIcon);
+        
+        FlatSVGIcon updateIcon = new FlatSVGIcon("lk/avinam/icon/update.svg", 20, 20);
+        updateIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
+        updateBtn.setIcon(updateIcon);
+
+        FlatSVGIcon addIcon1 = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
+        addIcon1.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FF0000")));
+        brandBtn.setIcon(addIcon);
     }
 
     /**
@@ -35,11 +52,11 @@ public class MedicineStock extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        searchBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
-        addBtn1 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
         addBtn = new javax.swing.JButton();
+        jTextField2 = new javax.swing.JTextField();
+        brandBtn = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -69,10 +86,10 @@ public class MedicineStock extends javax.swing.JPanel {
         jLabel2.setText("Medicine Stock List");
         jLabel2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
-        jButton6.setBackground(new java.awt.Color(0, 180, 216));
-        jButton6.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(202, 240, 248));
-        jButton6.setText("Search");
+        searchBtn.setBackground(new java.awt.Color(0, 180, 216));
+        searchBtn.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
+        searchBtn.setForeground(new java.awt.Color(202, 240, 248));
+        searchBtn.setText("Search");
 
         updateBtn.setBackground(new java.awt.Color(0, 119, 182));
         updateBtn.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
@@ -85,22 +102,28 @@ public class MedicineStock extends javax.swing.JPanel {
             }
         });
 
-        addBtn1.setBackground(new java.awt.Color(3, 4, 94));
-        addBtn1.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
-        addBtn1.setForeground(new java.awt.Color(202, 240, 248));
-        addBtn1.setText("New Stock");
-        addBtn1.addActionListener(new java.awt.event.ActionListener() {
+        addBtn.setBackground(new java.awt.Color(3, 4, 94));
+        addBtn.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
+        addBtn.setForeground(new java.awt.Color(202, 240, 248));
+        addBtn.setText("New Stock");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBtn1ActionPerformed(evt);
+                addBtnActionPerformed(evt);
             }
         });
 
         jTextField2.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
+        jTextField2.setText("Search By Medicine");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
-        addBtn.setBackground(new java.awt.Color(0, 180, 216));
-        addBtn.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
-        addBtn.setForeground(new java.awt.Color(202, 240, 248));
-        addBtn.setText("Add Brand");
+        brandBtn.setBackground(new java.awt.Color(0, 180, 216));
+        brandBtn.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
+        brandBtn.setForeground(new java.awt.Color(202, 240, 248));
+        brandBtn.setText("Add Brand");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -115,14 +138,14 @@ public class MedicineStock extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(brandBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextField2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))))
+                            .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))))
                 .addGap(21, 21, 21))
         );
         jPanel2Layout.setVerticalGroup(
@@ -132,15 +155,15 @@ public class MedicineStock extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField2)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(brandBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
                 .addGap(15, 15, 15))
@@ -162,20 +185,24 @@ public class MedicineStock extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_updateBtnActionPerformed
 
-    private void addBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtn1ActionPerformed
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_addBtn1ActionPerformed
+    }//GEN-LAST:event_addBtnActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
-    private javax.swing.JButton addBtn1;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton brandBtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton searchBtn;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }
