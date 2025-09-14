@@ -129,6 +129,7 @@
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Brand Name">
                   <Font PropertyName="font" name="Nunito SemiBold" size="14" style="1"/>
+                  <Color PropertyName="color" blue="5e" green="4" red="3" type="rgb"/>
                 </TitledBorder>
               </Border>
             </Property>
