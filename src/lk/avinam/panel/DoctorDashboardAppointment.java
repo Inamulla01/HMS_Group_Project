@@ -36,7 +36,7 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
         searchBtn.setIcon(searchIcon);
         
         FlatSVGIcon eyeIcon = new FlatSVGIcon("lk/avinam/icon/eye.svg", 20, 20);
-        eyeIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
+        eyeIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         viewBtn.setIcon(eyeIcon);
 
         FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);

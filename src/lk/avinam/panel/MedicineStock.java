@@ -35,7 +35,7 @@ public class MedicineStock extends javax.swing.JPanel {
         updateBtn.setIcon(updateIcon);
 
         FlatSVGIcon addIcon1 = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
-        addIcon1.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FF0000")));
+        addIcon1.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FFFFFF")));
         brandBtn.setIcon(addIcon);
     }
 
@@ -57,6 +57,8 @@ public class MedicineStock extends javax.swing.JPanel {
         addBtn = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         brandBtn = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 

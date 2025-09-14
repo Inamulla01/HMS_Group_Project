@@ -30,9 +30,9 @@ public class PatientManagementPanel extends javax.swing.JPanel {
         jTable1.getTableHeader().setForeground(Color.decode("#CAF0F8"));
         jTable1.getTableHeader().setPreferredSize(new Dimension(0, 47));
         
-        FlatSVGIcon addIcon2 = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
-        addIcon2.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
-        addBtn.setIcon(addIcon2);
+        FlatSVGIcon plusIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
+        plusIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
+        addBtn.setIcon(plusIcon);
         
         FlatSVGIcon searchIcon = new FlatSVGIcon("lk/avinam/icon/search.svg", 15, 15);
         searchIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FFFFFF")));
@@ -47,7 +47,7 @@ public class PatientManagementPanel extends javax.swing.JPanel {
         cancelBtn.setIcon(cancelIcon);
         
         FlatSVGIcon eyeIcon = new FlatSVGIcon("lk/avinam/icon/eye.svg", 20, 20);
-        eyeIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        eyeIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FFFFFF")));
         viewBtn.setIcon(eyeIcon);
     }
     
@@ -74,9 +74,11 @@ public class PatientManagementPanel extends javax.swing.JPanel {
         jRadioButton2 = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         addBtn.setBackground(new java.awt.Color(3, 4, 94));
         addBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        addBtn.setForeground(new java.awt.Color(255, 255, 255));
+        addBtn.setForeground(new java.awt.Color(144, 224, 239));
         addBtn.setText("Add Patient");
         addBtn.setPreferredSize(new java.awt.Dimension(184, 47));
         addBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +127,7 @@ public class PatientManagementPanel extends javax.swing.JPanel {
 
         updateBtn.setBackground(new java.awt.Color(0, 119, 182));
         updateBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        updateBtn.setForeground(new java.awt.Color(255, 255, 255));
+        updateBtn.setForeground(new java.awt.Color(202, 240, 248));
         updateBtn.setText("Update Patient");
         updateBtn.setPreferredSize(new java.awt.Dimension(184, 47));
 
@@ -144,10 +146,10 @@ public class PatientManagementPanel extends javax.swing.JPanel {
             }
         });
 
-        viewBtn.setBackground(new java.awt.Color(202, 240, 248));
+        viewBtn.setBackground(new java.awt.Color(0, 180, 216));
         viewBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        viewBtn.setForeground(new java.awt.Color(0, 119, 182));
-        viewBtn.setText("View");
+        viewBtn.setForeground(new java.awt.Color(255, 255, 255));
+        viewBtn.setText("View All");
         viewBtn.setPreferredSize(new java.awt.Dimension(184, 47));
 
         jRadioButton1.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
