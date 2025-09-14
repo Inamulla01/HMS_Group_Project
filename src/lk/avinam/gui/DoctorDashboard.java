@@ -5,7 +5,9 @@
 package lk.avinam.gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.CardLayout;
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import lk.avinam.panel.DoctorDashboardAppointment;
@@ -34,6 +36,18 @@ public class DoctorDashboard extends javax.swing.JFrame {
 
     private void init() {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        FlatSVGIcon dashboardIcon = new FlatSVGIcon("lk/avinam/icon/dashboard.svg", 20, 20);
+        dashboardIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        doctorDashboardBtn.setIcon(dashboardIcon);
+
+        FlatSVGIcon doctorManagementIcon = new FlatSVGIcon("lk/avinam/icon/appointment.svg", 20, 20);
+        doctorManagementIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        doctorManagementBtn.setIcon(doctorManagementIcon);
+
+        FlatSVGIcon logOutIcon = new FlatSVGIcon("lk/avinam/icon/log-out.svg", 20, 20);
+        logOutIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        logOutBtn.setIcon(logOutIcon);
+
 
     }
 
@@ -63,7 +77,7 @@ public class DoctorDashboard extends javax.swing.JFrame {
         menuPanel = new javax.swing.JPanel();
         doctorDashboardBtn = new javax.swing.JButton();
         doctorManagementBtn = new javax.swing.JButton();
-        doctorManagementBtn1 = new javax.swing.JButton();
+        logOutBtn = new javax.swing.JButton();
         headerPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -76,7 +90,7 @@ public class DoctorDashboard extends javax.swing.JFrame {
         doctorDashboardBtn.setBackground(new java.awt.Color(202, 240, 248));
         doctorDashboardBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         doctorDashboardBtn.setForeground(new java.awt.Color(3, 4, 94));
-        doctorDashboardBtn.setText("Dashboard");
+        doctorDashboardBtn.setText(" Dashboard");
         doctorDashboardBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         doctorDashboardBtn.setMargin(new java.awt.Insets(2, 5, 3, 14));
         doctorDashboardBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +102,7 @@ public class DoctorDashboard extends javax.swing.JFrame {
         doctorManagementBtn.setBackground(new java.awt.Color(202, 240, 248));
         doctorManagementBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         doctorManagementBtn.setForeground(new java.awt.Color(3, 4, 94));
-        doctorManagementBtn.setText("Manage Appointments");
+        doctorManagementBtn.setText(" Manage Appointments");
         doctorManagementBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         doctorManagementBtn.setMargin(new java.awt.Insets(2, 5, 3, 14));
         doctorManagementBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -97,14 +111,14 @@ public class DoctorDashboard extends javax.swing.JFrame {
             }
         });
 
-        doctorManagementBtn1.setBackground(new java.awt.Color(202, 240, 248));
-        doctorManagementBtn1.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
-        doctorManagementBtn1.setForeground(new java.awt.Color(3, 4, 94));
-        doctorManagementBtn1.setText("Log Out");
-        doctorManagementBtn1.setMargin(new java.awt.Insets(2, 5, 3, 14));
-        doctorManagementBtn1.addActionListener(new java.awt.event.ActionListener() {
+        logOutBtn.setBackground(new java.awt.Color(202, 240, 248));
+        logOutBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        logOutBtn.setForeground(new java.awt.Color(3, 4, 94));
+        logOutBtn.setText(" Log Out");
+        logOutBtn.setMargin(new java.awt.Insets(2, 5, 3, 14));
+        logOutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doctorManagementBtn1ActionPerformed(evt);
+                logOutBtnActionPerformed(evt);
             }
         });
 
@@ -117,7 +131,7 @@ public class DoctorDashboard extends javax.swing.JFrame {
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(doctorManagementBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                     .addComponent(doctorDashboardBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(doctorManagementBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
+                    .addComponent(logOutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
                 .addContainerGap())
         );
         menuPanelLayout.setVerticalGroup(
@@ -128,8 +142,8 @@ public class DoctorDashboard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(doctorManagementBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(doctorManagementBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(logOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
         );
 
         headerPanel.setBackground(new java.awt.Color(3, 4, 94));
@@ -195,9 +209,9 @@ this.contentPanelLayout.show(contentPanel, "dashboard_panel");
         this.contentPanelLayout.show(contentPanel, "appointment_panel");
     }//GEN-LAST:event_doctorManagementBtnActionPerformed
 
-    private void doctorManagementBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorManagementBtn1ActionPerformed
+    private void logOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_doctorManagementBtn1ActionPerformed
+    }//GEN-LAST:event_logOutBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,10 +231,10 @@ this.contentPanelLayout.show(contentPanel, "dashboard_panel");
     private javax.swing.JPanel contentPanel;
     private javax.swing.JButton doctorDashboardBtn;
     private javax.swing.JButton doctorManagementBtn;
-    private javax.swing.JButton doctorManagementBtn1;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton logOutBtn;
     private javax.swing.JPanel menuPanel;
     // End of variables declaration//GEN-END:variables
 }

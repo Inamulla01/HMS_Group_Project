@@ -5,7 +5,9 @@
 package lk.avinam.gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.CardLayout;
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import lk.avinam.panel.LaboratoryDashboardPanel;
@@ -32,6 +34,22 @@ public class LaboratoryDashboard extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         contentPanel.setLayout(new CardLayout());
         this.contentPanelLayout = (CardLayout) contentPanel.getLayout();
+        FlatSVGIcon dashboardIcon = new FlatSVGIcon("lk/avinam/icon/dashboard.svg", 20, 20);
+        dashboardIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        labDashboardBtn.setIcon(dashboardIcon);
+
+        FlatSVGIcon testScheduleIcon = new FlatSVGIcon("lk/avinam/icon/test-schedule.svg", 20, 20);
+        testScheduleIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        testScheduleBtn.setIcon(testScheduleIcon);
+        
+        FlatSVGIcon testManagmentIcon = new FlatSVGIcon("lk/avinam/icon/test-managment.svg", 20, 20);
+        testManagmentIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        testManagmentBtn.setIcon(testManagmentIcon);
+
+        FlatSVGIcon logOutIcon = new FlatSVGIcon("lk/avinam/icon/log-out.svg", 20, 20);
+        logOutIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        logOutBtn.setIcon(logOutIcon);
+
     }
 
     private void loadPanels() {
@@ -58,8 +76,9 @@ public class LaboratoryDashboard extends javax.swing.JFrame {
 
         menuPanel = new javax.swing.JPanel();
         labDashboardBtn = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        testScheduleBtn = new javax.swing.JButton();
+        testManagmentBtn = new javax.swing.JButton();
+        logOutBtn = new javax.swing.JButton();
         headerPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -72,7 +91,7 @@ public class LaboratoryDashboard extends javax.swing.JFrame {
         labDashboardBtn.setBackground(new java.awt.Color(144, 224, 239));
         labDashboardBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         labDashboardBtn.setForeground(new java.awt.Color(3, 4, 94));
-        labDashboardBtn.setText("Dashboard");
+        labDashboardBtn.setText(" Dashboard");
         labDashboardBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         labDashboardBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,17 +99,22 @@ public class LaboratoryDashboard extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(144, 224, 239));
-        jButton2.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(3, 4, 94));
-        jButton2.setText("jButton1");
-        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        testScheduleBtn.setBackground(new java.awt.Color(144, 224, 239));
+        testScheduleBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        testScheduleBtn.setForeground(new java.awt.Color(3, 4, 94));
+        testScheduleBtn.setText(" Test Schedule");
+        testScheduleBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
-        jButton3.setBackground(new java.awt.Color(144, 224, 239));
-        jButton3.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(3, 4, 94));
-        jButton3.setText("jButton1");
-        jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        testManagmentBtn.setBackground(new java.awt.Color(144, 224, 239));
+        testManagmentBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        testManagmentBtn.setForeground(new java.awt.Color(3, 4, 94));
+        testManagmentBtn.setText(" Test Managment");
+        testManagmentBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        logOutBtn.setBackground(new java.awt.Color(144, 224, 239));
+        logOutBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        logOutBtn.setForeground(new java.awt.Color(3, 4, 94));
+        logOutBtn.setText("Log Out");
 
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
@@ -100,8 +124,9 @@ public class LaboratoryDashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labDashboardBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(testScheduleBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(testManagmentBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(logOutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
                 .addContainerGap())
         );
         menuPanelLayout.setVerticalGroup(
@@ -110,10 +135,12 @@ public class LaboratoryDashboard extends javax.swing.JFrame {
                 .addGap(151, 151, 151)
                 .addComponent(labDashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(testScheduleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(testManagmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         headerPanel.setBackground(new java.awt.Color(3, 4, 94));
@@ -189,11 +216,12 @@ public class LaboratoryDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;
     private javax.swing.JPanel headerPanel;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton labDashboardBtn;
+    private javax.swing.JButton logOutBtn;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JButton testManagmentBtn;
+    private javax.swing.JButton testScheduleBtn;
     // End of variables declaration//GEN-END:variables
 }
