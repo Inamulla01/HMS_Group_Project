@@ -19,6 +19,7 @@ import lk.avinam.panel.LaboratoryDashboardPanel;
 public class LaboratoryDashboard extends javax.swing.JFrame {
 
     private LaboratoryDashboardPanel laboratoryDashboardPanel;
+    
     private CardLayout contentPanelLayout;
 
     /**
