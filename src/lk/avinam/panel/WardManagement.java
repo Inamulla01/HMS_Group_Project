@@ -87,6 +87,7 @@ public class WardManagement extends javax.swing.JPanel {
         addBtn.setForeground(new java.awt.Color(144, 224, 239));
         addBtn.setText("Add Ward");
 
+        jTable1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -106,6 +107,7 @@ public class WardManagement extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setRowHeight(47);
         jScrollPane1.setViewportView(jTable1);
 
         jTextField2.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N

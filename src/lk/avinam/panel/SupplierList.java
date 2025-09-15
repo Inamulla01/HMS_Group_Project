@@ -47,7 +47,7 @@ public class SupplierList extends javax.swing.JPanel {
         cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FF0000")));
         cancelBtn.setIcon(cancelIcon);
         
- FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg", 15, 15);
+ FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg", 20, 20);
         reportIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         reportBtn.setIcon(reportIcon);
     }
@@ -79,6 +79,7 @@ public class SupplierList extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(3, 4, 94));
         jLabel1.setText("Supplier List");
 
+        jTable1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -98,6 +99,7 @@ public class SupplierList extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setRowHeight(47);
         jScrollPane1.setViewportView(jTable1);
 
         jTextField2.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N

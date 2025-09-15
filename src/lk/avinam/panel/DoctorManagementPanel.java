@@ -49,7 +49,7 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
         cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FF0000")));
         cancelBtn.setIcon(cancelIcon);
-                               FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg", 15, 15);
+                               FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg", 20, 20);
         reportIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         reportBtn.setIcon(reportIcon);
     }
@@ -96,6 +96,7 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(3, 4, 94));
         jLabel4.setText("Doctor Managment");
 
+        jTable1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -115,6 +116,7 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setRowHeight(47);
         jScrollPane1.setViewportView(jTable1);
 
         addBtn.setBackground(new java.awt.Color(3, 4, 94));
@@ -125,7 +127,7 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
 
         cancelBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         cancelBtn.setForeground(new java.awt.Color(255, 51, 51));
-        cancelBtn.setText("Delete");
+        cancelBtn.setText("Cancel");
         cancelBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
         cancelBtn.setFocusable(false);
         cancelBtn.addActionListener(new java.awt.event.ActionListener() {
