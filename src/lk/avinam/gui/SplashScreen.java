@@ -6,6 +6,7 @@ package lk.avinam.gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.Timer;
+import lk.avinam.util.AppIconUtil;
 
 
 /**
@@ -20,6 +21,7 @@ public class SplashScreen extends javax.swing.JFrame {
     public SplashScreen() {
  
         initComponents();
+        AppIconUtil.applyIcon(this);
         // Run a timer for 5 seconds (5000 ms)
         Timer timer = new Timer(5000, e -> {
             this.dispose(); // close splash screen

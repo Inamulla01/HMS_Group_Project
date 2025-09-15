@@ -20,15 +20,18 @@ public class AddSchedule extends javax.swing.JDialog {
     public AddSchedule(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        init();
+   init();
+
     }
 
-    public void init() {
-        FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 20, 20);
+    private void init() {
+        FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
         addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         addBtn.setIcon(addIcon);
-        availabilityDate.setMinSelectableDate(new java.util.Date());
-
+                FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+        cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        cancelBtn.setIcon(cancelIcon);
+availabilityDate.setMinSelectableDate(new java.util.Date());
     }
 
     /**
@@ -47,7 +50,7 @@ public class AddSchedule extends javax.swing.JDialog {
         availabilityFrom = new com.github.lgooddatepicker.components.TimePicker();
         availabilityTo = new com.github.lgooddatepicker.components.TimePicker();
         addBtn = new javax.swing.JButton();
-        ClearBtn = new javax.swing.JButton();
+        cancelBtn = new javax.swing.JButton();
         availabilityDate = new com.toedter.calendar.JDayChooser();
         price = new javax.swing.JTextField();
 
@@ -55,19 +58,22 @@ public class AddSchedule extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jSeparator1.setForeground(new java.awt.Color(3, 4, 94));
+
         jLabel2.setText("Add New Schedule");
         jLabel2.setFont(new java.awt.Font("Nunito ExtraBold", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(3, 4, 94));
 
         jLabel1.setText("Available Day");
         jLabel1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(3, 4, 94));
 
         availabilityFrom.setBackground(new java.awt.Color(255, 255, 255));
-        availabilityFrom.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Availability From", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
+        availabilityFrom.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Availability From", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
         availabilityFrom.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
 
         availabilityTo.setBackground(new java.awt.Color(255, 255, 255));
-        availabilityTo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Availability To", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
+        availabilityTo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Availability To", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
         availabilityTo.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
 
         addBtn.setText("Add");
@@ -76,21 +82,22 @@ public class AddSchedule extends javax.swing.JDialog {
         addBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         addBtn.setForeground(new java.awt.Color(204, 255, 255));
 
-        ClearBtn.setText("Clear");
-        ClearBtn.setBackground(new java.awt.Color(202, 240, 248));
-        ClearBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ClearBtn.setFocusable(false);
-        ClearBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
-        ClearBtn.setForeground(new java.awt.Color(3, 4, 94));
-        ClearBtn.addActionListener(new java.awt.event.ActionListener() {
+        cancelBtn.setText("Cancel");
+        cancelBtn.setBackground(new java.awt.Color(202, 240, 248));
+        cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelBtn.setFocusable(false);
+        cancelBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        cancelBtn.setForeground(new java.awt.Color(3, 4, 94));
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ClearBtnActionPerformed(evt);
+                cancelBtnActionPerformed(evt);
             }
         });
 
-        price.setFont(new java.awt.Font("Nunito ExtraLight", 1, 14)); // NOI18N
-        price.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Price", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
+        price.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Price", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
         price.setDisabledTextColor(new java.awt.Color(153, 153, 153));
+        price.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        price.setForeground(new java.awt.Color(3, 4, 94));
         price.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 priceActionPerformed(evt);
@@ -102,11 +109,11 @@ public class AddSchedule extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(availabilityDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(ClearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2)
@@ -115,7 +122,7 @@ public class AddSchedule extends javax.swing.JDialog {
                     .addComponent(availabilityFrom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                     .addComponent(availabilityTo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(price))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,11 +141,11 @@ public class AddSchedule extends javax.swing.JDialog {
                 .addComponent(availabilityTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ClearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -156,9 +163,9 @@ public class AddSchedule extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearBtnActionPerformed
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ClearBtnActionPerformed
+    }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceActionPerformed
         // TODO add your handling code here:
@@ -186,11 +193,11 @@ public class AddSchedule extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ClearBtn;
     private javax.swing.JButton addBtn;
     private com.toedter.calendar.JDayChooser availabilityDate;
     private com.github.lgooddatepicker.components.TimePicker availabilityFrom;
     private com.github.lgooddatepicker.components.TimePicker availabilityTo;
+    private javax.swing.JButton cancelBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
