@@ -44,11 +44,11 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="availabilityDate" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="ClearBtn" min="-2" pref="130" max="-2" attributes="0"/>
+                          <Component id="cancelBtn" min="-2" pref="130" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="addBtn" min="-2" pref="140" max="-2" attributes="0"/>
                       </Group>
@@ -59,7 +59,7 @@
                       <Component id="availabilityTo" alignment="1" max="32767" attributes="0"/>
                       <Component id="price" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -80,18 +80,23 @@
                   <Component id="availabilityTo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="price" min="-2" pref="47" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="ClearBtn" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="cancelBtn" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                       <Component id="addBtn" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="29" max="32767" attributes="0"/>
+                  <EmptySpace pref="20" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="5e" green="4" red="3" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -110,6 +115,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Nunito SemiBold" size="14" style="1"/>
             </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="5e" green="4" red="3" type="rgb"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="com.github.lgooddatepicker.components.TimePicker" name="availabilityFrom">
@@ -121,6 +129,7 @@
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Availability From">
                   <Font PropertyName="font" name="Nunito SemiBold" size="14" style="1"/>
+                  <Color PropertyName="color" blue="5e" green="4" red="3" type="rgb"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -138,6 +147,7 @@
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Availability To">
                   <Font PropertyName="font" name="Nunito SemiBold" size="14" style="1"/>
+                  <Color PropertyName="color" blue="5e" green="4" red="3" type="rgb"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -161,9 +171,9 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="ClearBtn">
+        <Component class="javax.swing.JButton" name="cancelBtn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Clear"/>
+            <Property name="text" type="java.lang.String" value="Cancel"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f8" green="f0" red="ca" type="rgb"/>
             </Property>
@@ -179,7 +189,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ClearBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelBtnActionPerformed"/>
           </Events>
         </Component>
         <Component class="com.toedter.calendar.JDayChooser" name="availabilityDate">
@@ -190,6 +200,7 @@
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Price">
                   <Font PropertyName="font" name="Nunito SemiBold" size="14" style="1"/>
+                  <Color PropertyName="color" blue="5e" green="4" red="3" type="rgb"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -197,7 +208,10 @@
               <Color blue="99" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Nunito ExtraLight" size="14" style="1"/>
+              <Font name="Nunito SemiBold" size="14" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="5e" green="4" red="3" type="rgb"/>
             </Property>
           </Properties>
           <Events>
