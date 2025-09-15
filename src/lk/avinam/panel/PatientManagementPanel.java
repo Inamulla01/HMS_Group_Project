@@ -7,7 +7,10 @@ package lk.avinam.panel;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Event;
 import java.awt.Font;
+import lk.avinam.dialog.AddPatient;
+import lk.avinam.dialog.UpdatePatient;
 
 /**
  *
@@ -23,21 +26,21 @@ public class PatientManagementPanel extends javax.swing.JPanel {
         init();
     }
 
-    private void init(){
+    private void init() {
         jTable1.getTableHeader().setFont(new Font("", Font.BOLD, 16));
         jTable1.getTableHeader().setOpaque(false);
         jTable1.getTableHeader().setBackground(Color.decode("#00B4D8"));
         jTable1.getTableHeader().setForeground(Color.decode("#CAF0F8"));
         jTable1.getTableHeader().setPreferredSize(new Dimension(0, 47));
-        
+
         FlatSVGIcon plusIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
         plusIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         addBtn.setIcon(plusIcon);
-        
+
         FlatSVGIcon searchIcon = new FlatSVGIcon("lk/avinam/icon/search.svg", 15, 15);
         searchIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FFFFFF")));
         searchBtn.setIcon(searchIcon);
-        
+
         FlatSVGIcon updateIcon = new FlatSVGIcon("lk/avinam/icon/update.svg", 20, 20);
         updateIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         updateBtn.setIcon(updateIcon);
@@ -45,17 +48,16 @@ public class PatientManagementPanel extends javax.swing.JPanel {
         FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
         cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FF0000")));
         cancelBtn.setIcon(cancelIcon);
-        
+
         FlatSVGIcon eyeIcon = new FlatSVGIcon("lk/avinam/icon/eye.svg", 20, 20);
         eyeIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FFFFFF")));
         viewBtn.setIcon(eyeIcon);
-                
+
         FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg", 20, 20);
         reportIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         reportBtn.setIcon(reportIcon);
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -137,6 +139,11 @@ public class PatientManagementPanel extends javax.swing.JPanel {
         updateBtn.setForeground(new java.awt.Color(202, 240, 248));
         updateBtn.setText("Update Patient");
         updateBtn.setPreferredSize(new java.awt.Dimension(184, 47));
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
 
         cancelBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         cancelBtn.setForeground(new java.awt.Color(255, 51, 51));
@@ -242,12 +249,18 @@ public class PatientManagementPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        
+        AddPatient addPatientDialog = new AddPatient(new javax.swing.JFrame(), true);
+        addPatientDialog.setVisible(true);
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void reportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_reportBtnActionPerformed
+
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        UpdatePatient updatePatientDialog = new UpdatePatient(new javax.swing.JFrame(), true);
+        updatePatientDialog.setVisible(true);
+    }//GEN-LAST:event_updateBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

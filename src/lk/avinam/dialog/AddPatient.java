@@ -20,7 +20,7 @@ public class AddPatient extends javax.swing.JDialog {
     public AddPatient(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-   init();
+        init();
 
     }
 
@@ -28,11 +28,12 @@ public class AddPatient extends javax.swing.JDialog {
         FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
         addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         addBtn.setIcon(addIcon);
-                FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+        FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
         cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         cancelBtn.setIcon(cancelIcon);
 
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

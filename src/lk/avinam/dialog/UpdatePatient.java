@@ -20,7 +20,7 @@ public class UpdatePatient extends javax.swing.JDialog {
     public UpdatePatient(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-init();
+        init();
 
     }
 
@@ -28,11 +28,12 @@ init();
         FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/edit.svg", 20, 20);
         addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         editBtn.setIcon(addIcon);
-                              FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+        FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
         cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         cancelBtn.setIcon(cancelIcon);
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
