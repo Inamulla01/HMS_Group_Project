@@ -10,11 +10,11 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import lk.avinam.panel.AdminAndReceptionistDashboardAppointment;
+import lk.avinam.panel.AdminAndReceptionistAppointment;
 import lk.avinam.panel.AppointmentRoomManagement;
 import lk.avinam.panel.DoctorManagementPanel;
 import lk.avinam.panel.PatientManagementPanel;
-import lk.avinam.panel.StaffDashboardPanel;
+import lk.avinam.panel.ReceptionDashboardPanel;
 import lk.avinam.panel.RoomManagement;
 import lk.avinam.panel.WardManagement;
 import lk.avinam.util.AppIconUtil;
@@ -28,9 +28,9 @@ public class ReceptionDashboard extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard
      */
-    private StaffDashboardPanel dashboardPanel;
+    private ReceptionDashboardPanel dashboardPanel;
     private PatientManagementPanel patientManagementPanel;
-    private AdminAndReceptionistDashboardAppointment appointementPanel;
+    private AdminAndReceptionistAppointment appointementPanel;
     private RoomManagement wardNroomPanel;
     private AppointmentRoomManagement appointmentRoomManagementPanel;
     private DoctorManagementPanel doctorManagementPanel;
@@ -86,13 +86,13 @@ public class ReceptionDashboard extends javax.swing.JFrame {
             this.contentPanelLayout = (CardLayout) contentPanel.getLayout();
         }
 
-        this.dashboardPanel = new StaffDashboardPanel();
+        this.dashboardPanel = new ReceptionDashboardPanel();
         this.contentPanel.add(dashboardPanel, "dashboard_panel");
         
         this.patientManagementPanel = new PatientManagementPanel(); 
         this.contentPanel.add(patientManagementPanel, "patientManagement_panel");
         
-        this.appointementPanel = new AdminAndReceptionistDashboardAppointment(); 
+        this.appointementPanel = new AdminAndReceptionistAppointment(); 
         this.contentPanel.add(appointementPanel, "appointmentManagement_panel");
         
         this.wardNroomPanel = new RoomManagement(); 

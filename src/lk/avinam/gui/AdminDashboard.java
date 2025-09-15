@@ -10,9 +10,10 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import lk.avinam.panel.AdminAndReceptionistDashboardAppointment;
+import lk.avinam.panel.AdminAndReceptionistAppointment;
 import lk.avinam.panel.AdminDashboardPanel;
 import lk.avinam.panel.AppointmentRoomManagement;
+import lk.avinam.panel.AttendancePanel;
 import lk.avinam.panel.DoctorManagementPanel;
 import lk.avinam.panel.NurseManagment;
 import lk.avinam.panel.PatientManagementPanel;
@@ -33,9 +34,10 @@ public class AdminDashboard extends javax.swing.JFrame {
     private NurseManagment nurseManagementPanel;
     private PatientManagementPanel patientManagementPanel;
     private RoomManagement roomManagementPanel;
-    private AdminAndReceptionistDashboardAppointment appointmentManagementPanel;
+    private AdminAndReceptionistAppointment appointmentManagementPanel;
     private AppointmentRoomManagement appointmentRoomManagementPanel;
     private WardManagement wardManagementPanel;
+        private AttendancePanel attendanceManagementPanel;
     private CardLayout contentPanelLayout;
 
     /**
@@ -87,6 +89,10 @@ public class AdminDashboard extends javax.swing.JFrame {
         wardIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         wardBtn.setIcon(wardIcon);
         
+                FlatSVGIcon attendanceIcon = new FlatSVGIcon("lk/avinam/icon/attendance.svg", 25, 25);
+        attendanceIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        attendanceBtn.setIcon(attendanceIcon);
+        
         FlatSVGIcon logOutIcon = new FlatSVGIcon("lk/avinam/icon/log-out.svg", 20, 20);
         logOutIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         logOutBtn.setIcon(logOutIcon);
@@ -121,12 +127,14 @@ public class AdminDashboard extends javax.swing.JFrame {
            this.appointmentRoomManagementPanel = new AppointmentRoomManagement(); 
         this.contentPanel.add(appointmentRoomManagementPanel, "appointmentRoomManagement_panel");
         
-        this.appointmentManagementPanel = new AdminAndReceptionistDashboardAppointment();
+        this.appointmentManagementPanel = new AdminAndReceptionistAppointment();
         this.contentPanel.add(appointmentManagementPanel, "appointment_panel");
         
         this.wardManagementPanel = new WardManagement();
         this.contentPanel.add(wardManagementPanel, "ward_panel");
 
+                this.attendanceManagementPanel = new AttendancePanel();
+        this.contentPanel.add(attendanceManagementPanel, "attendance_panel");
         SwingUtilities.updateComponentTreeUI(contentPanel);
 
     }
@@ -151,6 +159,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         logOutBtn = new javax.swing.JButton();
         appointmentRoomBtn = new javax.swing.JButton();
         wardBtn = new javax.swing.JButton();
+        attendanceBtn = new javax.swing.JButton();
         headerPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -269,6 +278,17 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         });
 
+        attendanceBtn.setBackground(new java.awt.Color(144, 224, 239));
+        attendanceBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        attendanceBtn.setForeground(new java.awt.Color(3, 4, 94));
+        attendanceBtn.setText("Attendance Managment");
+        attendanceBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        attendanceBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                attendanceBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -285,7 +305,8 @@ public class AdminDashboard extends javax.swing.JFrame {
                     .addComponent(logOutBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                     .addComponent(appointmentRoomBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(wardBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(adminDashboardBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(adminDashboardBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(attendanceBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         menuPanelLayout.setVerticalGroup(
@@ -309,7 +330,9 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addComponent(appointmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(appointmentRoomBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(attendanceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(logOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -416,6 +439,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         this.contentPanelLayout.show(contentPanel, "ward_panel");
     }//GEN-LAST:event_wardBtnActionPerformed
 
+    private void attendanceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendanceBtnActionPerformed
+        // TODO add your handling code here:
+         this.contentPanelLayout.show(contentPanel, "attendance_panel");
+    }//GEN-LAST:event_attendanceBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -434,6 +462,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JButton adminDashboardBtn;
     private javax.swing.JButton appointmentBtn;
     private javax.swing.JButton appointmentRoomBtn;
+    private javax.swing.JButton attendanceBtn;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JButton doctorBtn;
     private javax.swing.JPanel headerPanel;
