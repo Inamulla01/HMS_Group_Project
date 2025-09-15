@@ -15,6 +15,7 @@ import lk.avinam.panel.MedicineSales;
 import lk.avinam.panel.MedicineStock;
 import lk.avinam.panel.PharmacistDashboardPanel;
 import lk.avinam.panel.SupplierList;
+import lk.avinam.util.AppIconUtil;
 
 /**
  *
@@ -40,6 +41,7 @@ public class PharmacistDashboard extends javax.swing.JFrame {
     }
 
     private void init() {
+        AppIconUtil.applyIcon(this);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         FlatSVGIcon dashboardIcon = new FlatSVGIcon("lk/avinam/icon/dashboard.svg", 20, 20);
         dashboardIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));

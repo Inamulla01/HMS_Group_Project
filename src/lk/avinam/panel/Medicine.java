@@ -22,8 +22,7 @@ public class Medicine extends javax.swing.JPanel {
         initComponents();
         init();
         
-         updateBtn.setIcon(new FlatSVGIcon("lk/avinam/icon/edit.svg", 20, 20));
-         addBtn.setIcon(new FlatSVGIcon("lk/avinam/icon/plus.svg", 20, 20));
+
     }
 
     private void init() {
@@ -106,7 +105,7 @@ public class Medicine extends javax.swing.JPanel {
 
         cancelBtn.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
         cancelBtn.setForeground(new java.awt.Color(204, 0, 0));
-        cancelBtn.setText("Delete");
+        cancelBtn.setText("Cancel");
         cancelBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
 
         updateBtn.setBackground(new java.awt.Color(0, 119, 182));

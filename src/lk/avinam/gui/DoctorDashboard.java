@@ -13,6 +13,7 @@ import javax.swing.SwingUtilities;
 import lk.avinam.panel.DoctorDashboardAppointment;
 import lk.avinam.panel.DoctorDashboardPanel;
 import lk.avinam.panel.DoctorManagementPanel;
+import lk.avinam.util.AppIconUtil;
 
 /**
  *
@@ -35,6 +36,7 @@ public class DoctorDashboard extends javax.swing.JFrame {
     }
 
     private void init() {
+        AppIconUtil.applyIcon(this);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         FlatSVGIcon dashboardIcon = new FlatSVGIcon("lk/avinam/icon/dashboard.svg", 20, 20);
         dashboardIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));

@@ -6,6 +6,8 @@ package lk.avinam.panel;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 
 /**
  *
@@ -22,6 +24,17 @@ public class MedicineStock extends javax.swing.JPanel {
     }
     
     private void init(){
+               jTable1.getTableHeader().setFont(new Font("",Font.BOLD,16));
+       jTable1.getTableHeader().setOpaque(false);
+       jTable1.getTableHeader().setBackground(Color.decode("#00B4D8"));
+       jTable1.getTableHeader().setForeground( Color.decode("#CAF0F8"));
+       jTable1.getTableHeader().setPreferredSize(new Dimension(0, 47));
+       
+       
+               FlatSVGIcon plusIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
+        plusIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
+        addBtn.setIcon(plusIcon);
+        
         FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
         addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         brandBtn.setIcon(addIcon);
@@ -50,7 +63,7 @@ public class MedicineStock extends javax.swing.JPanel {
 
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         searchBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
@@ -62,7 +75,7 @@ public class MedicineStock extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -81,7 +94,7 @@ public class MedicineStock extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTable1);
 
         jLabel2.setFont(new java.awt.Font("Nunito ExtraBold", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(3, 4, 94));
@@ -202,7 +215,7 @@ public class MedicineStock extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JButton searchBtn;
     private javax.swing.JButton updateBtn;

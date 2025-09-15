@@ -11,6 +11,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import lk.avinam.panel.LaboratoryDashboardPanel;
+import lk.avinam.util.AppIconUtil;
 
 /**
  *
@@ -32,6 +33,7 @@ public class LaboratoryDashboard extends javax.swing.JFrame {
     }
 
     private void init() {
+        AppIconUtil.applyIcon(this);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         contentPanel.setLayout(new CardLayout());
         this.contentPanelLayout = (CardLayout) contentPanel.getLayout();

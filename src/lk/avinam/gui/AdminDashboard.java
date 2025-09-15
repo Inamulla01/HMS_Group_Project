@@ -19,6 +19,7 @@ import lk.avinam.panel.PatientManagementPanel;
 import lk.avinam.panel.StaffManagment;
 import lk.avinam.panel.RoomManagement;
 import lk.avinam.panel.WardManagement;
+import lk.avinam.util.AppIconUtil;
 
 /**
  *
@@ -47,6 +48,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     private void init() {
+        AppIconUtil.applyIcon(this);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         FlatSVGIcon dashboardIcon = new FlatSVGIcon("lk/avinam/icon/dashboard.svg", 20, 20);

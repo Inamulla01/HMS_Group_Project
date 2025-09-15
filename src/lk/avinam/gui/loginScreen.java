@@ -7,6 +7,7 @@ package lk.avinam.gui;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import javax.swing.JOptionPane;
+import lk.avinam.util.AppIconUtil;
 
 /**
  *
@@ -34,7 +35,7 @@ public class loginScreen extends javax.swing.JFrame {
     }
 
     private void init() {
-
+AppIconUtil.applyIcon(this);
     }
 
     /**
