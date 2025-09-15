@@ -54,7 +54,7 @@
                                   <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="176" max="32767" attributes="0"/>
+                                  <EmptySpace pref="96" max="32767" attributes="0"/>
                                   <Component id="cancelBtn" min="-2" pref="129" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="viewBtn" min="-2" pref="177" max="-2" attributes="0"/>

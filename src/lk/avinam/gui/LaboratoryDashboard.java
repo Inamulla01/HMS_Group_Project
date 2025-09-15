@@ -6,6 +6,8 @@ package lk.avinam.gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import gui.TestManagement;
+import gui.TestScheduleManagement;
 import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JFrame;
@@ -18,10 +20,13 @@ import lk.avinam.util.AppIconUtil;
  * @author Inaamul Hasan
  */
 public class LaboratoryDashboard extends javax.swing.JFrame {
-
-    private LaboratoryDashboardPanel laboratoryDashboardPanel;
     
+    private LaboratoryDashboardPanel laboratoryDashboardPanel;
+    private TestManagement testManagement;
+    private TestScheduleManagement testScheduleManagement;
     private CardLayout contentPanelLayout;
+
+
 
     /**
      * Creates new form Dashboard
@@ -54,19 +59,24 @@ public class LaboratoryDashboard extends javax.swing.JFrame {
         logOutBtn.setIcon(logOutIcon);
 
     }
-
     private void loadPanels() {
         if (contentPanelLayout == null && contentPanel.getLayout() instanceof CardLayout) {
             this.contentPanelLayout = (CardLayout) contentPanel.getLayout();
         }
 
         this.laboratoryDashboardPanel = new LaboratoryDashboardPanel();
-
         this.contentPanel.add(laboratoryDashboardPanel, "dashboard_panel");
+        
+        this.testManagement = new TestManagement();
+        this.contentPanel.add(testManagement,"testManagementPanel");
+        
+        this.testScheduleManagement = new TestScheduleManagement();
+        this.contentPanel.add(testScheduleManagement,"testScheduleManagementPanel");
 
         SwingUtilities.updateComponentTreeUI(contentPanel);
 
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,12 +117,22 @@ public class LaboratoryDashboard extends javax.swing.JFrame {
         testScheduleBtn.setForeground(new java.awt.Color(3, 4, 94));
         testScheduleBtn.setText(" Test Schedule");
         testScheduleBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        testScheduleBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                testScheduleBtnActionPerformed(evt);
+            }
+        });
 
         testManagmentBtn.setBackground(new java.awt.Color(144, 224, 239));
         testManagmentBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         testManagmentBtn.setForeground(new java.awt.Color(3, 4, 94));
         testManagmentBtn.setText(" Test Managment");
         testManagmentBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        testManagmentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                testManagmentBtnActionPerformed(evt);
+            }
+        });
 
         logOutBtn.setBackground(new java.awt.Color(144, 224, 239));
         logOutBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
@@ -201,6 +221,18 @@ public class LaboratoryDashboard extends javax.swing.JFrame {
 
         this.contentPanelLayout.show(contentPanel, "dashboard_panel");
     }//GEN-LAST:event_labDashboardBtnActionPerformed
+
+    private void testScheduleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testScheduleBtnActionPerformed
+        // TODO add your handling code here:
+                this.contentPanelLayout.show(contentPanel, "testScheduleManagementPanel");
+
+    }//GEN-LAST:event_testScheduleBtnActionPerformed
+
+    private void testManagmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testManagmentBtnActionPerformed
+        // TODO add your handling code here:
+        this.contentPanelLayout.show(contentPanel, "testManagementPanel");
+
+    }//GEN-LAST:event_testManagmentBtnActionPerformed
 
     /**
      * @param args the command line arguments
