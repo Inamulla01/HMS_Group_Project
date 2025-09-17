@@ -133,7 +133,9 @@ public class RoomManagement extends javax.swing.JPanel {
             }
         });
 
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setForeground(new java.awt.Color(3, 4, 94));
+        jTabbedPane1.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
