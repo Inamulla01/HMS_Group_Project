@@ -5,15 +5,19 @@
 package lk.avinam.gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.CardLayout;
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import lk.avinam.panel.AdminAndReceptionistDashboardAppointment;
+import lk.avinam.panel.AdminAndReceptionistAppointment;
 import lk.avinam.panel.AppointmentRoomManagement;
 import lk.avinam.panel.DoctorManagementPanel;
 import lk.avinam.panel.PatientManagementPanel;
-import lk.avinam.panel.StaffDashboardPanel;
-import lk.avinam.panel.wardandRoomManagement;
+import lk.avinam.panel.ReceptionDashboardPanel;
+import lk.avinam.panel.RoomManagement;
+import lk.avinam.panel.WardManagement;
+import lk.avinam.util.AppIconUtil;
 
 /**
  *
@@ -24,12 +28,13 @@ public class ReceptionDashboard extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard
      */
-    private StaffDashboardPanel dashboardPanel;
+    private ReceptionDashboardPanel dashboardPanel;
     private PatientManagementPanel patientManagementPanel;
-    private AdminAndReceptionistDashboardAppointment appointementPanel;
-    private wardandRoomManagement wardNroomPanel;
+    private AdminAndReceptionistAppointment appointementPanel;
+    private RoomManagement wardNroomPanel;
     private AppointmentRoomManagement appointmentRoomManagementPanel;
     private DoctorManagementPanel doctorManagementPanel;
+        private WardManagement wardManagementPanel;
     private CardLayout contentPanelLayout;
 
     public ReceptionDashboard() {
@@ -39,7 +44,40 @@ public class ReceptionDashboard extends javax.swing.JFrame {
     }
 
     private void init() {
+        AppIconUtil.applyIcon(this);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                FlatSVGIcon dashboardIcon = new FlatSVGIcon("lk/avinam/icon/dashboard.svg", 20, 20);
+        dashboardIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        staffDashboardBtn.setIcon(dashboardIcon);
+
+        FlatSVGIcon doctorIcon = new FlatSVGIcon("lk/avinam/icon/doctor.svg", 20, 20);
+        doctorIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        doctorBtn.setIcon(doctorIcon);
+        
+        
+        FlatSVGIcon patientIcon = new FlatSVGIcon("lk/avinam/icon/patient-bed-hospital.svg", 20, 20);
+        patientIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        staffPatientManageBtn.setIcon(patientIcon);
+        
+        FlatSVGIcon roomIcon = new FlatSVGIcon("lk/avinam/icon/room.svg", 20, 20);
+        roomIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        roomBtn.setIcon(roomIcon);
+        
+        FlatSVGIcon appointmentIcon = new FlatSVGIcon("lk/avinam/icon/appointment.svg", 20, 20);
+        appointmentIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        appointmentBtn.setIcon(appointmentIcon);
+        
+        FlatSVGIcon appointmentRoomIcon = new FlatSVGIcon("lk/avinam/icon/room-appinment.svg", 20, 20);
+        appointmentRoomIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        appoinmentRoomBtn.setIcon(appointmentRoomIcon);
+        
+        FlatSVGIcon wardIcon = new FlatSVGIcon("lk/avinam/icon/ward.svg", 20, 20);
+        wardIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        wardBtn.setIcon(wardIcon);
+        
+        FlatSVGIcon logOutIcon = new FlatSVGIcon("lk/avinam/icon/log-out.svg", 20, 20);
+        logOutIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
+        logOutBtn.setIcon(logOutIcon);
 
     }
 
@@ -48,16 +86,16 @@ public class ReceptionDashboard extends javax.swing.JFrame {
             this.contentPanelLayout = (CardLayout) contentPanel.getLayout();
         }
 
-        this.dashboardPanel = new StaffDashboardPanel();
+        this.dashboardPanel = new ReceptionDashboardPanel();
         this.contentPanel.add(dashboardPanel, "dashboard_panel");
         
         this.patientManagementPanel = new PatientManagementPanel(); 
         this.contentPanel.add(patientManagementPanel, "patientManagement_panel");
         
-        this.appointementPanel = new AdminAndReceptionistDashboardAppointment(); 
+        this.appointementPanel = new AdminAndReceptionistAppointment(); 
         this.contentPanel.add(appointementPanel, "appointmentManagement_panel");
         
-        this.wardNroomPanel = new wardandRoomManagement(); 
+        this.wardNroomPanel = new RoomManagement(); 
         this.contentPanel.add(wardNroomPanel, "wardNroomManagement_panel");
         
         this.appointmentRoomManagementPanel = new AppointmentRoomManagement(); 
@@ -65,7 +103,8 @@ public class ReceptionDashboard extends javax.swing.JFrame {
         
          this.doctorManagementPanel = new DoctorManagementPanel(); 
         this.contentPanel.add(doctorManagementPanel, "doctorManagement_panel");
-        
+                this.wardManagementPanel = new WardManagement();
+        this.contentPanel.add(wardManagementPanel, "ward_panel");
         SwingUtilities.updateComponentTreeUI(contentPanel);
 
     }
@@ -82,11 +121,12 @@ public class ReceptionDashboard extends javax.swing.JFrame {
         menuPanel = new javax.swing.JPanel();
         staffDashboardBtn = new javax.swing.JButton();
         staffPatientManageBtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        appointmentBtn = new javax.swing.JButton();
+        roomBtn = new javax.swing.JButton();
+        logOutBtn = new javax.swing.JButton();
+        appoinmentRoomBtn = new javax.swing.JButton();
+        doctorBtn = new javax.swing.JButton();
+        wardBtn = new javax.swing.JButton();
         headerPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -99,7 +139,7 @@ public class ReceptionDashboard extends javax.swing.JFrame {
         staffDashboardBtn.setBackground(new java.awt.Color(144, 224, 239));
         staffDashboardBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         staffDashboardBtn.setForeground(new java.awt.Color(3, 4, 94));
-        staffDashboardBtn.setText("Dashboard");
+        staffDashboardBtn.setText(" Dashboard");
         staffDashboardBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         staffDashboardBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +150,7 @@ public class ReceptionDashboard extends javax.swing.JFrame {
         staffPatientManageBtn.setBackground(new java.awt.Color(144, 224, 239));
         staffPatientManageBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         staffPatientManageBtn.setForeground(new java.awt.Color(3, 4, 94));
-        staffPatientManageBtn.setText("Patient Management");
+        staffPatientManageBtn.setText(" Patient Management");
         staffPatientManageBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         staffPatientManageBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,52 +158,63 @@ public class ReceptionDashboard extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(144, 224, 239));
-        jButton1.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(3, 4, 94));
-        jButton1.setText("Appointment Management");
-        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        appointmentBtn.setBackground(new java.awt.Color(144, 224, 239));
+        appointmentBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        appointmentBtn.setForeground(new java.awt.Color(3, 4, 94));
+        appointmentBtn.setText(" Appointment Management");
+        appointmentBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        appointmentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                appointmentBtnActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(144, 224, 239));
-        jButton2.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(3, 4, 94));
-        jButton2.setText("Ward & Room Management");
-        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        roomBtn.setBackground(new java.awt.Color(144, 224, 239));
+        roomBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        roomBtn.setForeground(new java.awt.Color(3, 4, 94));
+        roomBtn.setText(" Room Management");
+        roomBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        roomBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                roomBtnActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(144, 224, 239));
-        jButton4.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(3, 4, 94));
-        jButton4.setText("Log Out");
+        logOutBtn.setBackground(new java.awt.Color(144, 224, 239));
+        logOutBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        logOutBtn.setForeground(new java.awt.Color(3, 4, 94));
+        logOutBtn.setText("Log Out");
 
-        jButton3.setBackground(new java.awt.Color(144, 224, 239));
-        jButton3.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(3, 4, 94));
-        jButton3.setText("Appointment Room");
-        jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        appoinmentRoomBtn.setBackground(new java.awt.Color(144, 224, 239));
+        appoinmentRoomBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        appoinmentRoomBtn.setForeground(new java.awt.Color(3, 4, 94));
+        appoinmentRoomBtn.setText(" Appointment Room");
+        appoinmentRoomBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        appoinmentRoomBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                appoinmentRoomBtnActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(144, 224, 239));
-        jButton5.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(3, 4, 94));
-        jButton5.setText("Doctor Management");
-        jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        doctorBtn.setBackground(new java.awt.Color(144, 224, 239));
+        doctorBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        doctorBtn.setForeground(new java.awt.Color(3, 4, 94));
+        doctorBtn.setText(" Doctor Management");
+        doctorBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        doctorBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                doctorBtnActionPerformed(evt);
+            }
+        });
+
+        wardBtn.setBackground(new java.awt.Color(144, 224, 239));
+        wardBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
+        wardBtn.setForeground(new java.awt.Color(3, 4, 94));
+        wardBtn.setText(" Ward Management");
+        wardBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        wardBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                wardBtnActionPerformed(evt);
             }
         });
 
@@ -176,11 +227,12 @@ public class ReceptionDashboard extends javax.swing.JFrame {
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(staffDashboardBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(staffPatientManageBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(appointmentBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(roomBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(logOutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(appoinmentRoomBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(doctorBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(wardBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         menuPanelLayout.setVerticalGroup(
@@ -191,15 +243,18 @@ public class ReceptionDashboard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(staffPatientManageBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(appointmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(doctorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(wardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(roomBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(appoinmentRoomBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addComponent(logOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         headerPanel.setBackground(new java.awt.Color(3, 4, 94));
@@ -264,26 +319,31 @@ public class ReceptionDashboard extends javax.swing.JFrame {
           this.contentPanelLayout.show(contentPanel, "patientManagement_panel");
     }//GEN-LAST:event_staffPatientManageBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void appointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentBtnActionPerformed
         // TODO add your handling code here:
         this.contentPanelLayout.show(contentPanel, "appointmentManagement_panel");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_appointmentBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void appoinmentRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appoinmentRoomBtnActionPerformed
         // TODO add your handling code here:
         this.contentPanelLayout.show(contentPanel, "appointmentRoomManagement_panel");
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_appoinmentRoomBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void roomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomBtnActionPerformed
         // TODO add your handling code here:
         this.contentPanelLayout.show(contentPanel, "wardNroomManagement_panel");
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_roomBtnActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void doctorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorBtnActionPerformed
         // TODO add your handling code here:   
           this.contentPanelLayout.show(contentPanel, "doctorManagement_panel");
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_doctorBtnActionPerformed
+
+    private void wardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wardBtnActionPerformed
+        // TODO add your handling code here:
+                this.contentPanelLayout.show(contentPanel, "ward_panel");
+    }//GEN-LAST:event_wardBtnActionPerformed
 
     
     /**
@@ -302,17 +362,18 @@ public class ReceptionDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton appoinmentRoomBtn;
+    private javax.swing.JButton appointmentBtn;
     private javax.swing.JPanel contentPanel;
+    private javax.swing.JButton doctorBtn;
     private javax.swing.JPanel headerPanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton logOutBtn;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JButton roomBtn;
     private javax.swing.JButton staffDashboardBtn;
     private javax.swing.JButton staffPatientManageBtn;
+    private javax.swing.JButton wardBtn;
     // End of variables declaration//GEN-END:variables
 }
