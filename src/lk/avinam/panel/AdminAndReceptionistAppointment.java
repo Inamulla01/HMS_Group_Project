@@ -111,11 +111,11 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Patient", "Doctor", "Doctor Department", "Room", "Date", "Time Solt", "Status"
+                "Patient NIC", "Patient", "Doctor", "Doctor Specialized In", "Room", "Date", "Time Solt", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -124,6 +124,10 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         });
         jTable1.setRowHeight(47);
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
+        }
 
         editBtn.setBackground(new java.awt.Color(0, 119, 182));
         editBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
