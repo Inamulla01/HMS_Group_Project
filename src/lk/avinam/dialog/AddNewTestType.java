@@ -55,6 +55,7 @@ public class AddNewTestType extends javax.swing.JDialog {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Medi Sewana | Add New Test Type");
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(202, 240, 248));
 

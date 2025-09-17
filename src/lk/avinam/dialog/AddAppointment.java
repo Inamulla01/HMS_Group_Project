@@ -49,6 +49,7 @@ public class AddAppointment extends javax.swing.JDialog {
         cancelBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Medi Sewana | New Appointment");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
