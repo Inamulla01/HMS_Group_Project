@@ -31,7 +31,7 @@ public class AdminDashboardPanel extends javax.swing.JPanel {
        jTable1.getTableHeader().setPreferredSize(new Dimension(0, 47));
        
        
-                jTable2.getTableHeader().setFont(new Font("",Font.BOLD,16));
+       jTable2.getTableHeader().setFont(new Font("",Font.BOLD,16));
        jTable2.getTableHeader().setOpaque(false);
        jTable2.getTableHeader().setBackground(Color.decode("#00B4D8"));
        jTable2.getTableHeader().setForeground( Color.decode("#CAF0F8"));
