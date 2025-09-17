@@ -17,8 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import lk.avinam.connection.MySQL;
+import raven.toast.Notifications;
 
 /**
  *
@@ -26,9 +26,6 @@ import lk.avinam.connection.MySQL;
  */
 public class DoctorManagementPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form DoctorDashboard
-     */
     public DoctorManagementPanel() {
         initComponents();
         init();
@@ -36,7 +33,6 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         cancelBtn.setVisible(false);
         updateBtn.setVisible(false);
         viewBtn.setVisible(false);
-
     }
 
     public void init() {
@@ -86,13 +82,12 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
                 v.add(rs.getString("doctor_type"));
                 v.add(rs.getString("doctor_status"));
                 dtm.addRow(v);
-
             }
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
             centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
             doctorTable.setDefaultRenderer(Object.class, centerRenderer);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Database error: " + e.getMessage());
         }
         doctorTable.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && doctorTable.getSelectedRow() != -1) {
@@ -111,17 +106,16 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
                 } else {
                     cancelBtn.setText("Active");
                     FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/correct.svg", 15, 15);
-                    Color darkGreen = new Color(0,255,51); 
+                    Color darkGreen = new Color(0, 255, 51);
                     cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> darkGreen));
                     cancelBtn.setIcon(cancelIcon);
 
                     cancelBtn.setForeground(darkGreen);
-                    cancelBtn.setBorder(BorderFactory.createLineBorder(darkGreen, 2)); 
+                    cancelBtn.setBorder(BorderFactory.createLineBorder(darkGreen, 2));
 
                 }
             }
         });
-
     }
 
     private String selectedIdColum;
@@ -133,7 +127,7 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
     private synchronized void toggleDoctorStatus() {
         String id = getSelectedIdColum();
         if (id == null || id.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No doctor selected.");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "No doctor selected.");
             return;
         }
 
@@ -147,7 +141,7 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
 
             if (rs.next()) {
                 int currentStatus = rs.getInt("status_id");
-                int newStatus = (currentStatus == 1) ? 2 : 1; // 1 = Active, 2 = Inactive
+                int newStatus = (currentStatus == 1) ? 2 : 1; // 1 = Active 2 = Inactive
 
                 String updateSql = "UPDATE doctor SET status_id = ? WHERE slmc_id = ?";
                 java.sql.PreparedStatement updatePst = conn.prepareStatement(updateSql);
@@ -159,22 +153,22 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
                     loadDoctorTable();
                     cancelBtn.setVisible(false);
                     cancelBtn.setText(newStatus == 1 ? "Set Inactive" : "Set Active");
-                    JOptionPane.showMessageDialog(this,
-                            "Doctor status updated to " + (newStatus == 1 ? "Active" : "Inactive") + ".");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Doctor not found.");
-                }
+                    Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Doctor status updated to " + (newStatus == 1 ? "Active" : "Inactive") + ".");
 
+                } else {
+                     Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Doctor not found.");
+
+                }
                 updatePst.close();
             } else {
-                JOptionPane.showMessageDialog(this, "Doctor not found.");
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Doctor not found.");
             }
 
             rs.close();
             checkPst.close();
 
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error updating doctor status: " + e.getMessage());
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Error updating doctor status: " + e.getMessage());
         }
     }
 
@@ -250,7 +244,7 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         addBtn.setFocusable(false);
 
         cancelBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
-        cancelBtn.setForeground(new java.awt.Color(0, 255, 51));
+        cancelBtn.setForeground(new java.awt.Color(255, 51, 0));
         cancelBtn.setText("Cancel");
         cancelBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
         cancelBtn.setFocusable(false);
@@ -425,6 +419,8 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
             int row = doctorTable.getSelectedRow();
             selectedIdColum = String.valueOf(doctorTable.getValueAt(row, 0));
             cancelBtn.setVisible(true);
+            updateBtn.setVisible(true);
+            viewBtn.setVisible(true);
         }
     }//GEN-LAST:event_doctorTableMouseClicked
 
