@@ -53,7 +53,6 @@ staffShift.setMinSelectableDate(new java.util.Date());
         cancelBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Medi Sewana | Add Nurse Shift");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

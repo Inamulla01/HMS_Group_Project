@@ -166,7 +166,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         contentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Medi Sewana | Admin Dashboard");
 
         menuPanel.setBackground(new java.awt.Color(3, 4, 94));
 

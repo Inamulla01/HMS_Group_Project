@@ -57,7 +57,6 @@ availableBtn.setIcon(new FlatSVGIcon("lk/avinam/icon/plus.svg", 20, 20));
         jComboBox2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Medi Sewana | Add Stock");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

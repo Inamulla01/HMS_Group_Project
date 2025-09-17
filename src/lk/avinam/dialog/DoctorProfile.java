@@ -82,7 +82,6 @@ public class DoctorProfile extends javax.swing.JDialog {
         editBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Medi Sewana | Doctor Profile");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

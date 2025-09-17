@@ -55,7 +55,6 @@ availabilityDate.setMinSelectableDate(new java.util.Date());
         price = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Medi Sewana | Add New Schedule");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

@@ -50,7 +50,6 @@ public class DoctorShift extends javax.swing.JDialog {
         jComboBox2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle(" Medi Sewana | Add Doctor Shift");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

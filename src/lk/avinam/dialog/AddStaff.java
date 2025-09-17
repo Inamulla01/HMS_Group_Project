@@ -55,7 +55,6 @@ public class AddStaff extends javax.swing.JDialog {
         jRadioButton2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Medi Sewana | Add Staff");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

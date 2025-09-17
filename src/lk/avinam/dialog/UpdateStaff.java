@@ -29,8 +29,7 @@ init();
     private void init() {
         availableBtn.setIcon(new FlatSVGIcon("lk/avinam/icon/plus.svg", 20, 20));
         FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/edit.svg", 20, 20);
-        addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
-        editBtn.setIcon(addIcon);
+        
         editBtn1.setIcon(addIcon);
         FlatSVGIcon addIcon1 = new FlatSVGIcon("lk/avinam/icon/delete.svg", 20, 20);
         addIcon1.setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.RED));
@@ -71,10 +70,8 @@ init();
         cancelBtn = new javax.swing.JButton();
         editBtn1 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
-        editBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Medi Sewana | Update Staff");
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -207,17 +204,6 @@ init();
 
         jSeparator2.setForeground(new java.awt.Color(3, 4, 94));
 
-        editBtn.setBackground(new java.awt.Color(3, 4, 94));
-        editBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
-        editBtn.setForeground(new java.awt.Color(202, 240, 248));
-        editBtn.setText("Edit");
-        editBtn.setFocusable(false);
-        editBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -245,8 +231,7 @@ init();
                             .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(179, 179, 179)
-                            .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(284, 284, 284))
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -268,13 +253,8 @@ init();
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabel3))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(17, 17, 17)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -348,10 +328,6 @@ init();
         // TODO add your handling code here:
     }//GEN-LAST:event_editBtn1ActionPerformed
 
-    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editBtnActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -375,7 +351,6 @@ init();
     private javax.swing.JButton availableBtn;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JButton deleteBtn;
-    private javax.swing.JButton editBtn;
     private javax.swing.JButton editBtn1;
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel12;

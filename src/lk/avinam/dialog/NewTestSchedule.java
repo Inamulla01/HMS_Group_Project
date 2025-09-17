@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package lk.avinam.dialog;
+package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
@@ -47,7 +47,6 @@ public class NewTestSchedule extends javax.swing.JDialog {
         jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Medi Sewana | Schedule New Test");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -259,18 +258,18 @@ public class NewTestSchedule extends javax.swing.JDialog {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         java.awt.Window parentWindow = javax.swing.SwingUtilities.getWindowAncestor(this);
 
-//        // Create the AddNewTestType dialog
-//        AddNewTestType dialog;
-//        if (parentWindow instanceof java.awt.Frame) {
-//            dialog = new AddNewTestType((java.awt.Frame) parentWindow, true);
-//        } else if (parentWindow instanceof java.awt.Dialog) {
-//            dialog = new AddNewTestType((java.awt.Frame)((java.awt.Dialog)parentWindow).getParent(), true);
-//        } else {
-//            dialog = new AddNewTestType(null, true); // fallback
-//        }
+        // Create the AddNewTestType dialog
+        AddNewTestType dialog;
+        if (parentWindow instanceof java.awt.Frame) {
+            dialog = new AddNewTestType((java.awt.Frame) parentWindow, true);
+        } else if (parentWindow instanceof java.awt.Dialog) {
+            dialog = new AddNewTestType((java.awt.Frame)((java.awt.Dialog)parentWindow).getParent(), true);
+        } else {
+            dialog = new AddNewTestType(null, true); // fallback
+        }
 
-//        dialog.setLocationRelativeTo(this);
-//        dialog.setVisible(true);
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
