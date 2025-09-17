@@ -37,7 +37,7 @@ public class PharmacistDashboardPanel extends javax.swing.JPanel {
        jTable2.getTableHeader().setForeground( Color.decode("#CAF0F8"));
        jTable2.getTableHeader().setPreferredSize(new Dimension(0, 47));
        
-                               FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg", 15, 15);
+                               FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg", 20, 20);
         reportIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         reportBtn.setIcon(reportIcon);
         reportBtn1.setIcon(reportIcon);
@@ -153,6 +153,7 @@ public class PharmacistDashboardPanel extends javax.swing.JPanel {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
+        jTable1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -172,6 +173,7 @@ public class PharmacistDashboardPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setRowHeight(47);
         jScrollPane1.setViewportView(jTable1);
 
         jLabel2.setFont(new java.awt.Font("Nunito ExtraBold", 1, 36)); // NOI18N
@@ -188,6 +190,7 @@ public class PharmacistDashboardPanel extends javax.swing.JPanel {
             }
         });
 
+        jTable2.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -207,6 +210,7 @@ public class PharmacistDashboardPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable2.setRowHeight(47);
         jScrollPane2.setViewportView(jTable2);
 
         jLabel3.setFont(new java.awt.Font("Nunito ExtraBold", 1, 24)); // NOI18N

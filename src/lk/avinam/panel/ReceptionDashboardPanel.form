@@ -84,16 +84,13 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jPanel11" alignment="1" max="32767" attributes="0"/>
                                           <Component id="jPanel15" alignment="1" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jPanel13" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          </Group>
+                                          <Component id="jPanel13" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="jPanel14" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jPanel14" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="jPanel17" alignment="1" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
@@ -149,7 +146,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel14" pref="0" max="32767" attributes="0"/>
+                          <Component id="jPanel14" min="-2" pref="128" max="-2" attributes="0"/>
                           <Component id="jPanel13" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -165,13 +162,13 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
+                <Property name="text" type="java.lang.String" value="Dashboard"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Nunito ExtraBold" size="36" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="5e" green="4" red="3" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Dashboard"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator1">
@@ -179,11 +176,11 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="5e" green="4" red="3" type="rgb"/>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="5e" green="4" red="3" type="rgb"/>
-                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="5e" green="4" red="3" type="rgb"/>
                 </Property>
               </Properties>
             </Component>
@@ -199,7 +196,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                          <Component id="jLabel7" min="-2" pref="77" max="-2" attributes="0"/>
+                          <Component id="todayPationts" min="-2" pref="77" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -214,7 +211,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel7" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
+                              <Component id="todayPationts" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabel5" min="-2" pref="36" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -229,27 +226,27 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
+                    <Property name="text" type="java.lang.String" value="Total Patients Admitted Today"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Nunito ExtraLight" size="24" style="1"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Total Patients Admitted Today"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel6">
                   <Properties>
+                    <Property name="text" type="java.lang.String" value="10"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Nunito ExtraLight" size="36" style="1"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="10"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel7">
+                <Component class="javax.swing.JLabel" name="todayPationts">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="jLabel3"/>
                   </Properties>
@@ -267,13 +264,13 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel11">
                   <Properties>
+                    <Property name="text" type="java.lang.String" value="Current in-Patients "/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Nunito ExtraLight" size="24" style="1"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Current in-Patients "/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -509,6 +506,7 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel29">
                   <Properties>
+                    <Property name="text" type="java.lang.String" value="Completed Lab Tests "/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="5e" green="4" red="3" type="rgb"/>
                     </Property>
@@ -518,11 +516,11 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="5e" green="4" red="3" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Completed Lab Tests "/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel30">
                   <Properties>
+                    <Property name="text" type="java.lang.String" value="10"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="5e" green="4" red="3" type="rgb"/>
                     </Property>
@@ -532,7 +530,6 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="5e" green="4" red="3" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="10"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel31">
@@ -796,6 +793,7 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel47">
                   <Properties>
+                    <Property name="text" type="java.lang.String" value="Ongoing Lab Tests "/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="5e" green="4" red="3" type="rgb"/>
                     </Property>
@@ -805,11 +803,11 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="5e" green="4" red="3" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Ongoing Lab Tests "/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel48">
                   <Properties>
+                    <Property name="text" type="java.lang.String" value="10"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="5e" green="4" red="3" type="rgb"/>
                     </Property>
@@ -819,7 +817,6 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="5e" green="4" red="3" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="10"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel49">
@@ -884,6 +881,7 @@
             </Container>
             <Component class="javax.swing.JButton" name="reportBtn">
               <Properties>
+                <Property name="text" type="java.lang.String" value="Generate Report"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="5e" green="4" red="3" type="rgb"/>
                 </Property>
@@ -893,7 +891,6 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ef" green="e0" red="90" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Generate Report"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[184, 47]"/>
                 </Property>

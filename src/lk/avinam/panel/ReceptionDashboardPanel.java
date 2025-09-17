@@ -25,7 +25,7 @@ public class ReceptionDashboardPanel extends javax.swing.JPanel {
     
     private void init(){
 
-                               FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg", 15, 15);
+                               FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg",20, 20);
         reportIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         reportBtn.setIcon(reportIcon);
 
@@ -43,7 +43,7 @@ public class ReceptionDashboardPanel extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        todayPationts = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -95,25 +95,25 @@ public class ReceptionDashboardPanel extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setText("Dashboard");
         jLabel1.setFont(new java.awt.Font("Nunito ExtraBold", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(3, 4, 94));
-        jLabel1.setText("Dashboard");
 
         jSeparator1.setBackground(new java.awt.Color(3, 4, 94));
-        jSeparator1.setForeground(new java.awt.Color(3, 4, 94));
         jSeparator1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jSeparator1.setForeground(new java.awt.Color(3, 4, 94));
 
         jPanel3.setBackground(new java.awt.Color(3, 4, 94));
 
+        jLabel5.setText("Total Patients Admitted Today");
         jLabel5.setFont(new java.awt.Font("Nunito ExtraLight", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Total Patients Admitted Today");
 
+        jLabel6.setText("10");
         jLabel6.setFont(new java.awt.Font("Nunito ExtraLight", 1, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("10");
 
-        jLabel7.setText("jLabel3");
+        todayPationts.setText("jLabel3");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -121,7 +121,7 @@ public class ReceptionDashboardPanel extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(todayPationts, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -133,7 +133,7 @@ public class ReceptionDashboardPanel extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(todayPationts, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -144,9 +144,9 @@ public class ReceptionDashboardPanel extends javax.swing.JPanel {
         jPanel4.setBackground(new java.awt.Color(3, 4, 94));
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
+        jLabel11.setText("Current in-Patients ");
         jLabel11.setFont(new java.awt.Font("Nunito ExtraLight", 1, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Current in-Patients ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -292,15 +292,15 @@ public class ReceptionDashboardPanel extends javax.swing.JPanel {
 
         jPanel11.setBackground(new java.awt.Color(144, 224, 239));
 
+        jLabel29.setText("Completed Lab Tests ");
         jLabel29.setBackground(new java.awt.Color(3, 4, 94));
         jLabel29.setFont(new java.awt.Font("Nunito ExtraLight", 1, 24)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(3, 4, 94));
-        jLabel29.setText("Completed Lab Tests ");
 
+        jLabel30.setText("10");
         jLabel30.setBackground(new java.awt.Color(3, 4, 94));
         jLabel30.setFont(new java.awt.Font("Nunito ExtraLight", 1, 36)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(3, 4, 94));
-        jLabel30.setText("10");
 
         jLabel31.setText("jLabel3");
 
@@ -482,15 +482,15 @@ public class ReceptionDashboardPanel extends javax.swing.JPanel {
 
         jPanel17.setBackground(new java.awt.Color(144, 224, 239));
 
+        jLabel47.setText("Ongoing Lab Tests ");
         jLabel47.setBackground(new java.awt.Color(3, 4, 94));
         jLabel47.setFont(new java.awt.Font("Nunito ExtraLight", 1, 24)); // NOI18N
         jLabel47.setForeground(new java.awt.Color(3, 4, 94));
-        jLabel47.setText("Ongoing Lab Tests ");
 
+        jLabel48.setText("10");
         jLabel48.setBackground(new java.awt.Color(3, 4, 94));
         jLabel48.setFont(new java.awt.Font("Nunito ExtraLight", 1, 36)); // NOI18N
         jLabel48.setForeground(new java.awt.Color(3, 4, 94));
-        jLabel48.setText("10");
 
         jLabel49.setText("jLabel3");
 
@@ -557,10 +557,10 @@ public class ReceptionDashboardPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(27, 16, 17, 0);
         jPanel12.add(jLabel34, gridBagConstraints);
 
+        reportBtn.setText("Generate Report");
         reportBtn.setBackground(new java.awt.Color(3, 4, 94));
         reportBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         reportBtn.setForeground(new java.awt.Color(144, 224, 239));
-        reportBtn.setText("Generate Report");
         reportBtn.setPreferredSize(new java.awt.Dimension(184, 47));
         reportBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -594,14 +594,12 @@ public class ReceptionDashboardPanel extends javax.swing.JPanel {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jPanel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(1, 1, 1))
                                     .addComponent(jPanel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -642,7 +640,7 @@ public class ReceptionDashboardPanel extends javax.swing.JPanel {
                     .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -716,7 +714,6 @@ public class ReceptionDashboardPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -733,5 +730,6 @@ public class ReceptionDashboardPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton reportBtn;
+    private javax.swing.JLabel todayPationts;
     // End of variables declaration//GEN-END:variables
 }

@@ -74,7 +74,7 @@ public class TestManagement extends javax.swing.JPanel {
         jTable1.getTableHeader().setForeground(Color.decode("#CAF0F8"));
         jTable1.getTableHeader().setPreferredSize(new Dimension(0, 47));
         
-         FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg", 15, 15);
+         FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg", 20, 20);
         reportIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         reportBtn.setIcon(reportIcon);
     }

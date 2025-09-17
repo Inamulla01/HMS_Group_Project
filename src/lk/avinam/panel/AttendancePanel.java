@@ -29,7 +29,7 @@ public class AttendancePanel extends javax.swing.JPanel {
        jTable1.getTableHeader().setForeground( Color.decode("#CAF0F8"));
        jTable1.getTableHeader().setPreferredSize(new Dimension(0, 47));
        
-               FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg", 15, 15);
+               FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg",20, 20);
         reportIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         reportBtn.setIcon(reportIcon);
         
@@ -94,6 +94,8 @@ public class AttendancePanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        jTable1.setRowHeight(47);
         jScrollPane1.setViewportView(jTable1);
 
         searchBtn.setBackground(new java.awt.Color(0, 180, 216));

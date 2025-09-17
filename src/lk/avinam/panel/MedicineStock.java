@@ -50,7 +50,7 @@ public class MedicineStock extends javax.swing.JPanel {
         FlatSVGIcon addIcon1 = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
         addIcon1.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FFFFFF")));
         brandBtn.setIcon(addIcon);
-                               FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg", 15, 15);
+                               FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg", 20, 20);
         reportIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         reportBtn.setIcon(reportIcon);
 
@@ -81,6 +81,7 @@ public class MedicineStock extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTable1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -100,6 +101,7 @@ public class MedicineStock extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setRowHeight(47);
         jScrollPane2.setViewportView(jTable1);
 
         jLabel2.setFont(new java.awt.Font("Nunito ExtraBold", 1, 36)); // NOI18N

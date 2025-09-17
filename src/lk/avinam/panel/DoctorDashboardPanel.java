@@ -24,7 +24,7 @@ public class DoctorDashboardPanel extends javax.swing.JPanel {
     }
     private void init(){
      dashbordDay.setMinSelectableDate(new java.util.Date());
-                            FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg", 15, 15);
+                            FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg",20, 20);
         reportIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         reportBtn.setIcon(reportIcon);
     }

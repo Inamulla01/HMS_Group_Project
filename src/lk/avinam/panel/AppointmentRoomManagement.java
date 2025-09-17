@@ -92,6 +92,7 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
         addBtn.setForeground(new java.awt.Color(144, 224, 239));
         addBtn.setText("New Room");
 
+        jTable1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -111,6 +112,7 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setRowHeight(47);
         jScrollPane1.setViewportView(jTable1);
 
         jTextField2.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
@@ -123,7 +125,7 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
 
         jRadioButton6.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         jRadioButton6.setForeground(new java.awt.Color(255, 0, 0));
-        jRadioButton6.setText("Canceled");
+        jRadioButton6.setText("Cancelled");
         jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton6ActionPerformed(evt);
@@ -150,9 +152,9 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
                                 .addGap(163, 163, 163)
                                 .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField2)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

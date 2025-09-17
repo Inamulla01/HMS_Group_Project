@@ -43,7 +43,7 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
         cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FF0000")));
         cancelBtn.setIcon(cancelIcon);
 
-               FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg", 15, 15);
+               FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg",20, 20);
         reportIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         reportBtn.setIcon(reportIcon);
     }
@@ -91,7 +91,7 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
 
         jRadioButton4.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         jRadioButton4.setForeground(new java.awt.Color(255, 0, 0));
-        jRadioButton4.setText("Canceled");
+        jRadioButton4.setText("Cancelled");
         jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton4ActionPerformed(evt);
@@ -108,6 +108,7 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
             }
         });
 
+        jTable1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jTable1.setForeground(new java.awt.Color(3, 4, 94));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,6 +126,7 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setRowHeight(47);
         jScrollPane1.setViewportView(jTable1);
 
         cancelBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
@@ -169,7 +171,7 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jRadioButton4)
                                 .addGap(39, 39, 39)
