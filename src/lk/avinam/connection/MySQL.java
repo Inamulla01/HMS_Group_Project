@@ -7,9 +7,9 @@ import java.sql.SQLException;
 
 public class MySQL {
 
-    private static final String DATABASE = "hospital_db";
+    private static final String DATABASE = "glizmo_dbms";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "Pasindu@2005";
+    private static final String PASSWORD = "Inamulla2005#";
     private static Connection connection;
 
     static {

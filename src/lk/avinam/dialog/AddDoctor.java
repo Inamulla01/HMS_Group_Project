@@ -54,6 +54,7 @@ public class AddDoctor extends javax.swing.JDialog {
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Medi Sewana | Add New Doctor");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

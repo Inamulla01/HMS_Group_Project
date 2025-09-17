@@ -53,6 +53,7 @@ public class AddMedicineSale extends javax.swing.JDialog {
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Medi Sewana | Add New Medicine Sale");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
