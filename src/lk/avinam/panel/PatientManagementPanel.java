@@ -249,8 +249,8 @@ public class PatientManagementPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        AddPatient addPatientDialog = new AddPatient(new javax.swing.JFrame(), true);
-        addPatientDialog.setVisible(true);
+          AddPatient addPatientDialog = new AddPatient(new javax.swing.JFrame(), true);
+          addPatientDialog.setVisible(true);
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void reportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportBtnActionPerformed

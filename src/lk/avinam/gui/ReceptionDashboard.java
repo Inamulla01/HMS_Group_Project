@@ -34,7 +34,7 @@ public class ReceptionDashboard extends javax.swing.JFrame {
     private RoomManagement wardNroomPanel;
     private AppointmentRoomManagement appointmentRoomManagementPanel;
     private DoctorManagementPanel doctorManagementPanel;
-        private WardManagement wardManagementPanel;
+    private WardManagement wardManagementPanel;
     private CardLayout contentPanelLayout;
 
     public ReceptionDashboard() {
@@ -46,35 +46,34 @@ public class ReceptionDashboard extends javax.swing.JFrame {
     private void init() {
         AppIconUtil.applyIcon(this);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                FlatSVGIcon dashboardIcon = new FlatSVGIcon("lk/avinam/icon/dashboard.svg", 20, 20);
+        FlatSVGIcon dashboardIcon = new FlatSVGIcon("lk/avinam/icon/dashboard.svg", 20, 20);
         dashboardIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         staffDashboardBtn.setIcon(dashboardIcon);
 
         FlatSVGIcon doctorIcon = new FlatSVGIcon("lk/avinam/icon/doctor.svg", 20, 20);
         doctorIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         doctorBtn.setIcon(doctorIcon);
-        
-        
+
         FlatSVGIcon patientIcon = new FlatSVGIcon("lk/avinam/icon/patient-bed-hospital.svg", 20, 20);
         patientIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         staffPatientManageBtn.setIcon(patientIcon);
-        
+
         FlatSVGIcon roomIcon = new FlatSVGIcon("lk/avinam/icon/room.svg", 20, 20);
         roomIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         roomBtn.setIcon(roomIcon);
-        
+
         FlatSVGIcon appointmentIcon = new FlatSVGIcon("lk/avinam/icon/appointment.svg", 20, 20);
         appointmentIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         appointmentBtn.setIcon(appointmentIcon);
-        
+
         FlatSVGIcon appointmentRoomIcon = new FlatSVGIcon("lk/avinam/icon/room-appinment.svg", 20, 20);
         appointmentRoomIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         appoinmentRoomBtn.setIcon(appointmentRoomIcon);
-        
+
         FlatSVGIcon wardIcon = new FlatSVGIcon("lk/avinam/icon/ward.svg", 20, 20);
         wardIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         wardBtn.setIcon(wardIcon);
-        
+
         FlatSVGIcon logOutIcon = new FlatSVGIcon("lk/avinam/icon/log-out.svg", 20, 20);
         logOutIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         logOutBtn.setIcon(logOutIcon);
@@ -88,22 +87,22 @@ public class ReceptionDashboard extends javax.swing.JFrame {
 
         this.dashboardPanel = new ReceptionDashboardPanel();
         this.contentPanel.add(dashboardPanel, "dashboard_panel");
-        
-        this.patientManagementPanel = new PatientManagementPanel(); 
+
+        this.patientManagementPanel = new PatientManagementPanel();
         this.contentPanel.add(patientManagementPanel, "patientManagement_panel");
-        
-        this.appointementPanel = new AdminAndReceptionistAppointment(); 
+
+        this.appointementPanel = new AdminAndReceptionistAppointment();
         this.contentPanel.add(appointementPanel, "appointmentManagement_panel");
-        
-        this.wardNroomPanel = new RoomManagement(); 
+
+        this.wardNroomPanel = new RoomManagement();
         this.contentPanel.add(wardNroomPanel, "wardNroomManagement_panel");
-        
-        this.appointmentRoomManagementPanel = new AppointmentRoomManagement(); 
+
+        this.appointmentRoomManagementPanel = new AppointmentRoomManagement();
         this.contentPanel.add(appointmentRoomManagementPanel, "appointmentRoomManagement_panel");
-        
-         this.doctorManagementPanel = new DoctorManagementPanel(); 
+
+        this.doctorManagementPanel = new DoctorManagementPanel();
         this.contentPanel.add(doctorManagementPanel, "doctorManagement_panel");
-                this.wardManagementPanel = new WardManagement();
+        this.wardManagementPanel = new WardManagement();
         this.contentPanel.add(wardManagementPanel, "ward_panel");
         SwingUtilities.updateComponentTreeUI(contentPanel);
 
@@ -311,12 +310,12 @@ public class ReceptionDashboard extends javax.swing.JFrame {
 
     private void staffDashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffDashboardBtnActionPerformed
         // TODO add your handling code here:
-          this.contentPanelLayout.show(contentPanel, "dashboard_panel");
+        this.contentPanelLayout.show(contentPanel, "dashboard_panel");
     }//GEN-LAST:event_staffDashboardBtnActionPerformed
 
     private void staffPatientManageBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffPatientManageBtnActionPerformed
         // TODO add your handling code here:
-          this.contentPanelLayout.show(contentPanel, "patientManagement_panel");
+        this.contentPanelLayout.show(contentPanel, "patientManagement_panel");
     }//GEN-LAST:event_staffPatientManageBtnActionPerformed
 
     private void appointmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentBtnActionPerformed
@@ -332,20 +331,19 @@ public class ReceptionDashboard extends javax.swing.JFrame {
     private void roomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roomBtnActionPerformed
         // TODO add your handling code here:
         this.contentPanelLayout.show(contentPanel, "wardNroomManagement_panel");
-        
+
     }//GEN-LAST:event_roomBtnActionPerformed
 
     private void doctorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorBtnActionPerformed
         // TODO add your handling code here:   
-          this.contentPanelLayout.show(contentPanel, "doctorManagement_panel");
+        this.contentPanelLayout.show(contentPanel, "doctorManagement_panel");
     }//GEN-LAST:event_doctorBtnActionPerformed
 
     private void wardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wardBtnActionPerformed
         // TODO add your handling code here:
-                this.contentPanelLayout.show(contentPanel, "ward_panel");
+        this.contentPanelLayout.show(contentPanel, "ward_panel");
     }//GEN-LAST:event_wardBtnActionPerformed
 
-    
     /**
      * @param args the command line arguments
      */

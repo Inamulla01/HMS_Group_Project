@@ -7,6 +7,8 @@ package lk.avinam.dialog;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -38,24 +40,27 @@ public class AddPatient extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextField2 = new javax.swing.JTextField();
+        nicTextField = new javax.swing.JTextField();
         addBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        phoneNomber2TextField = new javax.swing.JTextField();
+        phoneNo1TextField = new javax.swing.JTextField();
+        dobChooser = new com.toedter.calendar.JDateChooser();
+        addressTextField = new javax.swing.JTextField();
+        emailTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        maleButton = new javax.swing.JRadioButton();
+        femaleButton = new javax.swing.JRadioButton();
+        wardComboBox = new javax.swing.JComboBox<>();
+        roomComboBox = new javax.swing.JComboBox<>();
+        fnameTextField = new javax.swing.JTextField();
+        lnameTextField = new javax.swing.JTextField();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -67,8 +72,8 @@ public class AddPatient extends javax.swing.JDialog {
         jSeparator1.setBackground(new java.awt.Color(3, 4, 94));
         jSeparator1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "NIC", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
+        nicTextField.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        nicTextField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "NIC", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
 
         addBtn.setBackground(new java.awt.Color(3, 4, 94));
         addBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
@@ -85,55 +90,55 @@ public class AddPatient extends javax.swing.JDialog {
         cancelBtn.setForeground(new java.awt.Color(3, 4, 94));
         cancelBtn.setText("Cancel");
 
-        jTextField3.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        jTextField3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Phone No 2", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
+        phoneNomber2TextField.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        phoneNomber2TextField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Phone No 2", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
 
-        jTextField4.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        jTextField4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Phone No 1", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
+        phoneNo1TextField.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        phoneNo1TextField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Phone No 1", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
 
-        jDateChooser1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Date Of Birth", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
-        jDateChooser1.setOpaque(false);
+        dobChooser.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Date Of Birth", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
+        dobChooser.setOpaque(false);
 
-        jTextField5.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        jTextField5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Address", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        addressTextField.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        addressTextField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Address", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
+        addressTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                addressTextFieldActionPerformed(evt);
             }
         });
 
-        jTextField6.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        jTextField6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
+        emailTextField.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        emailTextField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(3, 4, 94));
         jLabel2.setText("Gender");
 
-        jRadioButton1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(3, 4, 94));
-        jRadioButton1.setText("Male");
+        maleButton.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        maleButton.setForeground(new java.awt.Color(3, 4, 94));
+        maleButton.setText("Male");
 
-        jRadioButton2.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(3, 4, 94));
-        jRadioButton2.setText("Female");
+        femaleButton.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        femaleButton.setForeground(new java.awt.Color(3, 4, 94));
+        femaleButton.setText("Female");
 
-        jComboBox4.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        jComboBox4.setForeground(new java.awt.Color(3, 4, 94));
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ward", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
-        jComboBox4.setPreferredSize(new java.awt.Dimension(89, 53));
+        wardComboBox.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        wardComboBox.setForeground(new java.awt.Color(3, 4, 94));
+        wardComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        wardComboBox.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ward", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
+        wardComboBox.setPreferredSize(new java.awt.Dimension(89, 53));
 
-        jComboBox5.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        jComboBox5.setForeground(new java.awt.Color(3, 4, 94));
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Room", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
-        jComboBox5.setPreferredSize(new java.awt.Dimension(89, 53));
+        roomComboBox.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        roomComboBox.setForeground(new java.awt.Color(3, 4, 94));
+        roomComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        roomComboBox.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Room", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
+        roomComboBox.setPreferredSize(new java.awt.Dimension(89, 53));
 
-        jTextField1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "First  Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
+        fnameTextField.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        fnameTextField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "First  Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
 
-        jTextField7.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        jTextField7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Last  Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
+        lnameTextField.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        lnameTextField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Last  Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -148,24 +153,24 @@ public class AddPatient extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))
+                            .addComponent(emailTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dobChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nicTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jRadioButton1)
+                                        .addComponent(maleButton)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jRadioButton2))
+                                        .addComponent(femaleButton))
                                     .addComponent(jLabel2))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(roomComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -174,20 +179,20 @@ public class AddPatient extends javax.swing.JDialog {
                                         .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
-                                        .addComponent(jComboBox4, 0, 275, Short.MAX_VALUE))))
-                            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
+                                        .addComponent(wardComboBox, 0, 275, Short.MAX_VALUE))))
+                            .addComponent(addressTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
                             .addComponent(jSeparator1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                                    .addComponent(jTextField4))
+                                    .addComponent(fnameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                                    .addComponent(phoneNo1TextField))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))
+                                        .addComponent(lnameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(12, 12, 12)
-                                        .addComponent(jTextField3)))))
+                                        .addComponent(phoneNomber2TextField)))))
                         .addGap(15, 15, 15))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -201,25 +206,25 @@ public class AddPatient extends javax.swing.JDialog {
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(fnameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lnameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(phoneNomber2TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(phoneNo1TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dobChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nicTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(roomComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(wardComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,8 +233,8 @@ public class AddPatient extends javax.swing.JDialog {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))))
+                            .addComponent(maleButton)
+                            .addComponent(femaleButton))))
                 .addGap(15, 15, 15))
         );
 
@@ -249,16 +254,37 @@ public class AddPatient extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        
-        String fullName = jTextField1.getText();
-        String nic = jTextField2.getText();
-        String text = jTextField3.getText();
-        
+
+        String fname = fnameTextField.getText().trim();
+        String lname = lnameTextField.getText().trim();
+        String no1 = phoneNo1TextField.getText().trim();
+        String no2 = phoneNomber2TextField.getText().trim();
+        Date date = dobChooser.getDate();
+        String dob = new SimpleDateFormat("yyyy-MM-dd").format(date);
+
+        String nic = nicTextField.getText().trim();
+        String email = emailTextField.getText().trim();
+        String gender = maleButton.isSelected() ? "Male" : femaleButton.isSelected() ? "Female" : "";
+        String address = addressTextField.getText().trim();
+        Object room = (String) roomComboBox.getSelectedItem();
+        Object ward = (String) wardComboBox.getSelectedItem();
+
+        System.out.println(fname);
+        System.out.println(lname);
+        System.out.println(no1);
+        System.out.println(no2);
+        System.out.println(dob);
+        System.out.println(nic);
+        System.out.println(email);
+        System.out.println(gender);
+        System.out.println(address);
+        System.out.println(room);
+        System.out.println(ward);
     }//GEN-LAST:event_addBtnActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void addressTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_addressTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,22 +309,23 @@ public class AddPatient extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
+    private javax.swing.JTextField addressTextField;
     private javax.swing.JButton cancelBtn;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser dobChooser;
+    private javax.swing.JTextField emailTextField;
+    private javax.swing.JRadioButton femaleButton;
+    private javax.swing.JTextField fnameTextField;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField lnameTextField;
+    private javax.swing.JRadioButton maleButton;
+    private javax.swing.JTextField nicTextField;
+    private javax.swing.JTextField phoneNo1TextField;
+    private javax.swing.JTextField phoneNomber2TextField;
+    private javax.swing.JComboBox<String> roomComboBox;
+    private javax.swing.JComboBox<String> wardComboBox;
     // End of variables declaration//GEN-END:variables
 }
