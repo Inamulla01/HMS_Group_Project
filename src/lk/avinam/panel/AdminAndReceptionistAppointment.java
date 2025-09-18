@@ -111,7 +111,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Patient NIC", "Patient", "Doctor", "Doctor Specialized In", "Room", "Date", "Time Solt", "Status"
+                "Appointment No", "Patient", "Doctor", "Doctor Specialized In", "Room", "Date", "Time Solt", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -125,7 +125,6 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         jTable1.setRowHeight(47);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
             jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
         }
 
@@ -241,11 +240,15 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
     }//GEN-LAST:event_searchBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-
+        AddAppointment addAppointment = new AddAppointment(null, true);
+        addAppointment.setLocationRelativeTo(null);
+        addAppointment.setVisible(true);
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-
+        UpdateAppointment updateAppointment = new UpdateAppointment(null, true);
+        updateAppointment.setLocationRelativeTo(null);
+        updateAppointment.setVisible(true);
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed

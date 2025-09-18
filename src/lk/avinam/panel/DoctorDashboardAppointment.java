@@ -8,6 +8,7 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import lk.avinam.dialog.ViewMorePatient;
 
 
 /**
@@ -141,7 +142,7 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Patient NIC", "Patient", "Room", "Date", "Time Solt", "Status"
+                "Appointment No", "Patient", "Room", "Date", "Time Solt", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -219,7 +220,9 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
     }//GEN-LAST:event_jRadioButton4ActionPerformed
 
     private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
-        
+        ViewMorePatient viewMorePatient = new ViewMorePatient(null, true);
+        viewMorePatient.setLocationRelativeTo(null);
+        viewMorePatient.setVisible(true);
     }//GEN-LAST:event_viewBtnActionPerformed
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed

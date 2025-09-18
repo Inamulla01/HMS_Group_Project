@@ -8,6 +8,7 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import lk.avinam.dialog.NewAppoinmentRoom;
 
 /**
  *
@@ -91,6 +92,11 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
         addBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         addBtn.setForeground(new java.awt.Color(144, 224, 239));
         addBtn.setText("New Room");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         jTable1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -206,6 +212,13 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
     private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton6ActionPerformed
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        // TODO add your handling code here:
+        NewAppoinmentRoom newAppoinmentRoom = new NewAppoinmentRoom(null, true);
+        newAppoinmentRoom.setLocationRelativeTo(null);
+        newAppoinmentRoom.setVisible(true);
+    }//GEN-LAST:event_addBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
