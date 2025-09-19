@@ -175,14 +175,14 @@
                               <Component id="roomComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="wardComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="cancelBtn" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                              <Component id="addBtn" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cancelBtn" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="addBtn" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
