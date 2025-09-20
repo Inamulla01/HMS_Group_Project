@@ -8,6 +8,7 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import lk.avinam.dialog.ViewMorePatient;
 
 
 /**
@@ -62,12 +63,12 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
         searchBtn = new javax.swing.JButton();
         jRadioButton4 = new javax.swing.JRadioButton();
         viewBtn = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         cancelBtn = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         reportBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -108,27 +109,6 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(3, 4, 94));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Patient", "Doctor", "Doctor Department", "Room", "Date", "Time Solt", "Status"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable1.setRowHeight(47);
-        jScrollPane1.setViewportView(jTable1);
-
         cancelBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         cancelBtn.setForeground(new java.awt.Color(255, 51, 51));
         cancelBtn.setText("Cancel");
@@ -155,6 +135,27 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
             }
         });
 
+        jTable1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        jTable1.setForeground(new java.awt.Color(3, 4, 94));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Appointment No", "Patient", "Room", "Date", "Time Solt", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setRowHeight(47);
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -162,16 +163,16 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(reportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(reportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jRadioButton4)
                                 .addGap(39, 39, 39)
@@ -180,8 +181,9 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                            .addComponent(viewBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(14, 14, 14))
+                            .addComponent(viewBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,9 +205,9 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
                         .addComponent(jRadioButton4)
                         .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                .addGap(57, 57, 57))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -218,7 +220,9 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
     }//GEN-LAST:event_jRadioButton4ActionPerformed
 
     private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
-        
+        ViewMorePatient viewMorePatient = new ViewMorePatient(null, true);
+        viewMorePatient.setLocationRelativeTo(null);
+        viewMorePatient.setVisible(true);
     }//GEN-LAST:event_viewBtnActionPerformed
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed

@@ -55,6 +55,7 @@ public class NewAppoinmentRoom extends javax.swing.JDialog {
         jSeparator1.setForeground(new java.awt.Color(3, 4, 94));
 
         price1.setEditable(false);
+        price1.setBackground(new java.awt.Color(255, 255, 255));
         price1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         price1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Room No", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
         price1.setDisabledTextColor(new java.awt.Color(153, 153, 153));
