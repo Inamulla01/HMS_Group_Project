@@ -20,22 +20,23 @@ public class UpdateNurse extends javax.swing.JDialog {
     public UpdateNurse(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-init();
+        init();
 
     }
 
     private void init() {
         availableBtn.setIcon(new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15));
         FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/edit.svg", 20, 20);
-        
+        addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         editBtn1.setIcon(addIcon);
         FlatSVGIcon addIcon1 = new FlatSVGIcon("lk/avinam/icon/delete.svg", 20, 20);
         addIcon1.setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.RED));
         deleteBtn.setIcon(addIcon1);
-                              FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+        FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
         cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         cancelBtn.setIcon(cancelIcon);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -294,7 +295,7 @@ init();
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-FlatLightLaf.setup();
+        FlatLightLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 UpdateNurse dialog = new UpdateNurse(new javax.swing.JFrame(), true);

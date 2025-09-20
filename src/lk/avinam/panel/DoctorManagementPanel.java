@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import lk.avinam.connection.MySQL;
+import lk.avinam.dialog.DoctorProfile;
 import raven.toast.Notifications;
 
 /**
@@ -41,32 +42,26 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         doctorTable.getTableHeader().setBackground(Color.decode("#00B4D8"));
         doctorTable.getTableHeader().setForeground(Color.decode("#CAF0F8"));
         doctorTable.getTableHeader().setPreferredSize(new Dimension(0, 47));
-
         FlatSVGIcon plusIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
         plusIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         addBtn.setIcon(plusIcon);
-
         FlatSVGIcon searchIcon = new FlatSVGIcon("lk/avinam/icon/search.svg", 15, 15);
         searchIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FFFFFF")));
         searchBtn.setIcon(searchIcon);
-
         FlatSVGIcon eyeIcon = new FlatSVGIcon("lk/avinam/icon/eye.svg", 20, 20);
         eyeIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FFFFFF")));
         viewBtn.setIcon(eyeIcon);
-
         FlatSVGIcon updateIcon = new FlatSVGIcon("lk/avinam/icon/update.svg", 20, 20);
         updateIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         updateBtn.setIcon(updateIcon);
-
         FlatSVGIcon reportIcon = new FlatSVGIcon("lk/avinam/icon/report.svg", 20, 20);
         reportIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         reportBtn.setIcon(reportIcon);
     }
 
     private void loadDoctorTable() {
-
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT * FROM `doctor_view`");
+            ResultSet rs = MySQL.executeSearch("SELECT * FROM doctor_view");
             DefaultTableModel dtm = (DefaultTableModel) doctorTable.getModel();
             dtm.setRowCount(0);
             int count = 0;
@@ -94,7 +89,6 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
                 int row = doctorTable.getSelectedRow();
                 selectedIdColum = doctorTable.getValueAt(row, 0).toString();
                 String currentStatus = doctorTable.getValueAt(row, 8).toString();
-
                 if ("Active".equalsIgnoreCase(currentStatus)) {
                     cancelBtn.setText("Inactive");
                     FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
@@ -102,18 +96,18 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
                     cancelBtn.setIcon(cancelIcon);
                     cancelBtn.setForeground(Color.red);
                     cancelBtn.setBorder(BorderFactory.createLineBorder(Color.red, 2));
-
                 } else {
                     cancelBtn.setText("Active");
                     FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/correct.svg", 15, 15);
                     Color darkGreen = new Color(0, 255, 51);
                     cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> darkGreen));
                     cancelBtn.setIcon(cancelIcon);
-
                     cancelBtn.setForeground(darkGreen);
                     cancelBtn.setBorder(BorderFactory.createLineBorder(darkGreen, 2));
-
                 }
+                cancelBtn.setVisible(true);
+                updateBtn.setVisible(true);
+                viewBtn.setVisible(true);
             }
         });
     }
@@ -124,7 +118,13 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         return selectedIdColum;
     }
 
-    private synchronized void toggleDoctorStatus() {
+    public void disableUpdateButton() {
+        cancelBtn.setVisible(false);
+        updateBtn.setVisible(false);
+        viewBtn.setVisible(false);
+    }
+
+    private void openUpdateDialog() {
         String id = getSelectedIdColum();
         if (id == null || id.isEmpty()) {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "No doctor selected.");
@@ -132,46 +132,64 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         }
 
         try {
-            java.sql.Connection conn = MySQL.getConnection();
+            
+            String query = "SELECT * FROM doctor_view WHERE slmc_id = '" + id + "'";
+            ResultSet rs = MySQL.executeSearch(query);
 
+            if (rs.next()) {
+                
+                DoctorProfile dialog = new DoctorProfile((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), true, rs, this);
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
+
+                disableUpdateButton();
+                loadDoctorTable();
+            } else {
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Doctor not found.");
+            }
+        } catch (SQLException e) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Error loading doctor details: " + e.getMessage());
+        }
+    }
+
+    private synchronized void toggleDoctorStatus() {
+        String id = getSelectedIdColum();
+        if (id == null || id.isEmpty()) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "No doctor selected.");
+            return;
+        }
+        try {
+            java.sql.Connection conn = MySQL.getConnection();
             String checkSql = "SELECT status_id FROM doctor WHERE slmc_id = ?";
             java.sql.PreparedStatement checkPst = conn.prepareStatement(checkSql);
             checkPst.setString(1, id);
             java.sql.ResultSet rs = checkPst.executeQuery();
-
             if (rs.next()) {
                 int currentStatus = rs.getInt("status_id");
-                int newStatus = (currentStatus == 1) ? 2 : 1; // 1 = Active 2 = Inactive
-
+                int newStatus = (currentStatus == 1) ? 2 : 1;
                 String updateSql = "UPDATE doctor SET status_id = ? WHERE slmc_id = ?";
                 java.sql.PreparedStatement updatePst = conn.prepareStatement(updateSql);
                 updatePst.setInt(1, newStatus);
                 updatePst.setString(2, id);
-
                 int rows = updatePst.executeUpdate();
                 if (rows > 0) {
                     loadDoctorTable();
-                    cancelBtn.setVisible(false);
+                    disableUpdateButton();
                     cancelBtn.setText(newStatus == 1 ? "Set Inactive" : "Set Active");
-                    Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Doctor status updated to " + (newStatus == 1 ? "Active" : "Inactive") + ".");
-
+                    Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_RIGHT, "Doctor status updated to " + (newStatus == 1 ? "Active" : "Inactive") + ".");
                 } else {
-                     Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Doctor not found.");
-
+                    Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Doctor not found.");
                 }
                 updatePst.close();
             } else {
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Doctor not found.");
             }
-
             rs.close();
             checkPst.close();
-
         } catch (HeadlessException | SQLException e) {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Error updating doctor status: " + e.getMessage());
         }
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -387,7 +405,7 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        // TODO add your handling code here:
+        openUpdateDialog();
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
