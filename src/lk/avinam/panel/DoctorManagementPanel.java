@@ -59,31 +59,40 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         reportBtn.setIcon(reportIcon);
     }
 
-    private void loadDoctorTable() {
-        try {
-            ResultSet rs = MySQL.executeSearch("SELECT * FROM doctor_view");
-            DefaultTableModel dtm = (DefaultTableModel) doctorTable.getModel();
-            dtm.setRowCount(0);
-            int count = 0;
-            while (rs.next()) {
-                Vector v = new Vector();
-                v.add(rs.getString("slmc_id"));
-                v.add(rs.getString("f_name") + "" + rs.getString("l_name"));
-                v.add(rs.getString("email"));
-                v.add(rs.getString("mobile"));
-                v.add(rs.getString("join_at"));
-                v.add(rs.getString("qualification_name"));
-                v.add(rs.getString("specialization"));
-                v.add(rs.getString("doctor_type"));
-                v.add(rs.getString("doctor_status"));
-                dtm.addRow(v);
-            }
-            DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-            centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-            doctorTable.setDefaultRenderer(Object.class, centerRenderer);
-        } catch (SQLException e) {
-            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Database error: " + e.getMessage());
+private void loadDoctorTable() { 
+    try {
+        ResultSet rs = MySQL.executeSearch("SELECT * FROM doctor_view");
+        DefaultTableModel dtm = (DefaultTableModel) doctorTable.getModel();
+        dtm.setRowCount(0);
+
+        while (rs.next()) {
+            Vector v = new Vector();
+            v.add(rs.getString("slmc_id"));
+            v.add(rs.getString("f_name") + " " + rs.getString("l_name"));
+            v.add(rs.getString("email"));
+            v.add(rs.getString("mobile"));
+            v.add(rs.getString("join_at"));
+            v.add(rs.getString("qualification"));   
+            v.add(rs.getString("specialization")); 
+            v.add(rs.getString("doctor_type"));
+            v.add(rs.getString("doctor_status"));
+            dtm.addRow(v);
         }
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        doctorTable.setDefaultRenderer(Object.class, centerRenderer);
+
+    } catch (SQLException e) {
+        Notifications.getInstance().show(
+            Notifications.Type.ERROR, 
+            Notifications.Location.BOTTOM_RIGHT, 
+            "Database error: " + e.getMessage()
+        );
+    }
+
+    
+
         doctorTable.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && doctorTable.getSelectedRow() != -1) {
                 int row = doctorTable.getSelectedRow();
