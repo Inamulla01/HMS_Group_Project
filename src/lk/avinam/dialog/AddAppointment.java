@@ -26,7 +26,7 @@ public class AddAppointment extends javax.swing.JDialog {
     private HashMap<String, Integer> patientMap;
     private HashMap<String, Integer> doctorMap;
     private HashMap<String, Integer> DoctorAvailabilDate;
-    
+
     public AddAppointment(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -44,122 +44,112 @@ public class AddAppointment extends javax.swing.JDialog {
         FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
         addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         addBtn.setIcon(addIcon);
-                FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+        FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
         cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         cancelBtn.setIcon(cancelIcon);
         AutoCompleteDecorator.decorate(PatientInput);
-        
+
         doctorInput.addActionListener(evt -> {
-    String selectedDoctor = (String) doctorInput.getSelectedItem();
-    if (selectedDoctor != null && doctorMap.containsKey(selectedDoctor)) {
-        int doctorId = doctorMap.get(selectedDoctor);
-        if (doctorId != 0) {
-            loadDoctorAvailabilDate(doctorId);
-        } else {
-            DAvailableDateCombo.setModel(
-                new DefaultComboBoxModel<>(new String[]{"Select Availability Date"})
-            );
-        }
-    }
-});
+            String selectedDoctor = (String) doctorInput.getSelectedItem();
+            if (selectedDoctor != null && doctorMap.containsKey(selectedDoctor)) {
+                int doctorId = doctorMap.get(selectedDoctor);
+                if (doctorId != 0) {
+                    loadDoctorAvailabilDate(doctorId);
+                } else {
+                    DAvailableDateCombo.setModel(
+                            new DefaultComboBoxModel<>(new String[]{"Select Availability Date"})
+                    );
+                }
+            }
+        });
 
     }
-    
-    
+
     private void generateAppointmentNumber() {
-    try {
-        // Get current year and month
-        LocalDate today = LocalDate.now();
-        int year = today.getYear();
-        int month = today.getMonthValue();
+        try {
 
-        // Build SQL query directly
-        String sql = "SELECT appointment_no FROM appointment "
-                   + "WHERE appointment_no LIKE 'APT-" + year + "-" + String.format("%02d", month) + "-%' "
-                   + "ORDER BY appointment_no DESC LIMIT 1";
+            LocalDate today = LocalDate.now();
+            int year = today.getYear();
+            int month = today.getMonthValue();
 
-        java.sql.Connection conn = MySQL.getConnection();
-        java.sql.Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery(sql);
+            String sql = "SELECT appointment_no FROM appointment WHERE appointment_no LIKE 'APT-" + year + "-" + String.format("%02d", month) + "-%' ORDER BY appointment_no DESC LIMIT 1";
 
-        String appointmentNo;
-        if (rs.next()) {
-            // Get last appointment number and increment
-            String lastNo = rs.getString("appointment_no");
-            int num = Integer.parseInt(lastNo.substring(lastNo.lastIndexOf("-") + 1)) + 1;
-            appointmentNo = String.format("APT-%d-%02d-%04d", year, month, num);
-        } else {
-            // First appointment of the month
-            appointmentNo = String.format("APT-%d-%02d-0001", year, month);
+            java.sql.Connection conn = MySQL.getConnection();
+            java.sql.Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            String appointmentNo;
+            if (rs.next()) {
+                String lastNo = rs.getString("appointment_no");
+                int num = Integer.parseInt(lastNo.substring(lastNo.lastIndexOf("-") + 1)) + 1;
+                appointmentNo = String.format("APT-%d-%02d-%04d", year, month, num);
+            } else {
+                appointmentNo = String.format("APT-%d-%02d-0001", year, month);
+            }
+
+            appointment_NO.setText(appointmentNo);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        // ✅ Set into JTextField
-        appointment_NO.setText(appointmentNo);
-
-    } catch (SQLException e) {
-        e.printStackTrace();
     }
-}
-    
-    private  void loadPatient(){
-        try{
-        ResultSet rs = MySQL.executeSearch("SELECT patient_id, CONCAT(nic_no, ' - ', patient_fname, ' ', patient_lname) AS patient_info FROM patient;");
-        Vector<String> patients = new Vector<>();
-        patients.add("Select Patient");
-        patientMap.put("Select Patient", 0);
-        while(rs.next()){
-        String patientName = rs.getString("patient_info");
-        patientMap.put(patientName, rs.getInt("patient_id"));
-        patients.add(patientName);
-        }
+
+    private void loadPatient() {
+        try {
+            ResultSet rs = MySQL.executeSearch("SELECT patient_id, CONCAT(nic_no, ' - ', patient_fname, ' ', patient_lname) AS patient_info FROM patient;");
+            Vector<String> patients = new Vector<>();
+            patients.add("Select Patient");
+            patientMap.put("Select Patient", 0);
+            while (rs.next()) {
+                String patientName = rs.getString("patient_info");
+                patientMap.put(patientName, rs.getInt("patient_id"));
+                patients.add(patientName);
+            }
             DefaultComboBoxModel dcm = new DefaultComboBoxModel(patients);
             PatientInput.setModel(dcm);
-        
-        }catch(SQLException e){
-        e.printStackTrace();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    
-    private void loadDoctor(){
-        try{
-        ResultSet rs = MySQL.executeSearch("SELECT doctor_id, CONCAT(f_name,' ', l_name,' - ', specialization,' - ', slmc_id) AS doctor_info FROM doctor;");
-        Vector<String> doctors = new Vector<>();
-        doctors.add("Select Doctor");
-        doctorMap.put("Select Doctor", 0);
-        while(rs.next()){
-        String patientName = rs.getString("doctor_info");
-        doctorMap.put(patientName, rs.getInt("doctor_id"));
-        doctors.add(patientName);
-        }
+    private void loadDoctor() {
+        try {
+            ResultSet rs = MySQL.executeSearch("SELECT doctor_id, CONCAT(f_name,' ', l_name,' - ', specialization,' - ', slmc_id) AS doctor_info FROM doctor;");
+            Vector<String> doctors = new Vector<>();
+            doctors.add("Select Doctor");
+            doctorMap.put("Select Doctor", 0);
+            while (rs.next()) {
+                String patientName = rs.getString("doctor_info");
+                doctorMap.put(patientName, rs.getInt("doctor_id"));
+                doctors.add(patientName);
+            }
             DefaultComboBoxModel dcm = new DefaultComboBoxModel(doctors);
             doctorInput.setModel(dcm);
-        
-        }catch(SQLException e){
-        e.printStackTrace();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
-    
-    private void loadDoctorAvailabilDate(int doctorId){
-        try{
-        ResultSet rs = MySQL.executeSearch("SELECT DISTINCT asd.availability_date_id, asd.availability_date FROM availability_schedule_date asd JOIN availability_schedule_date_has_doctor asdd ON asd.availability_date_id = asdd.availability_schedule_date_availability_date_id WHERE asdd.doctor_doctor_id = '"+doctorId+"' ORDER BY asd.availability_date;");
-        Vector<String> DoctorAvailabilDates = new Vector<>();
-        DoctorAvailabilDates.add("Select Doctors Availability Date ");
-        DoctorAvailabilDate.put("Select Doctors Availability Date ", 0);
-        while(rs.next()){
-        String patientName = rs.getString("availability_date");
-        DoctorAvailabilDate.put(patientName, rs.getInt("availability_date_id"));
-        DoctorAvailabilDates.add(patientName);
-        }
+
+    private void loadDoctorAvailabilDate(int doctorId) {
+        try {
+            ResultSet rs = MySQL.executeSearch("SELECT availability_schedule_date.availability_date_id, availability_schedule_date.availability_date FROM availability_schedule_date JOIN schedule_date_has_doctor  ON availability_schedule_date.availability_date_id = schedule_date_has_doctor.schedule_date_id WHERE schedule_date_has_doctor.doctor_id = '" + doctorId + "' ORDER BY availability_schedule_date.availability_date;");
+            Vector<String> DoctorAvailabilDates = new Vector<>();
+            DoctorAvailabilDates.add("Select Doctors Availability Date ");
+            DoctorAvailabilDate.put("Select Doctors Availability Date ", 0);
+            while (rs.next()) {
+                String patientName = rs.getString("availability_date");
+                DoctorAvailabilDate.put(patientName, rs.getInt("availability_date_id"));
+                DoctorAvailabilDates.add(patientName);
+            }
             DefaultComboBoxModel dcm = new DefaultComboBoxModel(DoctorAvailabilDates);
             DAvailableDateCombo.setModel(dcm);
-        
-        }catch(SQLException e){
-        e.printStackTrace();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
-
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -321,14 +311,14 @@ public class AddAppointment extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void DAvailableDateComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DAvailableDateComboActionPerformed
-       
+
     }//GEN-LAST:event_DAvailableDateComboActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
- FlatLightLaf.setup();
+        FlatLightLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 AddAppointment dialog = new AddAppointment(new javax.swing.JFrame(), true);

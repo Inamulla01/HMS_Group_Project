@@ -60,7 +60,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
     
     private void loadAppointmentDetails (){
         try{
-            ResultSet rs = MySQL.executeSearch("SELECT appointment_no,patient_name,slmc_id,doctor_name,specialization,appointment_room_no,availability_date,time_slot,appointment_status FROM appointment_view;");
+            ResultSet rs = MySQL.executeSearch("SELECT appointment_no,patient_name,slmc_id,doctor_name,specialization,appointment_room_no,availability_date,time_slot,appointment_status,price FROM appointment_view;");
             DefaultTableModel dtm = (DefaultTableModel)arAppointmentTable.getModel();
             dtm.setRowCount(0);
             while (rs.next()) {
@@ -73,6 +73,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
                 v.add(rs.getString("appointment_room_no"));
                 v.add(rs.getString("availability_date"));
                 v.add(rs.getString("time_slot"));
+                v.add(rs.getString("price"));
                 v.add(rs.getString("appointment_status"));
                 dtm.addRow(v);
             }
@@ -161,7 +162,6 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         arAppointmentTable.setRowHeight(47);
         jScrollPane1.setViewportView(arAppointmentTable);
         if (arAppointmentTable.getColumnModel().getColumnCount() > 0) {
-            arAppointmentTable.getColumnModel().getColumn(2).setResizable(false);
             arAppointmentTable.getColumnModel().getColumn(4).setPreferredWidth(100);
         }
 
