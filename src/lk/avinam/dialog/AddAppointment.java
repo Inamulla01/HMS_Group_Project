@@ -15,6 +15,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import lk.avinam.validation.Validater;
+import lk.avinam.validation.Validation;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
@@ -39,6 +42,7 @@ public class AddAppointment extends javax.swing.JDialog {
         this.doctorAvailabilSlot = new HashMap<>();
         loadPatient();
         loadDoctor();
+        
 
     }
 
@@ -171,7 +175,7 @@ public class AddAppointment extends javax.swing.JDialog {
 
     private void loadDoctorAvailabilDate(int doctorId) {
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT availability_schedule_date.availability_date_id, availability_schedule_date.availability_date FROM availability_schedule_date JOIN schedule_date_has_doctor  ON availability_schedule_date.availability_date_id = schedule_date_has_doctor.schedule_date_id WHERE schedule_date_has_doctor.doctor_id = '" + doctorId + "' AND availability_schedule_date.availability_date >= CURDATE() ORDER BY availability_schedule_date.availability_date;");
+            ResultSet rs = MySQL.executeSearch("SELECT DISTINCT availability_schedule_date.availability_date_id, availability_schedule_date.availability_date FROM availability_schedule_date JOIN schedule_date_has_doctor  ON availability_schedule_date.availability_date_id = schedule_date_has_doctor.schedule_date_id WHERE schedule_date_has_doctor.doctor_id = '" + doctorId + "' AND availability_schedule_date.availability_date >= CURDATE() ORDER BY availability_schedule_date.availability_date;");
             Vector<String> DoctorAvailabilDates = new Vector<>();
             DoctorAvailabilDates.add("Select Doctors Availability Date ");
             doctorAvailabilDate.put("Select Doctors Availability Date ", 0);
@@ -255,6 +259,11 @@ public class AddAppointment extends javax.swing.JDialog {
         addBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         addBtn.setForeground(new java.awt.Color(202, 240, 248));
         addBtn.setText("Save");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         cancelBtn.setBackground(new java.awt.Color(202, 240, 248));
         cancelBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
@@ -366,9 +375,58 @@ public class AddAppointment extends javax.swing.JDialog {
         loadPatient();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private synchronized void insertAppointmentData(){
+        
+    String appointmentNo = appointment_NO.getText();
+        
+    String selectedPatient = (String) PatientInput.getSelectedItem();
+    int patientId = patientMap.getOrDefault(selectedPatient, 0);
+
+    String selectedDoctor = (String) doctorInput.getSelectedItem();
+    int doctorId = doctorMap.getOrDefault(selectedDoctor, 0);
+
+    String selectedDate = (String) DAvailableDateCombo.getSelectedItem();
+    int dAvailableDateId = doctorAvailabilDate.getOrDefault(selectedDate, 0);
+
+    String selectedSlot = (String) doctorSlotCombo.getSelectedItem();
+    int doctorSlotId = doctorAvailabilSlot.getOrDefault(selectedSlot, 0);
+    
+    if(!Validater.isSelectedItemValid(patientId)){
+      return;
+    }else if(!Validater.isSelectedItemValid(doctorId)){
+    return;
+    }else if(!Validater.isSelectedItemValid(dAvailableDateId)){
+    return;
+    }else if(!Validater.isSelectedItemValid(doctorSlotId)){
+    return; 
+    }
+    
+    System.out.println("Appointment No: " + appointmentNo);
+    System.out.println("Patient ID: " + patientId);
+    System.out.println("Doctor ID: " + doctorId);
+    System.out.println("Date ID: " + dAvailableDateId);
+    System.out.println("Slot ID: " + doctorSlotId);
+    
+//    try{
+//        ResultSet rs = MySQL.executeSearch("SELECT appointment_no FROM appointment WHERE appointment_no = '"+appointmentNo+"';");
+//        if(rs.next()){
+//            JOptionPane.showMessageDialog(null,"This appointment is already exist", "Appointment",JOptionPane.ERROR_MESSAGE);
+//        }else{
+//        MySQL.executeIUD("INSERT INTO appointment (appointment_no, patient_id, doctor_id, slot_id, appointment_status_id) VALUES ('"+appointmentNo+"', '"+patientId+"', '"+doctorId+"', '"+dAvailableDateId+"', (SELECT appointment_status_id FROM appointment_status WHERE appointment_status = 'Pending'));");
+//        }
+//    }catch(SQLException e){
+//        e.printStackTrace();
+//    }
+    
+    }
+    
     private void DAvailableDateComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DAvailableDateComboActionPerformed
 
     }//GEN-LAST:event_DAvailableDateComboActionPerformed
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        insertAppointmentData();
+    }//GEN-LAST:event_addBtnActionPerformed
 
     /**
      * @param args the command line arguments
