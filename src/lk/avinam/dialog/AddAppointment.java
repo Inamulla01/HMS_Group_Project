@@ -192,24 +192,68 @@ public class AddAppointment extends javax.swing.JDialog {
         }
     }
     
+//    private void loadDoctorAvailabilSlot(int doctorId, int dateId) {
+//        try {
+//            ResultSet rs = MySQL.executeSearch("SELECT DISTINCT ast.availability_time_id, CONCAT(ast.availability_time_from, ' - ', ast.availability_time_to) AS time_slot FROM date_has_time dht JOIN availability_schedule_time ast ON dht.availability_time_id = ast.availability_time_id JOIN availability_schedule_date asd ON dht.availability_date_id = asd.availability_date_id JOIN schedule_date_has_doctor sdd ON asd.availability_date_id = sdd.schedule_date_id JOIN doctor d ON sdd.doctor_id = d.doctor_id WHERE d.doctor_id = '"+doctorId+"' AND asd.availability_date_id = '"+dateId+"';");
+//            Vector<String> DoctorAvailabilTime = new Vector<>();
+//            DoctorAvailabilTime.add("Select Doctors Availability Slot ");
+//            doctorAvailabilSlot.put("Select Doctors Availability Slot ", 0);
+//            while (rs.next()) {
+//                String doctorAvailabilSlotName = rs.getString("time_slot");
+//                doctorAvailabilSlot.put(doctorAvailabilSlotName, rs.getInt("availability_time_id"));
+//                DoctorAvailabilTime.add(doctorAvailabilSlotName);
+//            }
+//            DefaultComboBoxModel dcm = new DefaultComboBoxModel(DoctorAvailabilTime);
+//            doctorSlotCombo.setModel(dcm);
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+    
     private void loadDoctorAvailabilSlot(int doctorId, int dateId) {
-        try {
-            ResultSet rs = MySQL.executeSearch("SELECT availability_schedule_time.availability_time_id, CONCAT(availability_time_from, ' ', availability_time_to, ' ')AS time_slot FROM availability_schedule_time JOIN availability_schedule_date ON availability_schedule_date.availability_time_id = availability_schedule_time.availability_time_id JOIN schedule_date_has_doctor  ON availability_schedule_date.availability_date_id = schedule_date_has_doctor.schedule_date_id WHERE schedule_date_has_doctor.doctor_id = '"+doctorId+"' AND availability_schedule_date.availability_date_id = '"+dateId+"' ORDER BY availability_schedule_time.availability_time_from;");
-            Vector<String> DoctorAvailabilTime = new Vector<>();
-            DoctorAvailabilTime.add("Select Doctors Availability Slot ");
-            doctorAvailabilSlot.put("Select Doctors Availability Slot ", 0);
-            while (rs.next()) {
-                String doctorAvailabilSlotName = rs.getString("time_slot");
-                doctorAvailabilSlot.put(doctorAvailabilSlotName, rs.getInt("availability_time_id"));
-                DoctorAvailabilTime.add(doctorAvailabilSlotName);
-            }
-            DefaultComboBoxModel dcm = new DefaultComboBoxModel(DoctorAvailabilTime);
-            doctorSlotCombo.setModel(dcm);
+    try {
+        // Clear old map first
+        doctorAvailabilSlot.clear();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        // Query available slots for doctor + date
+                    String sql = "SELECT DISTINCT ast.availability_time_id, CONCAT(ast.availability_time_from, ' - ', ast.availability_time_to) AS time_slot FROM date_has_time dht JOIN availability_schedule_time ast ON dht.availability_time_id = ast.availability_time_id JOIN availability_schedule_date asd ON dht.availability_date_id = asd.availability_date_id JOIN schedule_date_has_doctor sdd ON asd.availability_date_id = sdd.schedule_date_id JOIN doctor d ON sdd.doctor_id = d.doctor_id WHERE d.doctor_id = '"+doctorId+"' AND asd.availability_date_id = '"+dateId+"'";
+
+        ResultSet rs = MySQL.executeSearch(sql);
+
+        // Vector for combo box items
+        Vector<String> DoctorAvailabilTime = new Vector<>();
+        DoctorAvailabilTime.add("Select Doctors Availability Slot");
+        doctorAvailabilSlot.put("Select Doctors Availability Slot", 0);
+
+        while (rs.next()) {
+            String slotLabel = rs.getString("time_slot");
+            int slotId = rs.getInt("availability_time_id");
+
+            doctorAvailabilSlot.put(slotLabel, slotId);
+            DoctorAvailabilTime.add(slotLabel);
         }
+
+        // If no slots found, show message in combo
+        if (DoctorAvailabilTime.size() == 1) {
+            DoctorAvailabilTime.set(0, "No Slots Available");
+            doctorAvailabilSlot.clear();
+            doctorAvailabilSlot.put("No Slots Available", 0);
+        }
+
+        // Update combo box
+        DefaultComboBoxModel dcm = new DefaultComboBoxModel<>(DoctorAvailabilTime);
+        doctorSlotCombo.setModel(dcm);
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, 
+            "Error loading doctor's availability slots.", 
+            "Database Error", 
+            JOptionPane.ERROR_MESSAGE);
     }
+}
+
 
 
     @SuppressWarnings("unchecked")
