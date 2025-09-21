@@ -175,7 +175,7 @@ public class AddAppointment extends javax.swing.JDialog {
 
     private void loadDoctorAvailabilDate(int doctorId) {
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT DISTINCT availability_schedule_date.availability_date_id, availability_schedule_date.availability_date FROM availability_schedule_date JOIN schedule_date_has_doctor  ON availability_schedule_date.availability_date_id = schedule_date_has_doctor.schedule_date_id WHERE schedule_date_has_doctor.doctor_id = '" + doctorId + "' AND availability_schedule_date.availability_date >= CURDATE() ORDER BY availability_schedule_date.availability_date;");
+            ResultSet rs = MySQL.executeSearch("SELECT availability_schedule_date.availability_date_id, availability_schedule_date.availability_date FROM availability_schedule_date JOIN schedule_date_has_doctor ON availability_schedule_date.availability_date_id = schedule_date_has_doctor.schedule_date_id WHERE schedule_date_has_doctor.doctor_id = '"+doctorId+"' AND availability_schedule_date.availability_date >= CURDATE() ORDER BY availability_schedule_date.availability_date;");
             Vector<String> DoctorAvailabilDates = new Vector<>();
             DoctorAvailabilDates.add("Select Doctors Availability Date ");
             doctorAvailabilDate.put("Select Doctors Availability Date ", 0);
