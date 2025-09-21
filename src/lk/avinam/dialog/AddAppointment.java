@@ -25,7 +25,8 @@ public class AddAppointment extends javax.swing.JDialog {
 
     private HashMap<String, Integer> patientMap;
     private HashMap<String, Integer> doctorMap;
-    private HashMap<String, Integer> DoctorAvailabilDate;
+    private HashMap<String, Integer> doctorAvailabilDate;
+    private HashMap<String, Integer> doctorAvailabilSlot;
 
     public AddAppointment(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -34,7 +35,8 @@ public class AddAppointment extends javax.swing.JDialog {
         generateAppointmentNumber();
         this.patientMap = new HashMap<>();
         this.doctorMap = new HashMap<>();
-        this.DoctorAvailabilDate = new HashMap<>();
+        this.doctorAvailabilDate = new HashMap<>();
+        this.doctorAvailabilSlot = new HashMap<>();
         loadPatient();
         loadDoctor();
 
@@ -50,18 +52,53 @@ public class AddAppointment extends javax.swing.JDialog {
         AutoCompleteDecorator.decorate(PatientInput);
 
         doctorInput.addActionListener(evt -> {
-            String selectedDoctor = (String) doctorInput.getSelectedItem();
-            if (selectedDoctor != null && doctorMap.containsKey(selectedDoctor)) {
-                int doctorId = doctorMap.get(selectedDoctor);
-                if (doctorId != 0) {
-                    loadDoctorAvailabilDate(doctorId);
-                } else {
-                    DAvailableDateCombo.setModel(
-                            new DefaultComboBoxModel<>(new String[]{"Select Availability Date"})
-                    );
-                }
+    String selectedDoctor = (String) doctorInput.getSelectedItem();
+    if (selectedDoctor != null && doctorMap.containsKey(selectedDoctor)) {
+        int doctorId = doctorMap.get(selectedDoctor);
+        if (doctorId != 0) {
+            // Reset slot combo whenever doctor changes
+            doctorSlotCombo.setModel(
+                new DefaultComboBoxModel<>(new String[]{"Select Doctors Availability Slot"})
+            );
+
+            // Load available dates for this doctor
+            loadDoctorAvailabilDate(doctorId);
+
+            // Clear old listeners to avoid stacking
+            for (java.awt.event.ActionListener al : DAvailableDateCombo.getActionListeners()) {
+                DAvailableDateCombo.removeActionListener(al);
             }
-        });
+
+            // Add fresh listener for date → slots
+            DAvailableDateCombo.addActionListener(dateEvt -> {
+                String selectedDate = (String) DAvailableDateCombo.getSelectedItem();
+                if (selectedDate != null && doctorAvailabilDate.containsKey(selectedDate)) {
+                    int dateId = doctorAvailabilDate.get(selectedDate);
+                    if (dateId != 0) {
+                        // Reload slots for this doctor + date
+                        loadDoctorAvailabilSlot(doctorId, dateId);
+                    } else {
+                        doctorSlotCombo.setModel(
+                            new DefaultComboBoxModel<>(new String[]{"Select Doctors Availability Slot"})
+                        );
+                    }
+                }
+            });
+
+        } else {
+            // Reset both if no doctor
+            DAvailableDateCombo.setModel(
+                new DefaultComboBoxModel<>(new String[]{"Select Availability Date"})
+            );
+            doctorSlotCombo.setModel(
+                new DefaultComboBoxModel<>(new String[]{"Select Availability Slot"})
+            );
+        }
+    }
+});
+
+
+        
 
     }
 
@@ -120,9 +157,9 @@ public class AddAppointment extends javax.swing.JDialog {
             doctors.add("Select Doctor");
             doctorMap.put("Select Doctor", 0);
             while (rs.next()) {
-                String patientName = rs.getString("doctor_info");
-                doctorMap.put(patientName, rs.getInt("doctor_id"));
-                doctors.add(patientName);
+                String DoctorName = rs.getString("doctor_info");
+                doctorMap.put(DoctorName, rs.getInt("doctor_id"));
+                doctors.add(DoctorName);
             }
             DefaultComboBoxModel dcm = new DefaultComboBoxModel(doctors);
             doctorInput.setModel(dcm);
@@ -134,14 +171,14 @@ public class AddAppointment extends javax.swing.JDialog {
 
     private void loadDoctorAvailabilDate(int doctorId) {
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT availability_schedule_date.availability_date_id, availability_schedule_date.availability_date FROM availability_schedule_date JOIN schedule_date_has_doctor  ON availability_schedule_date.availability_date_id = schedule_date_has_doctor.schedule_date_id WHERE schedule_date_has_doctor.doctor_id = '" + doctorId + "' ORDER BY availability_schedule_date.availability_date;");
+            ResultSet rs = MySQL.executeSearch("SELECT availability_schedule_date.availability_date_id, availability_schedule_date.availability_date FROM availability_schedule_date JOIN schedule_date_has_doctor  ON availability_schedule_date.availability_date_id = schedule_date_has_doctor.schedule_date_id WHERE schedule_date_has_doctor.doctor_id = '" + doctorId + "' AND availability_schedule_date.availability_date >= CURDATE() ORDER BY availability_schedule_date.availability_date;");
             Vector<String> DoctorAvailabilDates = new Vector<>();
             DoctorAvailabilDates.add("Select Doctors Availability Date ");
-            DoctorAvailabilDate.put("Select Doctors Availability Date ", 0);
+            doctorAvailabilDate.put("Select Doctors Availability Date ", 0);
             while (rs.next()) {
-                String patientName = rs.getString("availability_date");
-                DoctorAvailabilDate.put(patientName, rs.getInt("availability_date_id"));
-                DoctorAvailabilDates.add(patientName);
+                String DoctorAvailabilDateName = rs.getString("availability_date");
+                doctorAvailabilDate.put(DoctorAvailabilDateName, rs.getInt("availability_date_id"));
+                DoctorAvailabilDates.add(DoctorAvailabilDateName);
             }
             DefaultComboBoxModel dcm = new DefaultComboBoxModel(DoctorAvailabilDates);
             DAvailableDateCombo.setModel(dcm);
@@ -150,6 +187,26 @@ public class AddAppointment extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
+    
+    private void loadDoctorAvailabilSlot(int doctorId, int dateId) {
+        try {
+            ResultSet rs = MySQL.executeSearch("SELECT availability_schedule_time.availability_time_id, CONCAT(availability_time_from, ' ', availability_time_to, ' ')AS time_slot FROM availability_schedule_time JOIN availability_schedule_date ON availability_schedule_date.availability_time_id = availability_schedule_time.availability_time_id JOIN schedule_date_has_doctor  ON availability_schedule_date.availability_date_id = schedule_date_has_doctor.schedule_date_id WHERE schedule_date_has_doctor.doctor_id = '"+doctorId+"' AND availability_schedule_date.availability_date_id = '"+dateId+"' ORDER BY availability_schedule_time.availability_time_from;");
+            Vector<String> DoctorAvailabilTime = new Vector<>();
+            DoctorAvailabilTime.add("Select Doctors Availability Slot ");
+            doctorAvailabilSlot.put("Select Doctors Availability Slot ", 0);
+            while (rs.next()) {
+                String doctorAvailabilSlotName = rs.getString("time_slot");
+                doctorAvailabilSlot.put(doctorAvailabilSlotName, rs.getInt("availability_time_id"));
+                DoctorAvailabilTime.add(doctorAvailabilSlotName);
+            }
+            DefaultComboBoxModel dcm = new DefaultComboBoxModel(DoctorAvailabilTime);
+            doctorSlotCombo.setModel(dcm);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -158,7 +215,7 @@ public class AddAppointment extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        doctorSlotCombo = new javax.swing.JComboBox<>();
         DAvailableDateCombo = new javax.swing.JComboBox<>();
         addBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
@@ -179,10 +236,10 @@ public class AddAppointment extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(3, 4, 94));
         jLabel1.setText("New Appointments");
 
-        jComboBox2.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(3, 4, 94));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Doctors Availability Slot" }));
-        jComboBox2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Doctor Available Slot", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
+        doctorSlotCombo.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        doctorSlotCombo.setForeground(new java.awt.Color(3, 4, 94));
+        doctorSlotCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Doctors Availability Slot" }));
+        doctorSlotCombo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Doctor Available Slot", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
 
         DAvailableDateCombo.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         DAvailableDateCombo.setForeground(new java.awt.Color(3, 4, 94));
@@ -204,7 +261,6 @@ public class AddAppointment extends javax.swing.JDialog {
         cancelBtn.setForeground(new java.awt.Color(3, 4, 94));
         cancelBtn.setText("Cancel");
 
-        appointment_NO.setBackground(new java.awt.Color(255, 255, 255));
         appointment_NO.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         appointment_NO.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Appointment No", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
 
@@ -252,7 +308,7 @@ public class AddAppointment extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(DAvailableDateCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(doctorSlotCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -280,7 +336,7 @@ public class AddAppointment extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DAvailableDateCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(doctorSlotCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
@@ -340,8 +396,8 @@ public class AddAppointment extends javax.swing.JDialog {
     private javax.swing.JTextField appointment_NO;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JComboBox<String> doctorInput;
+    private javax.swing.JComboBox<String> doctorSlotCombo;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
