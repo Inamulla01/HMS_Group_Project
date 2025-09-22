@@ -215,6 +215,7 @@ public class AddAppointment extends javax.swing.JDialog {
     try {
         // Clear old map first
         doctorAvailabilSlot.clear();
+        System.out.println(dateId);
 
         // Query available slots for doctor + date
                     String sql = "SELECT DISTINCT ast.availability_time_id, CONCAT(ast.availability_time_from, ' - ', ast.availability_time_to) AS time_slot FROM date_has_time dht JOIN availability_schedule_time ast ON dht.availability_time_id = ast.availability_time_id JOIN availability_schedule_date asd ON dht.availability_date_id = asd.availability_date_id JOIN schedule_date_has_doctor sdd ON asd.availability_date_id = sdd.schedule_date_id JOIN doctor d ON sdd.doctor_id = d.doctor_id WHERE d.doctor_id = '"+doctorId+"' AND asd.availability_date_id = '"+dateId+"'";
@@ -445,22 +446,18 @@ public class AddAppointment extends javax.swing.JDialog {
     return; 
     }
     
-    System.out.println("Appointment No: " + appointmentNo);
-    System.out.println("Patient ID: " + patientId);
-    System.out.println("Doctor ID: " + doctorId);
-    System.out.println("Date ID: " + dAvailableDateId);
-    System.out.println("Slot ID: " + doctorSlotId);
+  
     
-//    try{
-//        ResultSet rs = MySQL.executeSearch("SELECT appointment_no FROM appointment WHERE appointment_no = '"+appointmentNo+"';");
-//        if(rs.next()){
-//            JOptionPane.showMessageDialog(null,"This appointment is already exist", "Appointment",JOptionPane.ERROR_MESSAGE);
-//        }else{
-//        MySQL.executeIUD("INSERT INTO appointment (appointment_no, patient_id, doctor_id, slot_id, appointment_status_id) VALUES ('"+appointmentNo+"', '"+patientId+"', '"+doctorId+"', '"+dAvailableDateId+"', (SELECT appointment_status_id FROM appointment_status WHERE appointment_status = 'Pending'));");
-//        }
-//    }catch(SQLException e){
-//        e.printStackTrace();
-//    }
+    try{
+        ResultSet rs = MySQL.executeSearch("SELECT appointment_no FROM appointment WHERE appointment_no = '"+appointmentNo+"';");
+        if(rs.next()){
+            JOptionPane.showMessageDialog(null,"This appointment is already exist", "Appointment",JOptionPane.ERROR_MESSAGE);
+        }else{
+        MySQL.executeIUD("INSERT INTO appointment (appointment_no, patient_id, doctor_id, availability_date_id,availability_time_id,appointment_room_id, appointment_status_id) VALUES ('"+appointmentNo+"', '"+patientId+"', '"+doctorId+"', '"+dAvailableDateId+"','"+doctorSlotId+"',' (SELECT appointment_status_id FROM appointment_status WHERE appointment_status = 'Pending'));");
+        }
+    }catch(SQLException e){
+        e.printStackTrace();
+    }
     
     }
     
