@@ -156,7 +156,7 @@ public class AddAppointment extends javax.swing.JDialog {
 
     private void loadDoctor() {
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT doctor_id, CONCAT(f_name,' ', l_name,' - ', specialization,' - ', slmc_id) AS doctor_info FROM doctor;");
+            ResultSet rs = MySQL.executeSearch("SELECT doctor_id, CONCAT(f_name,' ', l_name,' - ', specialization,' - ', slmc_id) AS doctor_info FROM doctor JOIN doctor_type ON doctor_type.doctor_type_id = doctor.doctor_type_id WHERE doctor_type.doctor_type = 'Out Patient Doctor';");
             Vector<String> doctors = new Vector<>();
             doctors.add("Select Doctor");
             doctorMap.put("Select Doctor", 0);
@@ -175,7 +175,7 @@ public class AddAppointment extends javax.swing.JDialog {
 
     private void loadDoctorAvailabilDate(int doctorId) {
         try {
-            ResultSet rs = MySQL.executeSearch("SELECT availability_schedule_date.availability_date_id, availability_schedule_date.availability_date FROM availability_schedule_date JOIN schedule_date_has_doctor ON availability_schedule_date.availability_date_id = schedule_date_has_doctor.schedule_date_id WHERE schedule_date_has_doctor.doctor_id = '"+doctorId+"' AND availability_schedule_date.availability_date >= CURDATE() ORDER BY availability_schedule_date.availability_date;");
+            ResultSet rs = MySQL.executeSearch("SELECT DISTINCT availability_schedule_date.availability_date_id, availability_schedule_date.availability_date FROM availability_schedule_date INNER JOIN date_has_time ON availability_schedule_date.availability_date_id = date_has_time.availability_date_id WHERE date_has_time.doctor_id = '"+doctorId+"' AND availability_schedule_date.availability_date >= CURDATE() ORDER BY availability_schedule_date.availability_date;");
             Vector<String> DoctorAvailabilDates = new Vector<>();
             DoctorAvailabilDates.add("Select Doctors Availability Date ");
             doctorAvailabilDate.put("Select Doctors Availability Date ", 0);
@@ -218,7 +218,7 @@ public class AddAppointment extends javax.swing.JDialog {
         System.out.println(dateId);
 
         // Query available slots for doctor + date
-                    String sql = "SELECT DISTINCT ast.availability_time_id, CONCAT(ast.availability_time_from, ' - ', ast.availability_time_to) AS time_slot FROM date_has_time dht JOIN availability_schedule_time ast ON dht.availability_time_id = ast.availability_time_id JOIN availability_schedule_date asd ON dht.availability_date_id = asd.availability_date_id JOIN schedule_date_has_doctor sdd ON asd.availability_date_id = sdd.schedule_date_id JOIN doctor d ON sdd.doctor_id = d.doctor_id WHERE d.doctor_id = '"+doctorId+"' AND asd.availability_date_id = '"+dateId+"'";
+                    String sql = "SELECT availability_schedule_time.availability_time_id, CONCAT(availability_schedule_time.availability_time_from, ' - ', availability_schedule_time.availability_time_to) AS time_slot FROM availability_schedule_time JOIN date_has_time ON date_has_time.availability_time_id = availability_schedule_time.availability_time_id JOIN availability_schedule_date ON availability_schedule_date.availability_date_id = date_has_time.availability_date_id JOIN doctor ON doctor.doctor_id = date_has_time.doctor_id WHERE doctor.doctor_id = '"+doctorId+"' AND availability_schedule_date.availability_date_id = '"+dateId+"';";
 
         ResultSet rs = MySQL.executeSearch(sql);
 
@@ -272,6 +272,7 @@ public class AddAppointment extends javax.swing.JDialog {
         PatientInput = new javax.swing.JComboBox<>();
         doctorInput = new javax.swing.JComboBox<>();
         jButton5 = new javax.swing.JButton();
+        appointment_NO1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -339,6 +340,9 @@ public class AddAppointment extends javax.swing.JDialog {
             }
         });
 
+        appointment_NO1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        appointment_NO1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Appointment Room No", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -362,13 +366,15 @@ public class AddAppointment extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(DAvailableDateCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(doctorSlotCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(doctorSlotCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(appointment_NO1)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(15, 15, 15))
+                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)))
+                .addGap(14, 14, 14))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,7 +397,9 @@ public class AddAppointment extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DAvailableDateCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(doctorSlotCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(14, 14, 14)
+                .addComponent(appointment_NO1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                     .addComponent(cancelBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -453,7 +461,7 @@ public class AddAppointment extends javax.swing.JDialog {
         if(rs.next()){
             JOptionPane.showMessageDialog(null,"This appointment is already exist", "Appointment",JOptionPane.ERROR_MESSAGE);
         }else{
-        MySQL.executeIUD("INSERT INTO appointment (appointment_no, patient_id, doctor_id, availability_date_id,availability_time_id,appointment_room_id, appointment_status_id) VALUES ('"+appointmentNo+"', '"+patientId+"', '"+doctorId+"', '"+dAvailableDateId+"','"+doctorSlotId+"',' (SELECT appointment_status_id FROM appointment_status WHERE appointment_status = 'Pending'));");
+        MySQL.executeIUD("INSERT INTO appointment (appointment_no, patient_id, doctor_id, availability_date_id,availability_time_id, appointment_status_id) VALUES ('"+appointmentNo+"', '"+patientId+"', '"+doctorId+"', '"+dAvailableDateId+"','"+doctorSlotId+"',' (SELECT appointment_status_id FROM appointment_status WHERE appointment_status = 'Pending'));");
         }
     }catch(SQLException e){
         e.printStackTrace();
@@ -493,6 +501,7 @@ public class AddAppointment extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> PatientInput;
     private javax.swing.JButton addBtn;
     private javax.swing.JTextField appointment_NO;
+    private javax.swing.JTextField appointment_NO1;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JComboBox<String> doctorInput;
     private javax.swing.JComboBox<String> doctorSlotCombo;
