@@ -280,6 +280,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         AddAppointment addAppointment = new AddAppointment(null, true);
         addAppointment.setLocationRelativeTo(null);
         addAppointment.setVisible(true);
+        loadAppointmentDetails();
         
 
     }//GEN-LAST:event_addBtnActionPerformed
@@ -288,6 +289,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         UpdateAppointment updateAppointment = new UpdateAppointment(null, true);
         updateAppointment.setLocationRelativeTo(null);
         updateAppointment.setVisible(true);
+        loadAppointmentDetails();
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
