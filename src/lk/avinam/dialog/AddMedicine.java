@@ -14,9 +14,7 @@ import java.awt.Color;
  */
 public class AddMedicine extends javax.swing.JDialog {
 
-    /**
-     * Creates new form medicineAdd
-     */
+
     public AddMedicine(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

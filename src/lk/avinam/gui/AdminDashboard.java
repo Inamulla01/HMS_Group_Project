@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package lk.avinam.gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
@@ -40,9 +36,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         private AttendancePanel attendanceManagementPanel;
     private CardLayout contentPanelLayout;
 
-    /**
-     * Creates new form Dashboard
-     */
     public AdminDashboard() {
         initComponents();
         init();

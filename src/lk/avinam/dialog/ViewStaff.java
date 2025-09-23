@@ -14,9 +14,7 @@ import java.awt.Color;
  */
 public class ViewStaff extends javax.swing.JDialog {
 
-    /**
-     * Creates new form ViewStaffdetails
-     */
+ 
     public ViewStaff(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

@@ -7,34 +7,250 @@ package lk.avinam.dialog;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.ButtonGroup;
+import lk.avinam.connection.MySQL;
+import lk.avinam.validation.Validater;
+import raven.toast.Notifications;
 
-/**
- *
- * @author moham
- */
 public class AddDoctor extends javax.swing.JDialog {
+
+    private Connection connection;
+    private final ButtonGroup genderGroup;
+    private String generatedPassword;
+    private String generatedSLMCId;
 
     public AddDoctor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        init();
 
-   init();
+        genderGroup = new ButtonGroup();
+        genderGroup.add(male);
+        genderGroup.add(female);
 
+        setupDatabaseConnection();
+        loadDoctorTypes();
+        generatePassword();
+        generateSLMCId();
     }
 
     private void init() {
         FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
         addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         addBtn.setIcon(addIcon);
-                FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+
+        FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
         cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         cancelBtn.setIcon(cancelIcon);
+
+    }
+
+    private void setupDatabaseConnection() {
+        try {
+            connection = MySQL.getConnection();
+            if (connection != null && !connection.isClosed()) {
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_RIGHT, "Database connected successfully");
+            }
+        } catch (SQLException e) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Database connection failed: " + e.getMessage());
+        }
+    }
+
+    private void loadDoctorTypes() {
+        try {
+            ResultSet rs = MySQL.executeSearch("SELECT * FROM doctor_type");
+            Vector<String> doctorTypes = new Vector();
+            doctorTypes.add("Select Doctor Type");
+
+            while (rs.next()) {
+                String doctorTypeName = rs.getString("doctor_type");
+                doctorTypes.add(doctorTypeName);
+            }
+
+            DefaultComboBoxModel dcm = new DefaultComboBoxModel(doctorTypes);
+            jComboBox2.setModel(dcm);
+        } catch (Exception e) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Error loading doctor types: " + e.getMessage());
+        }
+    }
+
+    private void generatePassword() {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder password = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < 8; i++) {
+            password.append(characters.charAt(random.nextInt(characters.length())));
+        }
+
+        generatedPassword = password.toString();
+        password1.setText(generatedPassword);
+    }
+
+    private void generateSLMCId() {
+        Random random = new Random();
+        String slmcId;
+
+        do {
+            int randomNumber = 10000 + random.nextInt(90000);
+            slmcId = "SLMC" + randomNumber;
+        } while (isSLMCIdExists(slmcId));
+
+        generatedSLMCId = slmcId;
+        slmcIdField.setText(generatedSLMCId);
+    }
+
+    private boolean isSLMCIdExists(String slmcId) {
+        try {
+            String sql = "SELECT COUNT(*) as count FROM doctor WHERE slmc_id = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, slmcId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("count") > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private void addDoctor() {
+        try {
+            if (!validateInputs()) {
+                return;
+            }
+
+            int doctorTypeId = getDoctorTypeId(jComboBox2.getSelectedItem().toString());
+            int genderId = male.isSelected() ? 1 : 2;
+            String joinAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+            String sql = "INSERT INTO doctor (slmc_id, f_name, l_name, mobile, email, password, join_at, specialization, gender_id, status_id, doctor_type_id, qualification) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?)";
+
+            PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, generatedSLMCId);          
+            pstmt.setString(2, firstName.getText().trim());  
+            pstmt.setString(3, lastName.getText().trim());  
+            pstmt.setString(4, contact.getText().trim());   
+            pstmt.setString(5, email1.getText().trim());   
+            pstmt.setString(6, generatedPassword); 
+            pstmt.setString(7, joinAt);   
+            pstmt.setString(8, jTextField1.getText().trim()); 
+            pstmt.setInt(9, genderId);   
+            pstmt.setInt(10, doctorTypeId); 
+            pstmt.setString(11, qualification.getText().trim()); 
+
+            int affectedRows = pstmt.executeUpdate();
+
+            if (affectedRows > 0) {
+                ResultSet generatedKeys = pstmt.getGeneratedKeys();
+                int doctorId = -1;
+                if (generatedKeys.next()) {
+                    doctorId = generatedKeys.getInt(1);
+                   
+                }
+
+                showSuccessDialog();
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_RIGHT, "Doctor added successfully!");
+                dispose();
+                generatePassword();
+                generateSLMCId();
+            }
+
+            pstmt.close();
+            
+        } catch (Exception e) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Error adding doctor: " + e.getMessage());
+        }
+    }
+
+    private boolean validateInputs() {
+        if (!Validater.isInputFieldValid(firstName.getText().trim())) {
+            firstName.requestFocus();
+            return false;
+        }
+
+        if (!Validater.isInputFieldValid(lastName.getText().trim())) {
+            lastName.requestFocus();
+            return false;
+        }
+
+        if (!Validater.isEmailValid(email1.getText().trim())) {
+            email1.requestFocus();
+            return false;
+        }
+
+        if (!Validater.isMobileValid(contact.getText().trim())) {
+            contact.requestFocus();
+            return false;
+        }
+
+        if (!Validater.isInputFieldValid(qualification.getText().trim())) {
+            qualification.requestFocus();
+            return false;
+        }
+
+        if (!Validater.isInputFieldValid(jTextField1.getText().trim())) {
+            jTextField1.requestFocus();
+            return false;
+        }
+
+        if (!male.isSelected() && !female.isSelected()) {
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_RIGHT, "Please select gender");
+            return false;
+        }
+
+        if (jComboBox2.getSelectedItem().toString().equals("Select Doctor Type")) {
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_RIGHT, "Please select doctor type");
+            return false;
+        }
+
+        return true;
+    }
+
+    private int getDoctorTypeId(String doctorType) throws Exception {
+        if (doctorType.equals("Select Doctor Type")) {
+            throw new Exception("Please select a doctor type");
+        }
+
+        String sql = "SELECT doctor_type_id FROM doctor_type WHERE doctor_type = ?";
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+        pstmt.setString(1, doctorType);
+        ResultSet rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt("doctor_type_id");
+        }
+        throw new Exception("Doctor type not found");
+    }
+
+    private void showSuccessDialog() {
+        String message = "Doctor added successfully!\n\n"
+                + "Generated SLMC ID: " + generatedSLMCId + "\n"
+                + "Generated Password: " + generatedPassword + "\n\n"
+                + "Please provide these credentials to the doctor.";
+
+        JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         firstName = new javax.swing.JTextField();
         qualification = new javax.swing.JTextField();
@@ -45,7 +261,7 @@ public class AddDoctor extends javax.swing.JDialog {
         male = new javax.swing.JRadioButton();
         female = new javax.swing.JRadioButton();
         password1 = new javax.swing.JTextField();
-        slmcId = new javax.swing.JTextField();
+        slmcIdField = new javax.swing.JTextField();
         email1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -87,6 +303,11 @@ public class AddDoctor extends javax.swing.JDialog {
         addBtn.setForeground(new java.awt.Color(204, 255, 255));
         addBtn.setText("Add");
         addBtn.setFocusable(false);
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         lastName.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         lastName.setForeground(new java.awt.Color(3, 4, 94));
@@ -102,10 +323,12 @@ public class AddDoctor extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(3, 4, 94));
         jLabel1.setText("Gender");
 
+        buttonGroup1.add(male);
         male.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         male.setForeground(new java.awt.Color(3, 4, 94));
         male.setText("Male");
 
+        buttonGroup1.add(female);
         female.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         female.setForeground(new java.awt.Color(3, 4, 94));
         female.setText("Female");
@@ -115,9 +338,9 @@ public class AddDoctor extends javax.swing.JDialog {
         password1.setDisabledTextColor(new java.awt.Color(153, 153, 153));
         password1.setEnabled(false);
 
-        slmcId.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        slmcId.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SLMC ID", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
-        slmcId.setEnabled(false);
+        slmcIdField.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        slmcIdField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SLMC ID", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14))); // NOI18N
+        slmcIdField.setEnabled(false);
 
         email1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         email1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
@@ -167,7 +390,7 @@ public class AddDoctor extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(slmcId, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(slmcIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(20, 20, 20)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,17 +414,16 @@ public class AddDoctor extends javax.swing.JDialog {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(qualification, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(contact, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(24, 24, 24)
-                                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cancelBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField1))))))
+                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jTextField1))))
                         .addGap(14, 14, 14))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -214,7 +436,7 @@ public class AddDoctor extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(password1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(slmcId, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(slmcIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,7 +483,7 @@ public class AddDoctor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void lastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameActionPerformed
@@ -288,6 +510,10 @@ public class AddDoctor extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        addDoctor();
+    }//GEN-LAST:event_addBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -310,6 +536,7 @@ public class AddDoctor extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JTextField contact;
     private javax.swing.JTextField email1;
@@ -325,6 +552,6 @@ public class AddDoctor extends javax.swing.JDialog {
     private javax.swing.JRadioButton male;
     private javax.swing.JTextField password1;
     private javax.swing.JTextField qualification;
-    private javax.swing.JTextField slmcId;
+    private javax.swing.JTextField slmcIdField;
     // End of variables declaration//GEN-END:variables
 }

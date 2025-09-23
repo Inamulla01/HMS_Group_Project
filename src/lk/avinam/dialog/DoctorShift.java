@@ -14,27 +14,29 @@ import java.awt.Color;
  */
 public class DoctorShift extends javax.swing.JDialog {
 
-    /**
-     * Creates new form DoctorShift
-     */
+//    public DoctorShift(java.awt.Frame parent, boolean modal, int doctorId) {
+//        super(parent, modal);
+////        this.doctorId = doctorId;
+//        initComponents();
+//        init();
+//    }
+    
     public DoctorShift(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
- 
-       
-   init();
-
+        init();
     }
 
     private void init() {
         FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
         addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         addBtn.setIcon(addIcon);
-                FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+        FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
         cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         cancelBtn.setIcon(cancelIcon);
- staffShift.setMinSelectableDate(new java.util.Date());
+        staffShift.setMinSelectableDate(new java.util.Date());
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -153,7 +155,7 @@ public class DoctorShift extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
- FlatLightLaf.setup();
+        FlatLightLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 DoctorShift dialog = new DoctorShift(new javax.swing.JFrame(), true);

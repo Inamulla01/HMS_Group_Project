@@ -13,11 +13,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 import javax.swing.BorderFactory;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import lk.avinam.connection.MySQL;
+import lk.avinam.dialog.AddDoctor;
 import lk.avinam.dialog.DoctorProfile;
 import raven.toast.Notifications;
 
@@ -34,6 +37,8 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         cancelBtn.setVisible(false);
         updateBtn.setVisible(false);
         viewBtn.setVisible(false);
+        buttonGroup1.clearSelection();
+        setupRadioButtonToggle();
     }
 
     public void init() {
@@ -59,66 +64,91 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         reportBtn.setIcon(reportIcon);
     }
 
-private void loadDoctorTable() { 
-    try {
-        ResultSet rs = MySQL.executeSearch("SELECT * FROM doctor_view");
-        DefaultTableModel dtm = (DefaultTableModel) doctorTable.getModel();
-        dtm.setRowCount(0);
-
-        while (rs.next()) {
-            Vector v = new Vector();
-            v.add(rs.getString("slmc_id"));
-            v.add(rs.getString("f_name") + " " + rs.getString("l_name"));
-            v.add(rs.getString("email"));
-            v.add(rs.getString("mobile"));
-            v.add(rs.getString("join_at"));
-            v.add(rs.getString("qualification"));   
-            v.add(rs.getString("specialization")); 
-            v.add(rs.getString("doctor_type"));
-            v.add(rs.getString("doctor_status"));
-            dtm.addRow(v);
-        }
-
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        doctorTable.setDefaultRenderer(Object.class, centerRenderer);
-
-    } catch (SQLException e) {
-        Notifications.getInstance().show(
-            Notifications.Type.ERROR, 
-            Notifications.Location.BOTTOM_RIGHT, 
-            "Database error: " + e.getMessage()
-        );
+    private void loadDoctorTable() {
+        loadDoctorTable("", "", "all");
     }
 
-    
+    private void loadDoctorTable(String slmcId, String email, String status) {
+        try {
+
+            String query = "SELECT * FROM doctor_view WHERE 1=1";
+
+            if (slmcId != null && !slmcId.trim().isEmpty() && !slmcId.equals("Search by SLMC ID")) {
+                query += " AND slmc_id LIKE '%" + slmcId + "%'";
+            }
+
+            if (email != null && !email.trim().isEmpty() && !email.equals("Search by Email")) {
+                query += " AND email LIKE '%" + email + "%'";
+            }
+
+            if (!status.equals("all")) {
+                if (status.equals("active")) {
+                    query += " AND doctor_status = 'Active'";
+                } else if (status.equals("inactive")) {
+                    query += " AND doctor_status = 'Inactive'";
+                }
+            }
+
+            ResultSet rs = MySQL.executeSearch(query);
+            DefaultTableModel dtm = (DefaultTableModel) doctorTable.getModel();
+            dtm.setRowCount(0);
+
+            while (rs.next()) {
+                Vector v = new Vector();
+                v.add(rs.getString("slmc_id"));
+                v.add(rs.getString("f_name") + " " + rs.getString("l_name"));
+                v.add(rs.getString("email"));
+                v.add(rs.getString("mobile"));
+                v.add(rs.getString("join_at"));
+                v.add(rs.getString("qualification"));
+                v.add(rs.getString("specialization"));
+                v.add(rs.getString("doctor_type"));
+                v.add(rs.getString("doctor_status"));
+                dtm.addRow(v);
+            }
+
+            DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+            centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+            doctorTable.setDefaultRenderer(Object.class, centerRenderer);
+
+        } catch (SQLException e) {
+            Notifications.getInstance().show(
+                    Notifications.Type.ERROR,
+                    Notifications.Location.BOTTOM_RIGHT,
+                    "Database error: " + e.getMessage()
+            );
+        }
 
         doctorTable.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && doctorTable.getSelectedRow() != -1) {
                 int row = doctorTable.getSelectedRow();
                 selectedIdColum = doctorTable.getValueAt(row, 0).toString();
                 String currentStatus = doctorTable.getValueAt(row, 8).toString();
-                if ("Active".equalsIgnoreCase(currentStatus)) {
-                    cancelBtn.setText("Inactive");
-                    FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
-                    cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FF0000")));
-                    cancelBtn.setIcon(cancelIcon);
-                    cancelBtn.setForeground(Color.red);
-                    cancelBtn.setBorder(BorderFactory.createLineBorder(Color.red, 2));
-                } else {
-                    cancelBtn.setText("Active");
-                    FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/correct.svg", 15, 15);
-                    Color darkGreen = new Color(0, 255, 51);
-                    cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> darkGreen));
-                    cancelBtn.setIcon(cancelIcon);
-                    cancelBtn.setForeground(darkGreen);
-                    cancelBtn.setBorder(BorderFactory.createLineBorder(darkGreen, 2));
-                }
+                updateCancelButtonAppearance(currentStatus);
                 cancelBtn.setVisible(true);
                 updateBtn.setVisible(true);
                 viewBtn.setVisible(true);
             }
         });
+    }
+
+    private void updateCancelButtonAppearance(String currentStatus) {
+        if ("Active".equalsIgnoreCase(currentStatus)) {
+            cancelBtn.setText("Inactive");
+            FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+            cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FF0000")));
+            cancelBtn.setIcon(cancelIcon);
+            cancelBtn.setForeground(Color.red);
+            cancelBtn.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+        } else {
+            cancelBtn.setText("Set Active");
+            FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/correct.svg", 15, 15);
+            Color darkGreen = new Color(0, 255, 51);
+            cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> darkGreen));
+            cancelBtn.setIcon(cancelIcon);
+            cancelBtn.setForeground(darkGreen);
+            cancelBtn.setBorder(BorderFactory.createLineBorder(darkGreen, 2));
+        }
     }
 
     private String selectedIdColum;
@@ -141,18 +171,15 @@ private void loadDoctorTable() {
         }
 
         try {
-            
             String query = "SELECT * FROM doctor_view WHERE slmc_id = '" + id + "'";
             ResultSet rs = MySQL.executeSearch(query);
 
             if (rs.next()) {
-                
                 DoctorProfile dialog = new DoctorProfile((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), true, rs, this);
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
-
                 disableUpdateButton();
-                loadDoctorTable();
+                performSearch();
             } else {
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Doctor not found.");
             }
@@ -182,9 +209,8 @@ private void loadDoctorTable() {
                 updatePst.setString(2, id);
                 int rows = updatePst.executeUpdate();
                 if (rows > 0) {
-                    loadDoctorTable();
+                    performSearch();
                     disableUpdateButton();
-                    cancelBtn.setText(newStatus == 1 ? "Set Inactive" : "Set Active");
                     Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_RIGHT, "Doctor status updated to " + (newStatus == 1 ? "Active" : "Inactive") + ".");
                 } else {
                     Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Doctor not found.");
@@ -200,11 +226,47 @@ private void loadDoctorTable() {
         }
     }
 
+    private void performSearch() {
+        String slmcId = jTextField1.getText().trim();
+        String email = jTextField2.getText().trim();
+        String status = "all";
+
+        if (jRadioButton2.isSelected()) {
+            status = "active";
+        } else if (jRadioButton1.isSelected()) {
+            status = "inactive";
+        }
+
+        loadDoctorTable(slmcId, email, status);
+    }
+
+    private void setupRadioButtonToggle() {
+
+        jRadioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                if (jRadioButton1.isSelected()) {
+                    buttonGroup1.clearSelection();
+                    performSearch();
+                    evt.consume();
+                }
+            }
+        });
+
+        jRadioButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                if (jRadioButton2.isSelected()) {
+                    buttonGroup1.clearSelection();
+                    performSearch();
+                    evt.consume();
+                }
+            }
+        });
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        reportBtn1 = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -219,16 +281,6 @@ private void loadDoctorTable() {
         jRadioButton2 = new javax.swing.JRadioButton();
         viewBtn = new javax.swing.JButton();
         reportBtn = new javax.swing.JButton();
-
-        reportBtn1.setBackground(new java.awt.Color(3, 4, 94));
-        reportBtn1.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        reportBtn1.setForeground(new java.awt.Color(144, 224, 239));
-        reportBtn1.setText("Generat Report");
-        reportBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reportBtn1ActionPerformed(evt);
-            }
-        });
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -269,6 +321,11 @@ private void loadDoctorTable() {
         addBtn.setForeground(new java.awt.Color(144, 224, 239));
         addBtn.setText("Add New Docter");
         addBtn.setFocusable(false);
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         cancelBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
         cancelBtn.setForeground(new java.awt.Color(255, 51, 0));
@@ -294,6 +351,14 @@ private void loadDoctorTable() {
 
         jTextField1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jTextField1.setText("Search by SLMC ID");
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField1FocusLost(evt);
+            }
+        });
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -302,6 +367,14 @@ private void loadDoctorTable() {
 
         jTextField2.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jTextField2.setText("Search by Email");
+        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField2FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField2FocusLost(evt);
+            }
+        });
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -319,11 +392,33 @@ private void loadDoctorTable() {
             }
         });
 
+        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jRadioButton1.setText("Inactive");
+        jRadioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton1MouseClicked(evt);
+            }
+        });
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jRadioButton2.setText("Active");
+        jRadioButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton2MouseClicked(evt);
+            }
+        });
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         viewBtn.setBackground(new java.awt.Color(0, 180, 216));
         viewBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
@@ -418,24 +513,20 @@ private void loadDoctorTable() {
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+        performSearch();
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
+        performSearch();
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
-        // TODO add your handling code here:
+        performSearch();
     }//GEN-LAST:event_searchBtnActionPerformed
 
     private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_viewBtnActionPerformed
-
-    private void reportBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_reportBtn1ActionPerformed
 
     private void reportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportBtnActionPerformed
         // TODO add your handling code here:
@@ -445,18 +536,68 @@ private void loadDoctorTable() {
         if (evt.getClickCount() == 1) {
             int row = doctorTable.getSelectedRow();
             selectedIdColum = String.valueOf(doctorTable.getValueAt(row, 0));
+            String currentStatus = doctorTable.getValueAt(row, 8).toString();
+            updateCancelButtonAppearance(currentStatus);
             cancelBtn.setVisible(true);
             updateBtn.setVisible(true);
             viewBtn.setVisible(true);
         }
     }//GEN-LAST:event_doctorTableMouseClicked
 
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        AddDoctor dialog = new AddDoctor(parentFrame, true);
+        dialog.setLocationRelativeTo(parentFrame);
+        dialog.setVisible(true);
+        performSearch();
+    }//GEN-LAST:event_addBtnActionPerformed
+
+    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
+        if (jTextField1.getText().equals("Search by SLMC ID")) {
+            jTextField1.setText("");
+        }
+    }//GEN-LAST:event_jTextField1FocusGained
+
+    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+        if (jTextField1.getText().trim().isEmpty()) {
+            jTextField1.setText("Search by SLMC ID");
+        }
+    }//GEN-LAST:event_jTextField1FocusLost
+
+    private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusGained
+        if (jTextField2.getText().equals("Search by Email")) {
+            jTextField2.setText("");
+        }
+    }//GEN-LAST:event_jTextField2FocusGained
+
+    private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
+        if (jTextField2.getText().trim().isEmpty()) {
+            jTextField2.setText("Search by Email");
+        }
+    }//GEN-LAST:event_jTextField2FocusLost
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        performSearch();
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        performSearch();
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
+
+    }//GEN-LAST:event_jRadioButton2MouseClicked
+
+    private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
+
+    }//GEN-LAST:event_jRadioButton1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JTable doctorTable;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
@@ -465,7 +606,6 @@ private void loadDoctorTable() {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JButton reportBtn;
-    private javax.swing.JButton reportBtn1;
     private javax.swing.JButton searchBtn;
     private javax.swing.JButton updateBtn;
     private javax.swing.JButton viewBtn;

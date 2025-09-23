@@ -10,25 +10,20 @@ import lk.avinam.connection.MySQL;
 import lk.avinam.panel.DoctorManagementPanel;
 import raven.toast.Notifications;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
-/**
- *
- * @author moham
- */
 public class DoctorProfile extends javax.swing.JDialog {
 
     private int doctorId;
     private String slmcIdValue;
     private DoctorManagementPanel managementPanel;
+    private boolean isOutpatient;
 
     public DoctorProfile(java.awt.Frame parent, boolean modal, ResultSet doctorData, DoctorManagementPanel managementPanel) {
         super(parent, modal);
         initComponents();
         init();
         populateFields(doctorData);
+        checkDoctorType();
+        updatePanelVisibility();
         this.managementPanel = managementPanel;
     }
 
@@ -72,7 +67,7 @@ public class DoctorProfile extends javax.swing.JDialog {
                 email.setText(doctorData.getString("email"));
                 contact.setText(doctorData.getString("mobile"));
                 joinAt.setText(doctorData.getString("join_at"));
-                qualification.setText(doctorData.getString("qualification_name"));
+                qualification.setText(doctorData.getString("qualification"));
                 spatialisedIn.setText(doctorData.getString("specialization"));
             }
         } catch (SQLException e) {
@@ -132,6 +127,45 @@ public class DoctorProfile extends javax.swing.JDialog {
         }
     }
 
+    private void checkDoctorType() {
+        try {
+            String query = "SELECT dt.doctor_type FROM doctor d "
+                    + "JOIN doctor_type dt ON d.doctor_type_id = dt.doctor_type_id "
+                    + "WHERE d.doctor_id = " + doctorId;
+            ResultSet rs = MySQL.executeSearch(query);
+            if (rs.next()) {
+                String doctorType = rs.getString("doctor_type");
+                isOutpatient = "Out Patient Doctor".equalsIgnoreCase(doctorType);
+            }
+        } catch (SQLException e) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT,
+                    "Error checking doctor type: " + e.getMessage());
+            isOutpatient = true;
+        }
+    }
+
+    private void updatePanelVisibility() {
+        if (isOutpatient) {
+
+            schedulePanel.setVisible(true);
+            jPanel3.setVisible(false);
+            availableBtn.setVisible(true);
+            availableBtn1.setVisible(false);
+            scheduleText.setVisible(true);
+            jLabel18.setVisible(false);
+            
+        } else {
+            
+            schedulePanel.setVisible(false);
+            jPanel3.setVisible(true);
+            availableBtn.setVisible(false);
+            availableBtn1.setVisible(true);
+            scheduleText.setVisible(false);
+            jLabel18.setVisible(true);
+            
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -142,7 +176,7 @@ public class DoctorProfile extends javax.swing.JDialog {
         availableBtn = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         slmcId = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
+        schedulePanel = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -156,7 +190,7 @@ public class DoctorProfile extends javax.swing.JDialog {
         lastName = new javax.swing.JTextField();
         cancelBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
+        scheduleText = new javax.swing.JLabel();
         spatialisedIn = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -215,32 +249,32 @@ public class DoctorProfile extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout schedulePanelLayout = new javax.swing.GroupLayout(schedulePanel);
+        schedulePanel.setLayout(schedulePanelLayout);
+        schedulePanelLayout.setHorizontalGroup(
+            schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(schedulePanelLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(schedulePanelLayout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel14))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(schedulePanelLayout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        schedulePanelLayout.setVerticalGroup(
+            schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(schedulePanelLayout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel12)
                     .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14))
                 .addContainerGap(21, Short.MAX_VALUE))
@@ -327,9 +361,9 @@ public class DoctorProfile extends javax.swing.JDialog {
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Nunito ExtraBold", 1, 16)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(3, 4, 94));
-        jLabel11.setText("Doctor Schedule Details");
+        scheduleText.setFont(new java.awt.Font("Nunito ExtraBold", 1, 16)); // NOI18N
+        scheduleText.setForeground(new java.awt.Color(3, 4, 94));
+        scheduleText.setText("Doctor Schedule Details");
 
         spatialisedIn.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         spatialisedIn.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Spatialised In", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
@@ -421,13 +455,13 @@ public class DoctorProfile extends javax.swing.JDialog {
                                 .addComponent(availableBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(email, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jSeparator1)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(schedulePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(slmcId, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(password, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
+                                .addComponent(scheduleText)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(availableBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -472,9 +506,9 @@ public class DoctorProfile extends javax.swing.JDialog {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(availableBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
+                    .addComponent(scheduleText))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(schedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
@@ -504,10 +538,16 @@ public class DoctorProfile extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void availableBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_availableBtnActionPerformed
-        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        AddSchedule dialog = new AddSchedule(parentFrame, true);
-        dialog.setLocationRelativeTo(parentFrame);
-        dialog.setVisible(true);
+//        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+//        if (isOutpatient) {
+//            AddSchedule dialog = new AddSchedule(parentFrame, true, doctorId);
+//            dialog.setLocationRelativeTo(parentFrame);
+//            dialog.setVisible(true);
+//        } else {
+//            DoctorShift dialog = new DoctorShift(parentFrame, true, doctorId);
+//            dialog.setLocationRelativeTo(parentFrame);
+//            dialog.setVisible(true);
+//        }
     }//GEN-LAST:event_availableBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
@@ -515,7 +555,7 @@ public class DoctorProfile extends javax.swing.JDialog {
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void availableBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_availableBtn1ActionPerformed
-        // TODO add your handling code here:
+        availableBtnActionPerformed(evt);
     }//GEN-LAST:event_availableBtn1ActionPerformed
 
     private void firstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameActionPerformed
@@ -591,7 +631,6 @@ public class DoctorProfile extends javax.swing.JDialog {
     private javax.swing.JButton editBtn;
     private javax.swing.JTextField email;
     private javax.swing.JTextField firstName;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -600,7 +639,6 @@ public class DoctorProfile extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -608,6 +646,8 @@ public class DoctorProfile extends javax.swing.JDialog {
     private javax.swing.JTextField lastName;
     private javax.swing.JTextField password;
     private javax.swing.JTextField qualification;
+    private javax.swing.JPanel schedulePanel;
+    private javax.swing.JLabel scheduleText;
     private javax.swing.JTextField slmcId;
     private javax.swing.JTextField spatialisedIn;
     // End of variables declaration//GEN-END:variables
