@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
+import javax.swing.BorderFactory;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -28,6 +29,8 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         initComponents();
         init();
         loadAppointmentDetails();
+        updateBtn.setVisible(false);
+        cancelBtn.setVisible(false);
     }
 
     private void init() {
@@ -47,7 +50,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         
         FlatSVGIcon updateIcon = new FlatSVGIcon("lk/avinam/icon/update.svg", 20, 20);
         updateIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
-        editBtn.setIcon(updateIcon);
+        updateBtn.setIcon(updateIcon);
 
         FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
         cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FF0000")));
@@ -56,6 +59,25 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         reportIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         reportBtn.setIcon(reportIcon);
 
+    }
+    
+    private void updateCancelButtonAppearance(String currentStatus) {
+        if ("Active".equalsIgnoreCase(currentStatus)) {
+            cancelBtn.setText("Set Cancelled");
+            FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+            cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FF0000")));
+            cancelBtn.setIcon(cancelIcon);
+            cancelBtn.setForeground(Color.red);
+            cancelBtn.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+        } else {
+            cancelBtn.setText("Set Completed");
+            FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/correct.svg", 15, 15);
+            Color darkGreen = new Color(0, 255, 51);
+            cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> darkGreen));
+            cancelBtn.setIcon(cancelIcon);
+            cancelBtn.setForeground(darkGreen);
+            cancelBtn.setBorder(BorderFactory.createLineBorder(darkGreen, 2));
+        }
     }
     
     private void loadAppointmentDetails (){
@@ -102,13 +124,14 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         addBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         arAppointmentTable = new javax.swing.JTable();
-        editBtn = new javax.swing.JButton();
+        updateBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jRadioButton4 = new javax.swing.JRadioButton();
         reportBtn = new javax.swing.JButton();
+        jRadioButton5 = new javax.swing.JRadioButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(3, 4, 94));
@@ -160,18 +183,23 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
             }
         });
         arAppointmentTable.setRowHeight(47);
+        arAppointmentTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                arAppointmentTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(arAppointmentTable);
         if (arAppointmentTable.getColumnModel().getColumnCount() > 0) {
             arAppointmentTable.getColumnModel().getColumn(4).setPreferredWidth(100);
         }
 
-        editBtn.setBackground(new java.awt.Color(0, 119, 182));
-        editBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        editBtn.setForeground(new java.awt.Color(202, 240, 248));
-        editBtn.setText("Update");
-        editBtn.addActionListener(new java.awt.event.ActionListener() {
+        updateBtn.setBackground(new java.awt.Color(0, 119, 182));
+        updateBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
+        updateBtn.setForeground(new java.awt.Color(202, 240, 248));
+        updateBtn.setText("Update");
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtnActionPerformed(evt);
+                updateBtnActionPerformed(evt);
             }
         });
 
@@ -213,6 +241,15 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
             }
         });
 
+        jRadioButton5.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
+        jRadioButton5.setForeground(new java.awt.Color(3, 4, 94));
+        jRadioButton5.setText("Completed");
+        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -233,13 +270,15 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                        .addGap(14, 14, 14)
+                        .addComponent(jRadioButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jRadioButton4)
-                        .addGap(48, 48, 48)
+                        .addGap(18, 18, 18)
                         .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(14, 14, 14))
@@ -258,14 +297,20 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
                     .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                     .addComponent(jTextField1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jRadioButton4)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButton5)
+                            .addComponent(jRadioButton4))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
                 .addGap(14, 14, 14))
@@ -285,12 +330,13 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
 
     }//GEN-LAST:event_addBtnActionPerformed
 
-    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-        UpdateAppointment updateAppointment = new UpdateAppointment(null, true);
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        String selectedAppointmentNo = getselectedAppointmentNo();
+        UpdateAppointment updateAppointment = new UpdateAppointment(null, true,selectedAppointmentNo);
         updateAppointment.setLocationRelativeTo(null);
         updateAppointment.setVisible(true);
         loadAppointmentDetails();
-    }//GEN-LAST:event_editBtnActionPerformed
+    }//GEN-LAST:event_updateBtnActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
         // TODO add your handling code here:
@@ -304,20 +350,41 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_reportBtnActionPerformed
 
+    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton5ActionPerformed
+
+    private String selectedAppointmentNo;
+    
+    public String getselectedAppointmentNo(){
+        return selectedAppointmentNo;
+    }
+    
+    private void arAppointmentTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_arAppointmentTableMouseClicked
+        if(evt.getClickCount() == 1){
+            int row = arAppointmentTable.getSelectedRow();
+            selectedAppointmentNo = (String) arAppointmentTable.getValueAt(row, 0);
+            updateBtn.setVisible(true);
+            cancelBtn.setVisible(true);
+        }
+    }//GEN-LAST:event_arAppointmentTableMouseClicked
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
     private javax.swing.JTable arAppointmentTable;
     private javax.swing.JButton cancelBtn;
-    private javax.swing.JButton editBtn;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JButton reportBtn;
     private javax.swing.JButton searchBtn;
+    private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }

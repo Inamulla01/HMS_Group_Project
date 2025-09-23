@@ -57,52 +57,59 @@ public class AddAppointment extends javax.swing.JDialog {
         cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         cancelBtn.setIcon(cancelIcon);
         AutoCompleteDecorator.decorate(PatientInput);
+        AutoCompleteDecorator.decorate(doctorInput);
+        AutoCompleteDecorator.decorate(DAvailableDateCombo);
+        AutoCompleteDecorator.decorate(doctorSlotCombo);
 
         doctorInput.addActionListener(evt -> {
     String selectedDoctor = (String) doctorInput.getSelectedItem();
-    if (selectedDoctor != null && doctorMap.containsKey(selectedDoctor)) {
-        int doctorId = doctorMap.get(selectedDoctor);
-        if (doctorId != 0) {
-            // Reset slot combo whenever doctor changes
-            doctorSlotCombo.setModel(
-                new DefaultComboBoxModel<>(new String[]{"Select Doctors Availability Slot"})
-            );
+    int doctorId = doctorMap.getOrDefault(selectedDoctor, 0);
 
-            // Load available dates for this doctor
-            loadDoctorAvailabilDate(doctorId);
+    DAvailableDateCombo.setModel(new DefaultComboBoxModel<>(new String[]{"Select Doctors Availability Date"}));
+    doctorSlotCombo.setModel(new DefaultComboBoxModel<>(new String[]{"Select Doctors Availability Slot"}));
+    getAppointmentNo.setText("");
+    getappointmentFree.setText("");
+    selectedDateHasTimeId = 0;
 
-            // Clear old listeners to avoid stacking
-            for (java.awt.event.ActionListener al : DAvailableDateCombo.getActionListeners()) {
-                DAvailableDateCombo.removeActionListener(al);
-            }
+    if (doctorId != 0) {
+        loadDoctorAvailabilDate(doctorId);
 
-            // Add fresh listener for date → slots
-            DAvailableDateCombo.addActionListener(dateEvt -> {
-                String selectedDate = (String) DAvailableDateCombo.getSelectedItem();
-                if (selectedDate != null && doctorAvailabilDate.containsKey(selectedDate)) {
-                    int dateId = doctorAvailabilDate.get(selectedDate);
-                    if (dateId != 0) {
-                        // Reload slots for this doctor + date
-                        loadDoctorAvailabilSlot(doctorId, dateId);
-                    } else {
-                        doctorSlotCombo.setModel(
-                            new DefaultComboBoxModel<>(new String[]{"Select Doctors Availability Slot"})
-                        );
-                    }
-                }
-            });
-
-        } else {
-            // Reset both if no doctor
-            DAvailableDateCombo.setModel(
-                new DefaultComboBoxModel<>(new String[]{"Select Availability Date"})
-            );
-            doctorSlotCombo.setModel(
-                new DefaultComboBoxModel<>(new String[]{"Select Availability Slot"})
-            );
+        for (java.awt.event.ActionListener al : DAvailableDateCombo.getActionListeners()) {
+            DAvailableDateCombo.removeActionListener(al);
         }
+
+        DAvailableDateCombo.addActionListener(dateEvt -> {
+            String selectedDate = (String) DAvailableDateCombo.getSelectedItem();
+            int dateId = doctorAvailabilDate.getOrDefault(selectedDate, 0);
+
+            doctorSlotCombo.setModel(new DefaultComboBoxModel<>(new String[]{"Select Doctors Availability Slot"}));
+            getAppointmentNo.setText("");
+            getappointmentFree.setText("");
+
+            if (dateId != 0) {
+                loadDoctorAvailabilSlot(doctorId, dateId);
+
+                for (java.awt.event.ActionListener al : doctorSlotCombo.getActionListeners()) {
+                    doctorSlotCombo.removeActionListener(al);
+                }
+
+                doctorSlotCombo.addActionListener(slotEvt -> {
+                    String selectedSlot = (String) doctorSlotCombo.getSelectedItem();
+                    int slotId = doctorAvailabilSlot.getOrDefault(selectedSlot, 0);
+
+                    getAppointmentNo.setText("");
+                    getappointmentFree.setText("");
+
+                    if (slotId != 0) {
+                        loadAppointmentRoomAndPrice(doctorId, dateId, slotId);
+                    }
+                });
+            }
+        });
     }
 });
+
+        
 
 doctorSlotCombo.addActionListener(slotEvt -> {
     String selectedSlot = (String) doctorSlotCombo.getSelectedItem();
@@ -112,7 +119,6 @@ doctorSlotCombo.addActionListener(slotEvt -> {
             int doctorId = doctorMap.getOrDefault((String) doctorInput.getSelectedItem(), 0);
             int dateId = doctorAvailabilDate.getOrDefault((String) DAvailableDateCombo.getSelectedItem(), 0);
 
-            // Reload appointment room with doctor + date + time
             loadAppointmentRoomAndPrice(doctorId, dateId, timeId);
         } else {
             getAppointmentNo.setText("No Room Available");
@@ -122,21 +128,7 @@ doctorSlotCombo.addActionListener(slotEvt -> {
     }
 });
 
-doctorInput.addActionListener(evt -> {
-    String selectedDoctor = (String) doctorInput.getSelectedItem();
-    int doctorId = doctorMap.getOrDefault(selectedDoctor, 0);
 
-    // Reset dependent selections
-    DAvailableDateCombo.setModel(new DefaultComboBoxModel<>(new String[]{"Select Doctors Availability Date"}));
-    doctorSlotCombo.setModel(new DefaultComboBoxModel<>(new String[]{"Select Doctors Availability Slot"}));
-    getAppointmentNo.setText("");
-    getappointmentFree.setText("");
-    selectedDateHasTimeId = 0;
-
-    if (doctorId != 0) {
-        loadDoctorAvailabilDate(doctorId);
-    }
-});
 
         
 
@@ -152,12 +144,11 @@ private void generateAppointmentNumber() {
 
         String appointmentNo;
         if (rs.next()) {
-            String lastNo = rs.getString("appointment_no"); // e.g., "APT00005"
-            // Extract only digits after "APT"
+            String lastNo = rs.getString("appointment_no");
             int num = Integer.parseInt(lastNo.substring(3)) + 1;
-            appointmentNo = String.format("APT%05d", num); // pad to 5 digits
+            appointmentNo = String.format("APT%04d", num); 
         } else {
-            appointmentNo = "APT00001";
+            appointmentNo = "APT0001";
         }
 
         appointment_NO.setText(appointmentNo);
@@ -166,21 +157,6 @@ private void generateAppointmentNumber() {
         e.printStackTrace();
     }
 }
-
-
-
-    
-//    private void loadAppointmentRoom(int doctorId, int dateId, int timeId){
-//        try{
-//            ResultSet rs = MySQL.executeSearch("SELECT appointment_room.appointment_room_no FROM appointment_room JOIN date_has_time ON date_has_time.appointment_room_id = appointment_room.appointment_room_id JOIN availability_schedule_date ON availability_schedule_date.availability_date_id = date_has_time.availability_date_id JOIN availability_schedule_time ON availability_schedule_time.availability_time_id = date_has_time.availability_time_id JOIN doctor ON doctor.doctor_id = date_has_time.doctor_id WHERE doctor.doctor_id = '"+doctorId+"' AND availability_schedule_date.availability_date_id ='"+dateId+"' AND availability_schedule_time.availability_time_id = '"+timeId+"';");
-//            while(rs.next()){
-//            String appointmentRoom = rs.getString("appointment_room_no");
-//            getAppointmentNo.setText(appointmentRoom);
-//            }
-//        }catch(SQLException e){
-//        
-//        }
-//    }
 
     private void loadPatient() {
         try {
@@ -195,6 +171,7 @@ private void generateAppointmentNumber() {
             }
             DefaultComboBoxModel dcm = new DefaultComboBoxModel(patients);
             PatientInput.setModel(dcm);
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -215,6 +192,7 @@ private void generateAppointmentNumber() {
             DefaultComboBoxModel dcm = new DefaultComboBoxModel(doctors);
             doctorInput.setModel(dcm);
 
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -234,42 +212,19 @@ private void generateAppointmentNumber() {
             DefaultComboBoxModel dcm = new DefaultComboBoxModel(DoctorAvailabilDates);
             DAvailableDateCombo.setModel(dcm);
 
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
-//    private void loadDoctorAvailabilSlot(int doctorId, int dateId) {
-//        try {
-//            ResultSet rs = MySQL.executeSearch("SELECT DISTINCT ast.availability_time_id, CONCAT(ast.availability_time_from, ' - ', ast.availability_time_to) AS time_slot FROM date_has_time dht JOIN availability_schedule_time ast ON dht.availability_time_id = ast.availability_time_id JOIN availability_schedule_date asd ON dht.availability_date_id = asd.availability_date_id JOIN schedule_date_has_doctor sdd ON asd.availability_date_id = sdd.schedule_date_id JOIN doctor d ON sdd.doctor_id = d.doctor_id WHERE d.doctor_id = '"+doctorId+"' AND asd.availability_date_id = '"+dateId+"';");
-//            Vector<String> DoctorAvailabilTime = new Vector<>();
-//            DoctorAvailabilTime.add("Select Doctors Availability Slot ");
-//            doctorAvailabilSlot.put("Select Doctors Availability Slot ", 0);
-//            while (rs.next()) {
-//                String doctorAvailabilSlotName = rs.getString("time_slot");
-//                doctorAvailabilSlot.put(doctorAvailabilSlotName, rs.getInt("availability_time_id"));
-//                DoctorAvailabilTime.add(doctorAvailabilSlotName);
-//            }
-//            DefaultComboBoxModel dcm = new DefaultComboBoxModel(DoctorAvailabilTime);
-//            doctorSlotCombo.setModel(dcm);
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-    
     private void loadDoctorAvailabilSlot(int doctorId, int dateId) {
     try {
-        // Clear old map first
         doctorAvailabilSlot.clear();
         System.out.println(dateId);
 
-        // Query available slots for doctor + date
-                    String sql = "SELECT availability_schedule_time.availability_time_id, CONCAT(availability_schedule_time.availability_time_from, ' - ', availability_schedule_time.availability_time_to) AS time_slot FROM availability_schedule_time JOIN date_has_time ON date_has_time.availability_time_id = availability_schedule_time.availability_time_id JOIN availability_schedule_date ON availability_schedule_date.availability_date_id = date_has_time.availability_date_id JOIN doctor ON doctor.doctor_id = date_has_time.doctor_id WHERE doctor.doctor_id = '"+doctorId+"' AND availability_schedule_date.availability_date_id = '"+dateId+"';";
+        ResultSet rs = MySQL.executeSearch("SELECT availability_schedule_time.availability_time_id, CONCAT(availability_schedule_time.availability_time_from, ' - ', availability_schedule_time.availability_time_to) AS time_slot FROM availability_schedule_time JOIN date_has_time ON date_has_time.availability_time_id = availability_schedule_time.availability_time_id JOIN availability_schedule_date ON availability_schedule_date.availability_date_id = date_has_time.availability_date_id JOIN doctor ON doctor.doctor_id = date_has_time.doctor_id WHERE doctor.doctor_id = '"+doctorId+"' AND availability_schedule_date.availability_date_id = '"+dateId+"';");
 
-        ResultSet rs = MySQL.executeSearch(sql);
-
-        // Vector for combo box items
         Vector<String> DoctorAvailabilTime = new Vector<>();
         DoctorAvailabilTime.add("Select Doctors Availability Slot");
         doctorAvailabilSlot.put("Select Doctors Availability Slot", 0);
@@ -282,16 +237,15 @@ private void generateAppointmentNumber() {
             DoctorAvailabilTime.add(slotLabel);
         }
 
-        // If no slots found, show message in combo
         if (DoctorAvailabilTime.size() == 1) {
             DoctorAvailabilTime.set(0, "No Slots Available");
             doctorAvailabilSlot.clear();
             doctorAvailabilSlot.put("No Slots Available", 0);
         }
 
-        // Update combo box
         DefaultComboBoxModel dcm = new DefaultComboBoxModel<>(DoctorAvailabilTime);
         doctorSlotCombo.setModel(dcm);
+
 
     } catch (SQLException e) {
         e.printStackTrace();
@@ -400,6 +354,8 @@ private void generateAppointmentNumber() {
             }
         });
 
+        appointment_NO.setEditable(false);
+        appointment_NO.setBackground(new java.awt.Color(255, 255, 255));
         appointment_NO.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         appointment_NO.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Appointment No", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
 
@@ -424,9 +380,13 @@ private void generateAppointmentNumber() {
             }
         });
 
+        getAppointmentNo.setEditable(false);
+        getAppointmentNo.setBackground(new java.awt.Color(255, 255, 255));
         getAppointmentNo.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         getAppointmentNo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Appointment Room No", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
 
+        getappointmentFree.setEditable(false);
+        getappointmentFree.setBackground(new java.awt.Color(255, 255, 255));
         getappointmentFree.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         getappointmentFree.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Appointment Fee", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
 
