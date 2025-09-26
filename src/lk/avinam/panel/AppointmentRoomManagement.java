@@ -107,11 +107,11 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Room Number", "Doctor Name", "Date", "Time Slot", "Nurse ID-01", "Nurse ID-02", "Status"
+                "Room Number", "Doctor SLMC ID", "Doctor Name", "Nurse Count", "Date", "Time Slot", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, true, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -122,7 +122,7 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jTextField2.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        jTextField2.setText("Search By Appointment No");
+        jTextField2.setText("Search By Appointment Room");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
