@@ -180,7 +180,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         jRadioButtonPending.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 if (jRadioButtonPending.isSelected()) {
-                    buttonGroup1.clearSelection();;
+                    buttonGroup1.clearSelection();
                     loadAppointmentDetails();
                     evt.consume();
                 }
@@ -190,7 +190,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         jRadioButtonCompleted.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 if (jRadioButtonCompleted.isSelected()) {
-                    buttonGroup1.clearSelection();;
+                    buttonGroup1.clearSelection();
                     loadAppointmentDetails();
                     evt.consume();
                 }
@@ -200,7 +200,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         jRadioButtonCancelled.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 if (jRadioButtonCancelled.isSelected()) {
-                    buttonGroup1.clearSelection();;
+                    buttonGroup1.clearSelection();
                     loadAppointmentDetails();
                     evt.consume();
                 }
@@ -420,7 +420,8 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextField1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(9, 9, 9))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
