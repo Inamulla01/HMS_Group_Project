@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package lk.avinam.gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
@@ -108,6 +104,8 @@ public class ReceptionDashboard extends javax.swing.JFrame {
         SwingUtilities.updateComponentTreeUI(contentPanel);
 
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
