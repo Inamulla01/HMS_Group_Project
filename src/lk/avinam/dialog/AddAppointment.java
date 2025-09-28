@@ -137,10 +137,7 @@ doctorSlotCombo.addActionListener(slotEvt -> {
     
 private void generateAppointmentNumber() {
     try {
-        String sql = "SELECT appointment_no FROM appointment ORDER BY appointment_no DESC LIMIT 1";
-        java.sql.Connection conn = MySQL.getConnection();
-        java.sql.Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery(sql);
+        ResultSet rs = MySQL.executeSearch("SELECT appointment_no FROM appointment ORDER BY appointment_no DESC LIMIT 1");
 
         String appointmentNo;
         if (rs.next()) {
@@ -495,8 +492,9 @@ private void generateAppointmentNumber() {
 
     String selectedSlot = (String) doctorSlotCombo.getSelectedItem();
     int doctorSlotId = doctorAvailabilSlot.getOrDefault(selectedSlot, 0);
-    
-    if(!Validater.isSelectedItemValid(patientId)){
+    if(!Validater.isInputFieldValid(appointmentNo)){
+        return;
+    }else if(!Validater.isSelectedItemValid(patientId)){
       return;
     }else if(!Validater.isSelectedItemValid(doctorId)){
     return;

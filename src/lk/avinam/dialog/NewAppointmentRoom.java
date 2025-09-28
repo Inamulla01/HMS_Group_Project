@@ -7,20 +7,26 @@ package lk.avinam.dialog;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import lk.avinam.connection.MySQL;
+import lk.avinam.validation.Validater;
 
 /**
  *
  * @author pasin
  */
-public class NewAppoinmentRoom extends javax.swing.JDialog {
+public class NewAppointmentRoom extends javax.swing.JDialog {
 
     /**
      * Creates new form NewAppoinmentRoom
      */
-    public NewAppoinmentRoom(java.awt.Frame parent, boolean modal) {
+    public NewAppointmentRoom(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-   init();
+        init();
+        generateAppointmentNumber();
 
     }
 
@@ -28,11 +34,53 @@ public class NewAppoinmentRoom extends javax.swing.JDialog {
         FlatSVGIcon addIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
         addIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         addBtn.setIcon(addIcon);
-                FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
+        FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
         cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         cancelBtn.setIcon(cancelIcon);
 
     }
+
+    private void generateAppointmentNumber() {
+        try {
+            ResultSet rs = MySQL.executeSearch("SELECT appointment_room_no FROM appointment_room ORDER BY appointment_room_no DESC LIMIT 1");
+
+            String appointmentNo;
+            if (rs.next()) {
+                String lastNo = rs.getString("appointment_room_no");
+                int num = Integer.parseInt(lastNo.substring(4)) + 1;
+                appointmentNo = String.format("APTR%04d", num);
+            } else {
+                appointmentNo = "APTR0001";
+            }
+
+            appointmentRoomNO.setText(appointmentNo);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private synchronized void insertAppointmentRoomNo(){
+        String appointmentRoomNo = appointmentRoomNO.getText();
+        
+        if (!Validater.isInputFieldValid(appointmentRoomNo)) {
+            return;
+        }
+        
+        try{
+            ResultSet rs = MySQL.executeSearch("SELECT appointment_room_no FROM appointment_room WHERE appointment_room_no ='"+appointmentRoomNo+"';");
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null,"This appointment Room is already exist", "Appointment Room",JOptionPane.ERROR_MESSAGE);
+            }else{
+                MySQL.executeIUD("INSERT INTO appointment_room (appointment_room_no, status_s_id) VALUES('"+appointmentRoomNo+"',(SELECT `status`.s_id FROM `status` WHERE status_type = 'Active'));");
+                JOptionPane.showMessageDialog(null, "New Appointment Room added successfully!", "Appointment Room Information Dialog", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -40,28 +88,29 @@ public class NewAppoinmentRoom extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        price1 = new javax.swing.JTextField();
+        appointmentRoomNO = new javax.swing.JTextField();
         cancelBtn = new javax.swing.JButton();
         addBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Add New Appointment Room");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Nunito ExtraBold", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(3, 4, 94));
-        jLabel2.setText("Add New Appoinment Room");
+        jLabel2.setText("Add New Appointment Room");
 
         jSeparator1.setForeground(new java.awt.Color(3, 4, 94));
 
-        price1.setEditable(false);
-        price1.setBackground(new java.awt.Color(255, 255, 255));
-        price1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
-        price1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Room No", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
-        price1.setDisabledTextColor(new java.awt.Color(153, 153, 153));
-        price1.addActionListener(new java.awt.event.ActionListener() {
+        appointmentRoomNO.setEditable(false);
+        appointmentRoomNO.setBackground(new java.awt.Color(255, 255, 255));
+        appointmentRoomNO.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        appointmentRoomNO.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Room No", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
+        appointmentRoomNO.setDisabledTextColor(new java.awt.Color(153, 153, 153));
+        appointmentRoomNO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                price1ActionPerformed(evt);
+                appointmentRoomNOActionPerformed(evt);
             }
         });
 
@@ -69,11 +118,21 @@ public class NewAppoinmentRoom extends javax.swing.JDialog {
         cancelBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         cancelBtn.setForeground(new java.awt.Color(3, 4, 94));
         cancelBtn.setText("Cancel");
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelBtnActionPerformed(evt);
+            }
+        });
 
         addBtn.setBackground(new java.awt.Color(3, 4, 94));
         addBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         addBtn.setForeground(new java.awt.Color(202, 240, 248));
         addBtn.setText("Save");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,7 +148,7 @@ public class NewAppoinmentRoom extends javax.swing.JDialog {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(price1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                            .addComponent(appointmentRoomNO, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addGap(0, 25, Short.MAX_VALUE))
         );
@@ -101,7 +160,7 @@ public class NewAppoinmentRoom extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(price1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(appointmentRoomNO, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,18 +185,27 @@ public class NewAppoinmentRoom extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void price1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_price1ActionPerformed
+    private void appointmentRoomNOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentRoomNOActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_price1ActionPerformed
+    }//GEN-LAST:event_appointmentRoomNOActionPerformed
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        insertAppointmentRoomNo();
+        
+    }//GEN-LAST:event_addBtnActionPerformed
+
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_cancelBtnActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-FlatLightLaf.setup();
+        FlatLightLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NewAppoinmentRoom dialog = new NewAppoinmentRoom(new javax.swing.JFrame(), true);
+                NewAppointmentRoom dialog = new NewAppointmentRoom(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -151,10 +219,10 @@ FlatLightLaf.setup();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
+    private javax.swing.JTextField appointmentRoomNO;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField price1;
     // End of variables declaration//GEN-END:variables
 }

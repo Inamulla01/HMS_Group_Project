@@ -11,13 +11,18 @@ import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Vector;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import lk.avinam.connection.MySQL;
-import lk.avinam.dialog.NewAppoinmentRoom;
+import lk.avinam.dialog.AppointmentRoomNurseView;
+import lk.avinam.dialog.NewAppointmentRoom;
+import raven.toast.Notifications;
 
 /**
  *
@@ -36,14 +41,14 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
         nurseviewBtn.setVisible(false);
         cancelBtn.setVisible(false);
     }
-
+    
     private void init() {
         appointmentRoomTable.getTableHeader().setFont(new Font("", Font.BOLD, 16));
         appointmentRoomTable.getTableHeader().setOpaque(false);
         appointmentRoomTable.getTableHeader().setBackground(Color.decode("#00B4D8"));
         appointmentRoomTable.getTableHeader().setForeground(Color.decode("#CAF0F8"));
         appointmentRoomTable.getTableHeader().setPreferredSize(new Dimension(0, 47));
-
+        
         FlatSVGIcon plusIcon = new FlatSVGIcon("lk/avinam/icon/plus.svg", 15, 15);
         plusIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         addBtn.setIcon(plusIcon);
@@ -55,7 +60,7 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
         FlatSVGIcon eyeIcon = new FlatSVGIcon("lk/avinam/icon/eye.svg", 20, 20);
         eyeIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#90E0EF")));
         nurseviewBtn.setIcon(eyeIcon);
-
+        
         FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
         cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FF0000")));
         cancelBtn.setIcon(cancelIcon);
@@ -69,40 +74,40 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
                 }
             }
         });
-
+        
         this.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 appointmentRoomTable.clearSelection();
             }
         });
-
+        
     }
     
-     private void SearchFilters() {
+    private void SearchFilters() {
         String AppointmentRoomNo = jTextField1.getText().trim();
         String sslmcId = jTextField2.getText().trim();
         Date selectedDate = jDateChooser.getDate();
         
         String status = "all";
-
+        
         if (jRadioButtonBooked.isSelected()) {
             status = "Booked";
         } else if (jRadioButtonCancelled.isSelected()) {
             status = "Cancelled";
-        } 
-
+        }        
+        
         loadAppointmentRoomDetails(AppointmentRoomNo, sslmcId, selectedDate, status);
     }
-
+    
     private void loadAppointmentRoomDetails() {
-        loadAppointmentRoomDetails("", "",null, "all");
+        loadAppointmentRoomDetails("", "", null, "all");
     }
-
+    
     private void loadAppointmentRoomDetails(String AppointmentRoomNo, String sslmcId, Date selectedDate, String status) {
         try {
             String query = "SELECT appointment_room_no, slmc_id, doctor_name, nurse_count, availability_date, time_slot, `status` FROM appointment_room_view WHERE 1=1 ";
-
+            
             if (AppointmentRoomNo != null && !AppointmentRoomNo.trim().isEmpty() && !AppointmentRoomNo.equals("Search By Appointment Room")) {
                 query += " AND appointment_room_no LIKE '%" + AppointmentRoomNo + "%'";
             }
@@ -110,20 +115,20 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
                 query += " AND slmc_id LIKE '%" + sslmcId + "%'";
             }
             if (selectedDate != null) {
-                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                 String dateToString = dateFormat.format(selectedDate);
-                 query += " AND availability_date = '"+dateToString+"' ";
-                 
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String dateToString = dateFormat.format(selectedDate);
+                query += " AND availability_date = '" + dateToString + "' ";
+                
             }
-
+            
             if (!status.equals("all")) {
                 if (status.equals("Booked")) {
                     query += " AND status = 'Booked'";
                 } else if (status.equals("Cancelled")) {
                     query += " AND status = 'Cancelled'";
-                } 
+                }                
             }
-
+            
             ResultSet rs = MySQL.executeSearch(query);
             DefaultTableModel dtm = (DefaultTableModel) appointmentRoomTable.getModel();
             dtm.setRowCount(0);
@@ -138,7 +143,7 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
                 v.add(rs.getString("status"));
                 dtm.addRow(v);
             }
-
+            
             DefaultTableCellRenderer renderer = new DefaultTableCellRenderer() {
                 @Override
                 public java.awt.Component getTableCellRendererComponent(javax.swing.JTable table,
@@ -149,9 +154,9 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
                     return this;
                 }
             };
-
+            
             appointmentRoomTable.setDefaultRenderer(Object.class, renderer);
-
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -168,7 +173,7 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
                 }
             }
         });
-
+        
         jRadioButtonCancelled.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -179,7 +184,6 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
                 }
             }
         });
-
         
     }
 
@@ -246,6 +250,11 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
         cancelBtn.setForeground(new java.awt.Color(255, 51, 51));
         cancelBtn.setText("Cancel");
         cancelBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelBtnActionPerformed(evt);
+            }
+        });
 
         addBtn.setBackground(new java.awt.Color(3, 4, 94));
         addBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
@@ -421,8 +430,7 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
     }//GEN-LAST:event_jRadioButtonCancelledActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        // TODO add your handling code here:
-        NewAppoinmentRoom newAppoinmentRoom = new NewAppoinmentRoom(null, true);
+        NewAppointmentRoom newAppoinmentRoom = new NewAppointmentRoom(null, true);
         newAppoinmentRoom.setLocationRelativeTo(null);
         newAppoinmentRoom.setVisible(true);
     }//GEN-LAST:event_addBtnActionPerformed
@@ -438,7 +446,7 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1FocusGained
 
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
-       if (jTextField1.getText().trim().isEmpty()) {
+        if (jTextField1.getText().trim().isEmpty()) {
             jTextField1.setText("Search By Appointment Room");
         }
     }//GEN-LAST:event_jTextField1FocusLost
@@ -454,26 +462,88 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
             jTextField2.setText("Search By Doctor SLMC ID");
         }
     }//GEN-LAST:event_jTextField2FocusLost
-
+    
     private String selectedAppointmentRoomNo;
-
-    public String getselectedAppointmentNo() {
+    
+    public String getselectedAppointmentRoomNo() {
         return selectedAppointmentRoomNo;
     }
-
-    private String selectedAppoinmentRoomStatus;
     
+    private String selectedAppoinmentRoomStatus;
+    private String doctorslmcId;
+    private String date;
+    private String timeSlot;
+    private String timeFrom;
+    private String timeTo;
+    private String databaseStatus;
+    
+
     private void appointmentRoomTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentRoomTableMouseClicked
         if (evt.getClickCount() == 1) {
             int row = appointmentRoomTable.getSelectedRow();
             selectedAppointmentRoomNo = (String) appointmentRoomTable.getValueAt(row, 0);
+            doctorslmcId = (String) appointmentRoomTable.getValueAt(row, 1);
+            date = (String) appointmentRoomTable.getValueAt(row, 4);
+            timeSlot = (String) appointmentRoomTable.getValueAt(row, 5);
             selectedAppoinmentRoomStatus = (String) appointmentRoomTable.getValueAt(row, 6);
             nurseviewBtn.setVisible(true);
-            cancelBtn.setVisible(true);
+            
+            if (timeSlot != null && !timeSlot.isEmpty()) {
+                String[] parts = timeSlot.split(" - ");
+                
+                DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH);
+                DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
+                
+                timeFrom = LocalTime.parse(parts[0].trim(), inputFormat).format(outputFormat);
+                timeTo = LocalTime.parse(parts[1].trim(), inputFormat).format(outputFormat);
+                
+            }
+            
+            try {
+                ResultSet rs = MySQL.executeSearch("SELECT room_reservations.`status` FROM appointment_room\n"
+                        + "JOIN date_has_time ON date_has_time.appointment_room_id = appointment_room.appointment_room_id\n"
+                        + "JOIN doctor ON date_has_time.doctor_id = doctor.doctor_id\n"
+                        + "JOIN availability_schedule_date ON date_has_time.availability_date_id = availability_schedule_date.availability_date_id\n"
+                        + "JOIN availability_schedule_time ON date_has_time.availability_time_id = availability_schedule_time.availability_time_id\n"
+                        + "JOIN room_reservations ON room_reservations.room_reservations_id = date_has_time.room_reservations_id WHERE appointment_room.appointment_room_no = '" + selectedAppointmentRoomNo + "' AND doctor.slmc_id = '" + doctorslmcId + "' \n"
+                        + "AND availability_schedule_date.availability_date = '" + date + "' AND availability_schedule_time.availability_time_from = '" + timeFrom + "' AND availability_schedule_time.availability_time_to = '" + timeTo + "';");
+                if (rs.next()) {
+                    databaseStatus = rs.getString("status");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            
+            if ("Booked".equals(databaseStatus)) {
+                cancelBtn.setVisible(true);
+            } else {
+                cancelBtn.setVisible(false);
+            }
+            
     }//GEN-LAST:event_appointmentRoomTableMouseClicked
     }
-    private void nurseviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nurseviewBtnActionPerformed
+    
+    private synchronized void CancelbookedRoom(){
+        MySQL.executeIUD("UPDATE date_has_time \n" +
+"JOIN appointment_room ON appointment_room.appointment_room_id = date_has_time.appointment_room_id\n" +
+"JOIN doctor ON doctor.doctor_id = date_has_time.doctor_id\n" +
+"JOIN availability_schedule_date ON availability_schedule_date.availability_date_id = date_has_time.availability_date_id\n" +
+"JOIN availability_schedule_time ON availability_schedule_time.availability_time_id = date_has_time.availability_time_id\n" +
+"SET date_has_time.room_reservations_id = (SELECT room_reservations.room_reservations_id FROM room_reservations WHERE room_reservations.`status` = 'Cancelled') \n" +
+"WHERE appointment_room.appointment_room_no = '" + selectedAppointmentRoomNo + "' AND doctor.slmc_id = '" + doctorslmcId + "' \n" +
+"AND availability_schedule_date.availability_date = '" + date + "' AND availability_schedule_time.availability_time_from = '" + timeFrom + "' AND availability_schedule_time.availability_time_to = '" + timeTo + "';");
         
+        Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_RIGHT, "Appointment Room status updated to Cancelled.");
+        loadAppointmentRoomDetails();
+        cancelBtn.setVisible(false);
+        
+    }
+    
+    private void nurseviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nurseviewBtnActionPerformed
+        String appointmentRoomNo = getselectedAppointmentRoomNo();
+        AppointmentRoomNurseView appointmentRoomNurseView = new AppointmentRoomNurseView(null, true, appointmentRoomNo);
+        appointmentRoomNurseView.setLocationRelativeTo(null);
+        appointmentRoomNurseView.setVisible(true);
     }//GEN-LAST:event_nurseviewBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
@@ -483,6 +553,10 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         SearchFilters();
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
+        CancelbookedRoom();
+    }//GEN-LAST:event_cancelBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

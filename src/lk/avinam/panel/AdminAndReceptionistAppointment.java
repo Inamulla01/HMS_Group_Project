@@ -115,7 +115,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
 
     private void loadAppointmentDetails(String sAppointmentNo, String sslmcId, Date selectedDate, String status) {
         try {
-            String query = "SELECT appointment_no,patient_name,slmc_id,doctor_name,specialization,appointment_room_no,availability_date,time_slot,appointment_status,price FROM appointment_view WHERE 1=1 ";
+            String query = "SELECT appointment_no,patient_name,slmc_id,doctor_name,appointment_room_no,availability_date,time_slot,appointment_status,price FROM appointment_view WHERE 1=1 ";
 
             if (sAppointmentNo != null && !sAppointmentNo.trim().isEmpty() && !sAppointmentNo.equals("Search By Appointment No")) {
                 query += " AND appointment_no LIKE '%" + sAppointmentNo + "%'";
@@ -149,7 +149,6 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
                 v.add(rs.getString("patient_name"));
                 v.add(rs.getString("slmc_id"));
                 v.add(rs.getString("doctor_name"));
-                v.add(rs.getString("specialization"));
                 v.add(rs.getString("appointment_room_no"));
                 v.add(rs.getString("availability_date"));
                 v.add(rs.getString("time_slot"));
@@ -268,11 +267,11 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Appointment No", "Patient", "Doctor SLMC ID", "Doctor", "Doctor Specialized In", "Room", "Date", "Time Solt", "Price", "Status"
+                "Appointment No", "Patient", "Doctor SLMC ID", "Doctor", "Room", "Date", "Time Solt", "Price", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -287,7 +286,8 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(arAppointmentTable);
         if (arAppointmentTable.getColumnModel().getColumnCount() > 0) {
-            arAppointmentTable.getColumnModel().getColumn(4).setPreferredWidth(100);
+            arAppointmentTable.getColumnModel().getColumn(6).setMinWidth(120);
+            arAppointmentTable.getColumnModel().getColumn(6).setPreferredWidth(120);
         }
 
         updateBtn.setBackground(new java.awt.Color(0, 119, 182));
@@ -522,7 +522,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         if (evt.getClickCount() == 1) {
             int row = arAppointmentTable.getSelectedRow();
             selectedAppointmentNo = (String) arAppointmentTable.getValueAt(row, 0);
-            selectedAppoinmentStatus = (String) arAppointmentTable.getValueAt(row, 9);
+            selectedAppoinmentStatus = (String) arAppointmentTable.getValueAt(row, 8);
             updateBtn.setVisible(true);
 
             try {
@@ -595,7 +595,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
     private synchronized void cancelAppointment() {
         String appointmentNo = getselectedAppointmentNo();
         MySQL.executeIUD("UPDATE appointment SET appointment.appointment_status_id = (SELECT appointment_status.appointment_status_id FROM appointment_status WHERE appointment_status = 'Cancelled') WHERE appointment.appointment_no = '" + appointmentNo + "'; ");
-        Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_RIGHT, "Appointment status updated to Cancelled.");
+        Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_RIGHT, "Appointment status updated to Cancelled.");
         loadAppointmentDetails();
         updateBtn.setVisible(false);
         cancelBtn.setVisible(false);
