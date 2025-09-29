@@ -320,6 +320,9 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
             }
         });
 
+        jDateChooser.setBackground(new java.awt.Color(255, 255, 255));
+        jDateChooser.setForeground(new java.awt.Color(3, 4, 94));
+        jDateChooser.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jDateChooser.setOpaque(false);
         jDateChooser.setPreferredSize(new java.awt.Dimension(106, 53));
 

@@ -74,7 +74,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         arAppointmentTable.getSelectionModel().addListSelectionListener(event -> {
             if (!event.getValueIsAdjusting()) {
                 int selectedRow = arAppointmentTable.getSelectedRow();
-                if (selectedRow == -1) { // nothing selected
+                if (selectedRow == -1) { 
                     updateBtn.setVisible(false);
                     cancelBtn.setVisible(false);
                     completedBtn.setVisible(false);
@@ -539,9 +539,11 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
             if ("Pending".equals(databaseStatus)) {
                 cancelBtn.setVisible(true);
                 completedBtn.setVisible(true);
+                updateBtn.setVisible(true);
             } else {
                 cancelBtn.setVisible(false);
                 completedBtn.setVisible(false);
+                updateBtn.setVisible(false);
             }
         }
 
