@@ -5,9 +5,18 @@
 package lk.avinam.panel;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import com.mysql.cj.xdevapi.Statement;
+import com.sun.jdi.connect.spi.Connection;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.sql.ResultSet;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import lk.avinam.connection.MySQL;
+import lk.avinam.dialog.AddPatient;
+import lk.avinam.dialog.UpdatePatient;
 
 /**
  *
@@ -21,6 +30,7 @@ public class PatientManagementPanel extends javax.swing.JPanel {
     public PatientManagementPanel() {
         initComponents();
         init();
+        loadPatients();
     }
 
     private void init(){
@@ -42,10 +52,6 @@ public class PatientManagementPanel extends javax.swing.JPanel {
         updateIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         updateBtn.setIcon(updateIcon);
 
-        FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
-        cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FF0000")));
-        cancelBtn.setIcon(cancelIcon);
-        
         FlatSVGIcon eyeIcon = new FlatSVGIcon("lk/avinam/icon/eye.svg", 20, 20);
         eyeIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FFFFFF")));
         viewBtn.setIcon(eyeIcon);
@@ -55,6 +61,40 @@ public class PatientManagementPanel extends javax.swing.JPanel {
         reportBtn.setIcon(reportIcon);
     }
     
+    private void loadPatients() {
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0); // Clear existing rows
+
+    try{
+        
+        ResultSet rs = MySQL.executeSearch(
+    "SELECT p.patient_id, p.nic_no, " +
+    "CONCAT(p.patient_fname, ' ', p.patient_lname) AS patient_name, " +
+    "p.phone_no1, p.admitted_date, wt.ward_type " +
+    "FROM patient p " +
+    "INNER JOIN ward_type wt ON p.ward_type_id = wt.ward_id"
+);
+
+        while (rs.next()) {
+            Object[] row = {
+                rs.getString("nic_no"),
+                rs.getString("patient_name"),
+                rs.getString("phone_no1"),
+                rs.getString("ward_type")
+            };
+            model.addRow(row);
+        }
+
+        
+        DefaultTableCellRenderer columTextCenter = new DefaultTableCellRenderer();
+            columTextCenter.setHorizontalAlignment(SwingConstants.CENTER);
+            jTable1.setDefaultRenderer(Object.class, columTextCenter);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        javax.swing.JOptionPane.showMessageDialog(this, "Error loading patients: " + e.getMessage());
+    }
+}
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,13 +111,11 @@ public class PatientManagementPanel extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         updateBtn = new javax.swing.JButton();
-        cancelBtn = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         viewBtn = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
         reportBtn = new javax.swing.JButton();
+        jTextField3 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -105,20 +143,20 @@ public class PatientManagementPanel extends javax.swing.JPanel {
         jTable1.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "NIC", "Name", "Mobile", "Admited Date", "Doctor", "Status"
+                "NIC", "Name", "Mobile", "Ward"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -137,12 +175,11 @@ public class PatientManagementPanel extends javax.swing.JPanel {
         updateBtn.setForeground(new java.awt.Color(202, 240, 248));
         updateBtn.setText("Update Patient");
         updateBtn.setPreferredSize(new java.awt.Dimension(184, 47));
-
-        cancelBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        cancelBtn.setForeground(new java.awt.Color(255, 51, 51));
-        cancelBtn.setText("Delete Patient");
-        cancelBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
-        cancelBtn.setPreferredSize(new java.awt.Dimension(184, 47));
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
 
         jTextField2.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         jTextField2.setText("Search By Patients NIC");
@@ -159,12 +196,6 @@ public class PatientManagementPanel extends javax.swing.JPanel {
         viewBtn.setText("View All");
         viewBtn.setPreferredSize(new java.awt.Dimension(184, 47));
 
-        jRadioButton1.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        jRadioButton1.setText("Active");
-
-        jRadioButton2.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        jRadioButton2.setText("Inactive");
-
         jSeparator1.setForeground(new java.awt.Color(3, 4, 94));
 
         reportBtn.setBackground(new java.awt.Color(3, 4, 94));
@@ -175,6 +206,15 @@ public class PatientManagementPanel extends javax.swing.JPanel {
         reportBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 reportBtnActionPerformed(evt);
+            }
+        });
+
+        jTextField3.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
+        jTextField3.setText("Search By Patients Name");
+        jTextField3.setPreferredSize(new java.awt.Dimension(47, 16));
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
             }
         });
 
@@ -191,18 +231,15 @@ public class PatientManagementPanel extends javax.swing.JPanel {
                         .addComponent(reportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                                .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(0, 13, Short.MAX_VALUE)
                                 .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -222,15 +259,13 @@ public class PatientManagementPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
                 .addContainerGap())
@@ -242,24 +277,32 @@ public class PatientManagementPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        
+       AddPatient addPatientDialog = new AddPatient(new javax.swing.JFrame(),true);
+       addPatientDialog.setVisible(true);
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void reportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_reportBtnActionPerformed
 
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+      UpdatePatient updatePatientDialog =  new UpdatePatient(new javax.swing.JFrame(), true);
+      updatePatientDialog.setVisible(true);
+    }//GEN-LAST:event_updateBtnActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
-    private javax.swing.JButton cancelBtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JButton reportBtn;
     private javax.swing.JButton searchBtn;
     private javax.swing.JButton updateBtn;
