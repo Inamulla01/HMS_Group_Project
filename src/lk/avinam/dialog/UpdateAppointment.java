@@ -226,7 +226,7 @@ public class UpdateAppointment extends javax.swing.JDialog {
             return;
         }
 
-        MySQL.executeIUD("UPDATE appointment SET availability_date_id = '" + dAvailableDateId + "', availability_time_id = '" + doctorSlotId + "' WHERE appointment_no = '" + appointmentNo + "';");
+        MySQL.executeIUD("UPDATE appointment SET availability_date_id = '" + dAvailableDateId + "', availability_time_id = '" + doctorSlotId + "', appointment_room_id = '"+selectedRoomId+"' WHERE appointment_no = '" + appointmentNo + "';");
 
         JOptionPane.showMessageDialog(null, "Appointment updated successfully!", "Appointment Information", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
