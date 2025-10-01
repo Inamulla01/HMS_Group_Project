@@ -7,7 +7,6 @@ package lk.avinam.dialog;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
-import java.time.LocalDate;
 import lk.avinam.connection.MySQL;
 import lk.avinam.util.AppIconUtil;
 import java.sql.ResultSet;
@@ -15,10 +14,10 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 import lk.avinam.validation.Validater;
 import lk.avinam.validation.Validation;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import raven.toast.Notifications;
 
 /**
  *
@@ -245,10 +244,8 @@ private void generateAppointmentNumber() {
 
     } catch (SQLException e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, 
-            "Error loading doctor's availability slots.", 
-            "Database Error", 
-            JOptionPane.ERROR_MESSAGE);
+        Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_RIGHT, "Error loading doctor's availability slots.");
+        
     }
 }
     private int selectedRoomId = 0;
@@ -520,11 +517,11 @@ private void generateAppointmentNumber() {
     try{
         ResultSet rs = MySQL.executeSearch("SELECT appointment_no FROM appointment WHERE appointment_no = '"+appointmentNo+"';");
         if(rs.next()){
-            JOptionPane.showMessageDialog(null,"This appointment is already exist", "Appointment",JOptionPane.ERROR_MESSAGE);
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "This appointment is already exist");
         }else{
         MySQL.executeIUD("INSERT INTO appointment (appointment_no, patient_id, doctor_id, availability_date_id,availability_time_id,appointment_room_id, appointment_status_id) VALUES ('"+appointmentNo+"', '"+patientId+"', '"+doctorId+"', '"+dAvailableDateId+"','"+doctorSlotId+"','"+selectedRoomId+"', (SELECT appointment_status_id FROM appointment_status WHERE appointment_status = 'Pending'));");
-        JOptionPane.showMessageDialog(null, "New Appointment added successfully!", "Appointment Information Dialog", JOptionPane.INFORMATION_MESSAGE);
-                this.dispose();
+        Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_RIGHT, "New Appointment added successfully!");       
+        this.dispose();
         }
     }catch(SQLException e){
         e.printStackTrace();

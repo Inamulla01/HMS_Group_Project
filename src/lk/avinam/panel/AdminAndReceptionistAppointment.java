@@ -10,18 +10,26 @@ import lk.avinam.dialog.UpdateAppointment;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import lk.avinam.connection.MySQL;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.view.JasperViewer;
+import org.springframework.beans.propertyeditors.InputSourceEditor;
 import raven.toast.Notifications;
 
 /**
@@ -502,7 +510,17 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void reportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportBtnActionPerformed
-        // TODO add your handling code here:
+        try{
+            InputStream filePath = getClass().getResourceAsStream("/lk/avinam/validation/report/LoadAppointmentDetailsTable1.jasper");
+
+            HashMap<String, Object> parameters = new HashMap<>();
+            
+            JRTableModelDataSource jrTMDataSourse = new JRTableModelDataSource(arAppointmentTable.getModel());
+            JasperPrint fillReport = JasperFillManager.fillReport(filePath, parameters,jrTMDataSourse);
+            JasperViewer.viewReport(fillReport,false);
+        }catch(JRException e){
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reportBtnActionPerformed
 
     private void jRadioButtonCompletedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonCompletedActionPerformed

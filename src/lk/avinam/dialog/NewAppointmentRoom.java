@@ -9,9 +9,9 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 import lk.avinam.connection.MySQL;
 import lk.avinam.validation.Validater;
+import raven.toast.Notifications;
 
 /**
  *
@@ -70,10 +70,10 @@ public class NewAppointmentRoom extends javax.swing.JDialog {
         try{
             ResultSet rs = MySQL.executeSearch("SELECT appointment_room_no FROM appointment_room WHERE appointment_room_no ='"+appointmentRoomNo+"';");
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null,"This appointment Room is already exist", "Appointment Room",JOptionPane.ERROR_MESSAGE);
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "This appointment Room is already exist.");
             }else{
                 MySQL.executeIUD("INSERT INTO appointment_room (appointment_room_no, status_s_id) VALUES('"+appointmentRoomNo+"',(SELECT `status`.s_id FROM `status` WHERE status_type = 'Active'));");
-                JOptionPane.showMessageDialog(null, "New Appointment Room added successfully!", "Appointment Room Information Dialog", JOptionPane.INFORMATION_MESSAGE);
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_RIGHT, "New Appointment Room added successfully!");
                 this.dispose();
             }
         }catch(SQLException e){

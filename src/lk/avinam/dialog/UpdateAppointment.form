@@ -65,12 +65,12 @@
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="loadAppointmentNo" alignment="1" min="-2" pref="553" max="-2" attributes="0"/>
                       <Component id="PatientInput" alignment="1" min="-2" pref="553" max="-2" attributes="0"/>
                       <Component id="doctorInput" alignment="1" min="-2" pref="553" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="DAvailableDateCombo" pref="266" max="32767" attributes="0"/>
                               <Component id="getAppointmentRoomNo" max="32767" attributes="0"/>
