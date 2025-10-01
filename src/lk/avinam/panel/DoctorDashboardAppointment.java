@@ -8,16 +8,23 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import lk.avinam.connection.MySQL;
 import lk.avinam.dialog.ViewMorePatient;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -389,7 +396,17 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
     }//GEN-LAST:event_viewBtnActionPerformed
 
     private void reportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportBtnActionPerformed
-        // TODO add your handling code here:
+        try{
+            InputStream filePath = getClass().getResourceAsStream("/lk/avinam/report/LoadAppointmentDetailsDoctorTable.jasper");
+
+            HashMap<String, Object> parameters = new HashMap<>();
+            
+            JRTableModelDataSource jrTMDataSourse = new JRTableModelDataSource(dAppointmentTable.getModel());
+            JasperPrint fillReport = JasperFillManager.fillReport(filePath, parameters,jrTMDataSourse);
+            JasperViewer.viewReport(fillReport,false);
+        }catch(JRException e){
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reportBtnActionPerformed
 
     private void jRadioButtonPendingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPendingActionPerformed

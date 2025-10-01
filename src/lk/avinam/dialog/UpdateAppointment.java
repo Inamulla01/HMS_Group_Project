@@ -7,6 +7,7 @@ package lk.avinam.dialog;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -15,6 +16,13 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import lk.avinam.connection.MySQL;
 import lk.avinam.validation.Validater;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import raven.toast.Notifications;
 
 /**
@@ -245,7 +253,6 @@ public class UpdateAppointment extends javax.swing.JDialog {
         getappointmentFree = new javax.swing.JTextField();
         PatientInput = new javax.swing.JTextField();
         doctorInput = new javax.swing.JTextField();
-        reportBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -324,16 +331,6 @@ public class UpdateAppointment extends javax.swing.JDialog {
         doctorInput.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
         doctorInput.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Doctor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Nunito SemiBold", 1, 14), new java.awt.Color(3, 4, 94))); // NOI18N
 
-        reportBtn.setBackground(new java.awt.Color(3, 4, 94));
-        reportBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
-        reportBtn.setForeground(new java.awt.Color(144, 224, 239));
-        reportBtn.setText("Generat Report");
-        reportBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reportBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -342,8 +339,6 @@ public class UpdateAppointment extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(reportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -355,12 +350,12 @@ public class UpdateAppointment extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(15, 15, 15))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(loadAppointmentNo, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PatientInput, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(doctorInput, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(DAvailableDateCombo, 0, 266, Short.MAX_VALUE)
                             .addComponent(getAppointmentRoomNo))
@@ -394,9 +389,7 @@ public class UpdateAppointment extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(editBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(reportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
@@ -429,21 +422,44 @@ public class UpdateAppointment extends javax.swing.JDialog {
 
     }//GEN-LAST:event_DAvailableDateComboActionPerformed
 
+    private void appointmentReport() {
+        try {
+            HashMap<String, Object> parameters = new HashMap<>();
+
+            parameters.put("appointmentNo", loadAppointmentNo.getText());
+            parameters.put("Patient", PatientInput.getText());
+            parameters.put("Doctor", doctorInput.getText());
+            parameters.put("DADate", DAvailableDateCombo.getSelectedItem());
+            parameters.put("DASlot", doctorSlotCombo.getSelectedItem());
+            parameters.put("ARoomNo", getAppointmentRoomNo.getText());
+            parameters.put("AFee", getappointmentFree.getText());
+
+            InputStream jrxmlStream = getClass().getResourceAsStream("/lk/avinam/report/AppointmentReport.jrxml");
+
+            JasperReport jasperreport = JasperCompileManager.compileReport(jrxmlStream);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperreport, parameters, new JREmptyDataSource());
+            JasperViewer viewer = new JasperViewer(jasperPrint, false);
+            viewer.setVisible(true);
+            viewer.toFront();
+            viewer.requestFocus();
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
+    
     private void getAppointmentRoomNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getAppointmentRoomNoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_getAppointmentRoomNoActionPerformed
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         updateAppointmentData();
+        appointmentReport();
     }//GEN-LAST:event_editBtnActionPerformed
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         this.dispose();
     }//GEN-LAST:event_cancelBtnActionPerformed
-
-    private void reportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_reportBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -459,6 +475,5 @@ public class UpdateAppointment extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField loadAppointmentNo;
-    private javax.swing.JButton reportBtn;
     // End of variables declaration//GEN-END:variables
 }

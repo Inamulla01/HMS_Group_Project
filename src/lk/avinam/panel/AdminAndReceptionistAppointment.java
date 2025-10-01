@@ -511,7 +511,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
 
     private void reportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportBtnActionPerformed
         try{
-            InputStream filePath = getClass().getResourceAsStream("/lk/avinam/validation/report/LoadAppointmentDetailsTable1.jasper");
+            InputStream filePath = getClass().getResourceAsStream("/lk/avinam/report/LoadAppointmentDetailsTable1.jasper");
 
             HashMap<String, Object> parameters = new HashMap<>();
             

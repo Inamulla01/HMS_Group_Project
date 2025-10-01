@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_Letter" pageWidth="400" pageHeight="400" columnWidth="360" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="355437d5-f7af-4811-a18a-c10b06e4957e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="appointmentNo" class="java.lang.String"/>
+	<parameter name="Patient" class="java.lang.String"/>
+	<parameter name="Doctor" class="java.lang.String"/>
+	<parameter name="DADate" class="java.lang.String"/>
+	<parameter name="DASlot" class="java.lang.String"/>
+	<parameter name="ARoomNo" class="java.lang.String"/>
+	<parameter name="AFee" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<title>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="9" width="360" height="40" forecolor="#03045E" uuid="b9f55b9a-aceb-41ef-94dc-ebd031d3d68e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Nunito ExtraBold" size="24"/>
+				</textElement>
+				<text><![CDATA[Appointment Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="220" splitType="Stretch">
+			<textField>
+				<reportElement x="110" y="0" width="250" height="30" uuid="a7359870-b75c-4c8f-98d1-187fcc6707cd"/>
+				<box>
+					<bottomPen lineWidth="0.25" lineColor="#03045E"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{appointmentNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="110" height="30" forecolor="#03045E" uuid="b2ca101f-49a8-4fe0-9ef7-2f8fc8e678ed"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nunito SemiBold" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Appointment No :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="110" height="30" forecolor="#03045E" uuid="37dfff17-8365-4751-9d12-87f0ef3bb9bc"/>
+				<box>
+					<pen lineColor="#03045E"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nunito SemiBold" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Patient Details :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="30" width="250" height="30" uuid="dc214eb2-08f1-4868-ab5b-9c2289ca7441"/>
+				<box>
+					<pen lineColor="#03045E"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Patient}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="110" height="40" forecolor="#03045E" uuid="4a963f9e-a671-47c6-900b-2118df24c702"/>
+				<box>
+					<pen lineColor="#03045E"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nunito SemiBold" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Doctor Details :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="60" width="250" height="40" uuid="f215f25a-2824-47e7-9205-092fd2aeadf4"/>
+				<box>
+					<pen lineColor="#03045E"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Doctor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="100" width="130" height="30" forecolor="#03045E" uuid="a14cd301-2ebd-4c9c-bad2-36c56dc3b654"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nunito SemiBold" size="12"/>
+				</textElement>
+				<text><![CDATA[Doctor Available Date :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="130" width="130" height="30" forecolor="#03045E" uuid="5b6f467d-48fb-4cad-9b10-d56d3370cdf0"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nunito SemiBold" size="12"/>
+				</textElement>
+				<text><![CDATA[Doctor Available Slot :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="100" width="230" height="30" uuid="c2bc655b-1a7d-45e9-adcc-9b67543e5103"/>
+				<box>
+					<bottomPen lineWidth="0.25" lineColor="#03045E"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DADate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="130" width="230" height="30" uuid="25c9555f-b527-46bb-80bb-9cbb4ce5cc07"/>
+				<box>
+					<bottomPen lineWidth="0.25" lineColor="#03045E"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DASlot}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="160" width="140" height="30" forecolor="#03045E" uuid="05b6e0d5-d6b5-4517-9d94-a7cc8c06958f"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nunito SemiBold" size="12"/>
+				</textElement>
+				<text><![CDATA[Appointment Room No :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="190" width="140" height="30" forecolor="#03045E" uuid="3450ac17-ec11-4d9e-8dda-cf8b8795ca13"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nunito SemiBold" size="12"/>
+				</textElement>
+				<text><![CDATA[Appointment Fee :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="160" width="220" height="30" uuid="c6a36eb1-c4b9-458f-add8-3ebf9992493e"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#03045E"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#03045E"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nunito SemiBold" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ARoomNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="190" width="220" height="30" uuid="7cc847e4-6647-471f-8de8-f8593227b701"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#03045E"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#03045E"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nunito SemiBold" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{AFee}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+</jasperReport>
