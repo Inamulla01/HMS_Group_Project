@@ -30,14 +30,14 @@ import raven.toast.Notifications;
  */
 public class AppointmentRoomManagement extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AppointmentRoomManagement
-     */
     public AppointmentRoomManagement() {
         initComponents();
         init();
         loadAppointmentRoomDetails();
         radioButtonListener();
+        addAppointmentNoListener();
+        addDoctorIdListener();
+        addDateChooserListener();
         nurseviewBtn.setVisible(false);
         cancelBtn.setVisible(false);
     }
@@ -68,7 +68,7 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
         appointmentRoomTable.getSelectionModel().addListSelectionListener(event -> {
             if (!event.getValueIsAdjusting()) {
                 int selectedRow = appointmentRoomTable.getSelectedRow();
-                if (selectedRow == -1) { // nothing selected
+                if (selectedRow == -1) {
                     nurseviewBtn.setVisible(false);
                     cancelBtn.setVisible(false);
                 }
@@ -83,6 +83,67 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
         });
         
     }
+    
+    private void addAppointmentNoListener() {
+        jTextField1.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            private void search() {
+                SearchFilters();
+            }
+
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+        });
+    }
+
+    private void addDoctorIdListener() {
+        jTextField2.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            private void search() {
+                SearchFilters();
+            }
+
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+        });
+    }
+
+    private void addDateChooserListener() {
+    jDateChooser.getDateEditor().getUiComponent().addKeyListener(new java.awt.event.KeyAdapter() {
+        @Override
+        public void keyReleased(java.awt.event.KeyEvent e) {
+            SearchFilters();
+        }
+    });
+
+    jDateChooser.getDateEditor().addPropertyChangeListener(evt -> {
+        if ("date".equals(evt.getPropertyName())) {
+            SearchFilters();
+        }
+    });
+}
     
     private void SearchFilters() {
         String AppointmentRoomNo = jTextField1.getText().trim();
@@ -322,7 +383,7 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
 
         jDateChooser.setBackground(new java.awt.Color(255, 255, 255));
         jDateChooser.setForeground(new java.awt.Color(3, 4, 94));
-        jDateChooser.setFont(new java.awt.Font("Nunito SemiBold", 1, 14)); // NOI18N
+        jDateChooser.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         jDateChooser.setOpaque(false);
         jDateChooser.setPreferredSize(new java.awt.Dimension(106, 53));
 
@@ -394,19 +455,23 @@ public class AppointmentRoomManagement extends javax.swing.JPanel {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(nurseviewBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(27, 27, 27)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jRadioButtonCancelled)
-                                .addComponent(jRadioButtonBooked))
-                            .addComponent(jDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nurseviewBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                            .addComponent(cancelBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))))
+                                .addComponent(jRadioButtonBooked)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
                 .addContainerGap())

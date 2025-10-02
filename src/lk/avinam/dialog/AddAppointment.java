@@ -518,6 +518,9 @@ public class AddAppointment extends javax.swing.JDialog {
             parameters.put("DASlot", doctorSlotCombo.getSelectedItem());
             parameters.put("ARoomNo", getAppointmentRoomNo.getText());
             parameters.put("AFee", getappointmentFree.getText());
+            String rawBarcode = appointment_NO.getText();
+            String numericBarcode = rawBarcode.replaceAll("\\D", "");
+            parameters.put("BARCODE", numericBarcode);
 
             InputStream jrxmlStream = getClass().getResourceAsStream("/lk/avinam/report/AppointmentReport.jrxml");
 

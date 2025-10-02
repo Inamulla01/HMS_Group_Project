@@ -433,6 +433,7 @@ public class UpdateAppointment extends javax.swing.JDialog {
             parameters.put("DASlot", doctorSlotCombo.getSelectedItem());
             parameters.put("ARoomNo", getAppointmentRoomNo.getText());
             parameters.put("AFee", getappointmentFree.getText());
+            parameters.put("BARCODE", loadAppointmentNo.getText());
 
             InputStream jrxmlStream = getClass().getResourceAsStream("/lk/avinam/report/AppointmentReport.jrxml");
 

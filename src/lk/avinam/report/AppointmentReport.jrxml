@@ -18,6 +18,7 @@
 	<parameter name="DASlot" class="java.lang.String"/>
 	<parameter name="ARoomNo" class="java.lang.String"/>
 	<parameter name="AFee" class="java.lang.String"/>
+	<parameter name="BARCODE" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -33,7 +34,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="220" splitType="Stretch">
+		<band height="302" splitType="Stretch">
 			<textField>
 				<reportElement x="110" y="0" width="250" height="30" uuid="a7359870-b75c-4c8f-98d1-187fcc6707cd"/>
 				<box>
@@ -88,7 +89,7 @@
 				<text><![CDATA[Doctor Details :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="110" y="60" width="250" height="40" uuid="f215f25a-2824-47e7-9205-092fd2aeadf4"/>
+				<reportElement x="110" y="60" width="230" height="40" uuid="f215f25a-2824-47e7-9205-092fd2aeadf4"/>
 				<box>
 					<pen lineColor="#03045E"/>
 					<bottomPen lineWidth="0.25"/>
@@ -186,6 +187,40 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{AFee}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="80" y="280" width="80" height="22" uuid="42290f3a-77b4-42e8-9450-b4491fa1009a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nunito SemiBold"/>
+				</textElement>
+				<text><![CDATA[Date and Time :]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="160" y="280" width="90" height="22" uuid="b8df67b2-3d2f-4708-a92c-a6ad8a56e681"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nunito SemiBold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="h:mm a">
+				<reportElement x="250" y="280" width="60" height="22" uuid="a40c6b6f-20cd-49ff-beae-337d3960a0a7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Nunito SemiBold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="340" y="60" width="20" height="40" uuid="b07a26db-5b13-4c36-9b61-22b58c90393a"/>
+				<box>
+					<bottomPen lineWidth="0.25" lineColor="#03045E"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="140" y="230" width="90" height="30" uuid="9dc87958-9945-4a8c-8191-661f7d59cc9a"/>
+				<jr:Codabar xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[$P{BARCODE}]]></jr:codeExpression>
+				</jr:Codabar>
+			</componentElement>
 		</band>
 	</pageHeader>
 	<detail>

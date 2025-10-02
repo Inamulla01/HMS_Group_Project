@@ -46,6 +46,10 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         cancelBtn.setVisible(false);
         completedBtn.setVisible(false);
         radioButtonListener();
+        addAppointmentNoListener();
+        addDoctorIdListener();
+        addDateChooserListener();
+
     }
 
     private void init() {
@@ -82,7 +86,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         arAppointmentTable.getSelectionModel().addListSelectionListener(event -> {
             if (!event.getValueIsAdjusting()) {
                 int selectedRow = arAppointmentTable.getSelectedRow();
-                if (selectedRow == -1) { 
+                if (selectedRow == -1) {
                     updateBtn.setVisible(false);
                     cancelBtn.setVisible(false);
                     completedBtn.setVisible(false);
@@ -99,11 +103,73 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
 
     }
 
+    private void addAppointmentNoListener() {
+        jTextField1.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            private void search() {
+                SearchFilters();
+            }
+
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+        });
+    }
+
+    private void addDoctorIdListener() {
+        jTextField2.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            private void search() {
+                SearchFilters();
+            }
+
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+        });
+    }
+
+    private void addDateChooserListener() {
+    jDateChooser.getDateEditor().getUiComponent().addKeyListener(new java.awt.event.KeyAdapter() {
+        @Override
+        public void keyReleased(java.awt.event.KeyEvent e) {
+            SearchFilters();
+        }
+    });
+
+    jDateChooser.getDateEditor().addPropertyChangeListener(evt -> {
+        if ("date".equals(evt.getPropertyName())) {
+            SearchFilters();
+        }
+    });
+}
+
+
     private void SearchFilters() {
         String sAppointmentNo = jTextField1.getText().trim();
         String sslmcId = jTextField2.getText().trim();
         Date selectedDate = jDateChooser.getDate();
-        
+
         String status = "all";
 
         if (jRadioButtonPending.isSelected()) {
@@ -118,7 +184,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
     }
 
     private void loadAppointmentDetails() {
-        loadAppointmentDetails("", "",null, "all");
+        loadAppointmentDetails("", "", null, "all");
     }
 
     private void loadAppointmentDetails(String sAppointmentNo, String sslmcId, Date selectedDate, String status) {
@@ -132,10 +198,9 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
                 query += " AND slmc_id LIKE '%" + sslmcId + "%'";
             }
             if (selectedDate != null) {
-                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                 String dateToString = dateFormat.format(selectedDate);
-                 query += " AND availability_date = '"+dateToString+"' ";
-                 
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String dateToString = dateFormat.format(selectedDate);
+                query += " AND availability_date = '" + dateToString + "' ";
             }
 
             if (!status.equals("all")) {
@@ -333,6 +398,11 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
                 jTextField1ActionPerformed(evt);
             }
         });
+        jTextField1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTextField1PropertyChange(evt);
+            }
+        });
 
         jTextField2.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         jTextField2.setText("Search By Doctor SLMC ID");
@@ -354,6 +424,14 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         jDateChooser.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         jDateChooser.setOpaque(false);
         jDateChooser.setPreferredSize(new java.awt.Dimension(106, 53));
+        jDateChooser.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jDateChooserFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jDateChooserFocusLost(evt);
+            }
+        });
         jDateChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jDateChooserPropertyChange(evt);
@@ -510,15 +588,15 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void reportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportBtnActionPerformed
-        try{
+        try {
             InputStream filePath = getClass().getResourceAsStream("/lk/avinam/report/LoadAppointmentDetailsTable1.jasper");
 
             HashMap<String, Object> parameters = new HashMap<>();
-            
+
             JRTableModelDataSource jrTMDataSourse = new JRTableModelDataSource(arAppointmentTable.getModel());
-            JasperPrint fillReport = JasperFillManager.fillReport(filePath, parameters,jrTMDataSourse);
-            JasperViewer.viewReport(fillReport,false);
-        }catch(JRException e){
+            JasperPrint fillReport = JasperFillManager.fillReport(filePath, parameters, jrTMDataSourse);
+            JasperViewer.viewReport(fillReport, false);
+        } catch (JRException e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_reportBtnActionPerformed
@@ -608,9 +686,21 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserPropertyChange
-   
+
 
     }//GEN-LAST:event_jDateChooserPropertyChange
+
+    private void jTextField1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTextField1PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1PropertyChange
+
+    private void jDateChooserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDateChooserFocusGained
+
+    }//GEN-LAST:event_jDateChooserFocusGained
+
+    private void jDateChooserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDateChooserFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDateChooserFocusLost
 
     private synchronized void cancelAppointment() {
         String appointmentNo = getselectedAppointmentNo();
