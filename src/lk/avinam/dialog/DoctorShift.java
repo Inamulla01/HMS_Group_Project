@@ -7,6 +7,15 @@ package lk.avinam.dialog;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.DefaultComboBoxModel;
+import lk.avinam.connection.MySQL;
+import raven.toast.Notifications;
 
 /**
  *
@@ -14,17 +23,30 @@ import java.awt.Color;
  */
 public class DoctorShift extends javax.swing.JDialog {
 
-//    public DoctorShift(java.awt.Frame parent, boolean modal, int doctorId) {
-//        super(parent, modal);
-////        this.doctorId = doctorId;
-//        initComponents();
-//        init();
-//    }
-    
-    public DoctorShift(java.awt.Frame parent, boolean modal) {
+    private int doctorId;
+    private Connection conn;
+    private Map<String, Integer> shiftTypeMap;
+    private Map<String, Integer> wardTypeMap;
+
+    public DoctorShift(java.awt.Frame parent, boolean modal, int doctorId) {
         super(parent, modal);
+        this.doctorId = doctorId;
+        this.conn = MySQL.getConnection();
+        this.shiftTypeMap = new HashMap<>();
+        this.wardTypeMap = new HashMap<>();
         initComponents();
         init();
+        loadComboBoxData();
+    }
+
+    public DoctorShift(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        this.conn = MySQL.getConnection();
+        this.shiftTypeMap = new HashMap<>();
+        this.wardTypeMap = new HashMap<>();
+        initComponents();
+        init();
+        loadComboBoxData();
     }
 
     private void init() {
@@ -34,15 +56,146 @@ public class DoctorShift extends javax.swing.JDialog {
         FlatSVGIcon cancelIcon = new FlatSVGIcon("lk/avinam/icon/cancel.svg", 15, 15);
         cancelIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#03045E")));
         cancelBtn.setIcon(cancelIcon);
-        staffShift.setMinSelectableDate(new java.util.Date());
+        doctorShift.setMinSelectableDate(new java.util.Date());
+
     }
 
+    private void loadComboBoxData() {
+        loadShiftTypes();
+        loadWardTypes();
+    }
+
+    private void loadShiftTypes() {
+        try {
+            String query = "SELECT shift_type_id, shift_type FROM shift_type";
+            ResultSet rs = MySQL.executeSearch(query);
+            
+            DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+            shiftTypeMap.clear();
+            
+            while (rs.next()) {
+                int id = rs.getInt("shift_type_id");
+                String type = rs.getString("shift_type");
+                model.addElement(type);
+                shiftTypeMap.put(type, id);
+            }
+            
+            jComboBox1.setModel(model);
+            rs.close();
+        } catch (SQLException e) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, 
+                "Error loading shift types");
+         
+        }
+    }
+
+    private void loadWardTypes() {
+        try {
+            String query = "SELECT ward_id, ward_type FROM ward_type";
+            ResultSet rs = MySQL.executeSearch(query);
+            
+            DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+            wardTypeMap.clear();
+            
+            while (rs.next()) {
+                int id = rs.getInt("ward_id");
+                String type = rs.getString("ward_type");
+                model.addElement(type);
+                wardTypeMap.put(type, id);
+            }
+            
+            jComboBox2.setModel(model);
+            rs.close();
+        } catch (SQLException e) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, 
+                "Error loading ward types");
+        }
+    }
+
+    private boolean isShiftExists() {
+        try {
+            String query = "SELECT COUNT(*) FROM Doctor_shift_schedule WHERE doctor_id = ? AND date = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, doctorId);
+            java.sql.Date sqlDate = new java.sql.Date(doctorShift.getDate().getTime());
+            pstmt.setDate(2, sqlDate);
+            
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+            rs.close();
+            pstmt.close();
+        } catch (SQLException e) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, 
+                "Error checking existing shifts");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private void saveDoctorShift() {
+        // Validate inputs
+        if (doctorShift.getDate() == null) {
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_RIGHT, 
+                "Please select a date");
+            return;
+        }
+        
+        if (jComboBox1.getSelectedItem() == null || jComboBox1.getSelectedIndex() == 0) {
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_RIGHT, 
+                "Please select a shift type");
+            return;
+        }
+        
+        if (jComboBox2.getSelectedItem() == null || jComboBox2.getSelectedIndex() == 0) {
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_RIGHT, 
+                "Please select a ward type");
+            return;
+        }
+        
+        // Check if shift already exists for this doctor on selected date
+        if (isShiftExists()) {
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_RIGHT, 
+                "A shift already exists for this doctor on the selected date");
+            return;
+        }
+        
+        try {
+            String query = "INSERT INTO Doctor_shift_schedule (date, doctor_id, ward_id, shift_type_id) VALUES (?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            
+            // Convert java.util.Date to java.sql.Date
+            java.sql.Date sqlDate = new java.sql.Date(doctorShift.getDate().getTime());
+            
+            pstmt.setDate(1, sqlDate);
+            pstmt.setInt(2, doctorId);
+            pstmt.setInt(3, wardTypeMap.get(jComboBox2.getSelectedItem().toString()));
+            pstmt.setInt(4, shiftTypeMap.get(jComboBox1.getSelectedItem().toString()));
+            
+            int rowsAffected = pstmt.executeUpdate();
+            pstmt.close();
+            
+            if (rowsAffected > 0) {
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_RIGHT, 
+                    "Doctor shift added successfully");
+                dispose();
+            } else {
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, 
+                    "Failed to add doctor shift");
+            }
+            
+        } catch (SQLException e) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, 
+                "Error saving doctor shift: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        staffShift = new com.toedter.calendar.JDayChooser();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -50,6 +203,7 @@ public class DoctorShift extends javax.swing.JDialog {
         addBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox<>();
+        doctorShift = new com.toedter.calendar.JCalendar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -74,6 +228,11 @@ public class DoctorShift extends javax.swing.JDialog {
         addBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         addBtn.setForeground(new java.awt.Color(144, 224, 239));
         addBtn.setText("Save");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         cancelBtn.setBackground(new java.awt.Color(202, 240, 248));
         cancelBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
@@ -96,7 +255,8 @@ public class DoctorShift extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(doctorShift, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -105,8 +265,7 @@ public class DoctorShift extends javax.swing.JDialog {
                             .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(staffShift, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, 0, 574, Short.MAX_VALUE)
                             .addComponent(jSeparator1)
                             .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(16, Short.MAX_VALUE))
@@ -121,7 +280,7 @@ public class DoctorShift extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(staffShift, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(doctorShift, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -148,8 +307,12 @@ public class DoctorShift extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_cancelBtnActionPerformed
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        saveDoctorShift();
+    }//GEN-LAST:event_addBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,12 +336,12 @@ public class DoctorShift extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
     private javax.swing.JButton cancelBtn;
+    private com.toedter.calendar.JCalendar doctorShift;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private com.toedter.calendar.JDayChooser staffShift;
     // End of variables declaration//GEN-END:variables
 }

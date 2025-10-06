@@ -36,7 +36,6 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         loadDoctorTable();
         cancelBtn.setVisible(false);
         updateBtn.setVisible(false);
-        viewBtn.setVisible(false);
         buttonGroup1.clearSelection();
         setupRadioButtonToggle();
     }
@@ -53,9 +52,6 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         FlatSVGIcon searchIcon = new FlatSVGIcon("lk/avinam/icon/search.svg", 15, 15);
         searchIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FFFFFF")));
         searchBtn.setIcon(searchIcon);
-        FlatSVGIcon eyeIcon = new FlatSVGIcon("lk/avinam/icon/eye.svg", 20, 20);
-        eyeIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#FFFFFF")));
-        viewBtn.setIcon(eyeIcon);
         FlatSVGIcon updateIcon = new FlatSVGIcon("lk/avinam/icon/update.svg", 20, 20);
         updateIcon.setColorFilter(new FlatSVGIcon.ColorFilter(c -> Color.decode("#CAF0F8")));
         updateBtn.setIcon(updateIcon);
@@ -127,7 +123,6 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
                 updateCancelButtonAppearance(currentStatus);
                 cancelBtn.setVisible(true);
                 updateBtn.setVisible(true);
-                viewBtn.setVisible(true);
             }
         });
     }
@@ -160,7 +155,6 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
     public void disableUpdateButton() {
         cancelBtn.setVisible(false);
         updateBtn.setVisible(false);
-        viewBtn.setVisible(false);
     }
 
     private void openUpdateDialog() {
@@ -175,7 +169,7 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
             ResultSet rs = MySQL.executeSearch(query);
 
             if (rs.next()) {
-                DoctorProfile dialog = new DoctorProfile((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), true, rs, this);
+                DoctorProfile dialog = new DoctorProfile((java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this), true, rs);
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
                 disableUpdateButton();
@@ -279,7 +273,6 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         searchBtn = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        viewBtn = new javax.swing.JButton();
         reportBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -420,18 +413,6 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
             }
         });
 
-        viewBtn.setBackground(new java.awt.Color(0, 180, 216));
-        viewBtn.setFont(new java.awt.Font("Nunito ExtraBold", 1, 14)); // NOI18N
-        viewBtn.setForeground(new java.awt.Color(255, 255, 255));
-        viewBtn.setText("View All");
-        viewBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        viewBtn.setFocusable(false);
-        viewBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewBtnActionPerformed(evt);
-            }
-        });
-
         reportBtn.setBackground(new java.awt.Color(3, 4, 94));
         reportBtn.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         reportBtn.setForeground(new java.awt.Color(144, 224, 239));
@@ -468,8 +449,6 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -496,8 +475,7 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
                     .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jRadioButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
                 .addContainerGap())
@@ -524,10 +502,6 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
         performSearch();
     }//GEN-LAST:event_searchBtnActionPerformed
 
-    private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_viewBtnActionPerformed
-
     private void reportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_reportBtnActionPerformed
@@ -540,7 +514,7 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
             updateCancelButtonAppearance(currentStatus);
             cancelBtn.setVisible(true);
             updateBtn.setVisible(true);
-            viewBtn.setVisible(true);
+
         }
     }//GEN-LAST:event_doctorTableMouseClicked
 
@@ -608,6 +582,5 @@ public class DoctorManagementPanel extends javax.swing.JPanel {
     private javax.swing.JButton reportBtn;
     private javax.swing.JButton searchBtn;
     private javax.swing.JButton updateBtn;
-    private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables
 }
