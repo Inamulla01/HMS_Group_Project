@@ -400,7 +400,6 @@ public class DoctorProfile extends javax.swing.JDialog {
             dialog.setVisible(true);
             dialog.dispose();
             loadShiftSchedules();
-
         }
     }
 
