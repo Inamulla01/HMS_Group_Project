@@ -1,10 +1,21 @@
 package lk.avinam.dialog;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import lk.avinam.connection.MySQL;
 import lk.avinam.panel.DoctorManagementPanel;
@@ -17,24 +28,19 @@ public class DoctorProfile extends javax.swing.JDialog {
     private DoctorManagementPanel managementPanel;
     private boolean isOutpatient;
 
-    public DoctorProfile(java.awt.Frame parent, boolean modal, ResultSet doctorData, DoctorManagementPanel managementPanel) {
+    public DoctorProfile(java.awt.Frame parent, boolean modal, ResultSet doctorData) {
         super(parent, modal);
         initComponents();
         init();
         populateFields(doctorData);
         checkDoctorType();
         updatePanelVisibility();
-        this.managementPanel = managementPanel;
     }
 
     public DoctorProfile(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         init();
-    }
-
-    public void setManagementPanel(DoctorManagementPanel managementPanel) {
-        this.managementPanel = managementPanel;
     }
 
     private void init() {
@@ -53,6 +59,218 @@ public class DoctorProfile extends javax.swing.JDialog {
         FlatSVGIcon addIcon2 = new FlatSVGIcon("lk/avinam/icon/delete.svg", 20, 20);
         addIcon2.setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.RED));
         deleteBtn1.setIcon(addIcon2);
+    }
+
+    private void loadShiftSchedules() {
+        try {
+            jPanel3.removeAll();
+            jPanel3.setLayout(new BoxLayout(jPanel3, BoxLayout.Y_AXIS));
+
+            String query = "SELECT * FROM `doctor_shift_view`" +
+                         "WHERE doctor_id = " + doctorId + " ";
+
+            ResultSet rs = MySQL.executeSearch(query);
+
+            boolean hasData = false;
+
+            while (rs.next()) {
+                hasData = true;
+                int shiftId = rs.getInt("Doctor_shift_schedule_id");
+                String date = rs.getString("date");
+                String ward = rs.getString("ward_type");
+                String shift = rs.getString("shift_type");
+
+                // Create main card panel
+                JPanel card = new JPanel();
+                card.setLayout(new BorderLayout(10, 5));
+                card.setBackground(Color.WHITE);
+                card.setBorder(BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(new Color(200, 200, 200)),
+                        BorderFactory.createEmptyBorder(15, 15, 15, 15)
+                ));
+                card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 80));
+
+                // Create content panel
+                JPanel contentPanel = new JPanel();
+                contentPanel.setLayout(new GridLayout(2, 1, 5, 5));
+                contentPanel.setBackground(Color.WHITE);
+                contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
+
+                // Day label
+                JLabel dayLabel = new JLabel("Available Day: " + date);
+                dayLabel.setFont(new Font("Nunito SemiBold", Font.BOLD, 14));
+                dayLabel.setForeground(new Color(3, 4, 94));
+
+                // Shift label
+                JLabel shiftLabel = new JLabel("Available Shift: " + shift + " - " + ward);
+                shiftLabel.setFont(new Font("Nunito SemiBold", Font.PLAIN, 12));
+                shiftLabel.setForeground(Color.DARK_GRAY);
+
+                contentPanel.add(dayLabel);
+                contentPanel.add(shiftLabel);
+
+                // Delete button
+                JButton deleteBtn = new JButton("Delete");
+                deleteBtn.setFont(new Font("Nunito ExtraBold", Font.BOLD, 12));
+                deleteBtn.setForeground(Color.WHITE);
+                deleteBtn.setBackground(Color.RED);
+                deleteBtn.setFocusPainted(false);
+                deleteBtn.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
+                deleteBtn.setPreferredSize(new Dimension(100, 35));
+
+                deleteBtn.addActionListener(e -> {
+                    int confirm = JOptionPane.showConfirmDialog(this,
+                            "Are you sure you want to delete this shift?",
+                            "Confirm Delete", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        try {
+                            String deleteQuery = "DELETE FROM doctor_shift_schedule WHERE Doctor_shift_schedule_id=" + shiftId;
+                            MySQL.executeIUD(deleteQuery);
+                            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_RIGHT, "Shift deleted!");
+                            loadShiftSchedules();
+                        } catch (Exception ex) {
+                            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Error deleting shift: " + ex.getMessage());
+                        }
+                    }
+                });
+
+                // Add components to card
+                card.add(contentPanel, BorderLayout.CENTER);
+                card.add(deleteBtn, BorderLayout.EAST);
+
+                jPanel3.add(card);
+                jPanel3.add(Box.createRigidArea(new Dimension(0, 10))); // Add spacing between cards
+            }
+
+            // Add empty state message if no data
+            if (!hasData) {
+                JPanel emptyPanel = new JPanel();
+                emptyPanel.setLayout(new BorderLayout());
+                emptyPanel.setBackground(Color.WHITE);
+                emptyPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+
+                JLabel emptyLabel = new JLabel("No shift schedules available", JLabel.CENTER);
+                emptyLabel.setFont(new Font("Nunito SemiBold", Font.ITALIC, 14));
+                emptyLabel.setForeground(Color.GRAY);
+
+                emptyPanel.add(emptyLabel, BorderLayout.CENTER);
+                jPanel3.add(emptyPanel);
+            }
+
+            jPanel3.revalidate();
+            jPanel3.repaint();
+
+        } catch (SQLException e) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Error loading shifts: " + e.getMessage());
+        }
+    }
+
+    private void loadOutpatientSchedules() {
+        try {
+            schedulePanel.removeAll();
+            schedulePanel.setLayout(new BoxLayout(schedulePanel, BoxLayout.Y_AXIS));
+
+            String query = "SELECT * FROM `doctor_schedule_view` " +
+                         "WHERE `doctor_id` = " + doctorId + " ";
+
+            ResultSet rs = MySQL.executeSearch(query);
+
+            boolean hasData = false;
+
+            while (rs.next()) {
+                hasData = true;
+                int scheduleId = rs.getInt("date_has_time_id");
+                String date = rs.getString("availability_date");
+                String from = rs.getString("availability_time_from");
+                String to = rs.getString("availability_time_to");
+
+                // Create main card panel
+                JPanel card = new JPanel();
+                card.setLayout(new BorderLayout(10, 5));
+                card.setBackground(Color.WHITE);
+                card.setBorder(BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(new Color(200, 200, 200)),
+                        BorderFactory.createEmptyBorder(15, 15, 15, 15)
+                ));
+                card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 80));
+
+                // Create content panel
+                JPanel contentPanel = new JPanel();
+                contentPanel.setLayout(new GridLayout(2, 1, 5, 5));
+                contentPanel.setBackground(Color.WHITE);
+                contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
+
+                // Day label
+                JLabel dayLabel = new JLabel("Available Day: " + date);
+                dayLabel.setFont(new Font("Nunito SemiBold", Font.BOLD, 14));
+                dayLabel.setForeground(new Color(3, 4, 94));
+
+                // Time label
+                JLabel timeLabel = new JLabel("Available Time From: " + from + " To: " + to);
+                timeLabel.setFont(new Font("Nunito SemiBold", Font.PLAIN, 12));
+                timeLabel.setForeground(Color.DARK_GRAY);
+
+                contentPanel.add(dayLabel);
+                contentPanel.add(timeLabel);
+
+                // Delete button
+                JButton deleteBtn = new JButton("Delete");
+                deleteBtn.setFont(new Font("Nunito ExtraBold", Font.BOLD, 12));
+                deleteBtn.setForeground(Color.WHITE);
+                deleteBtn.setBackground(Color.RED);
+                deleteBtn.setFocusPainted(false);
+                deleteBtn.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
+                deleteBtn.setPreferredSize(new Dimension(100, 35));
+
+                deleteBtn.addActionListener(e -> {
+                    int confirm = JOptionPane.showConfirmDialog(this,
+                            "Are you sure you want to delete this schedule?",
+                            "Confirm Delete", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        try {
+                            String deleteQuery = "DELETE FROM date_has_time WHERE date_has_time_id=" + scheduleId;
+                            MySQL.executeIUD(deleteQuery);
+                            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_RIGHT, "Schedule deleted!");
+                            loadOutpatientSchedules();
+                        } catch (Exception ex) {
+                            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Error deleting schedule: " + ex.getMessage());
+                        }
+                    }
+                });
+
+                // Add components to card
+                card.add(contentPanel, BorderLayout.CENTER);
+                card.add(deleteBtn, BorderLayout.EAST);
+
+                schedulePanel.add(card);
+                schedulePanel.add(Box.createRigidArea(new Dimension(0, 10))); // Add spacing between cards
+            }
+
+            // Add empty state message if no data
+            if (!hasData) {
+                JPanel emptyPanel = new JPanel();
+                emptyPanel.setLayout(new BorderLayout());
+                emptyPanel.setBackground(Color.WHITE);
+                emptyPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
+
+                JLabel emptyLabel = new JLabel("No outpatient schedules available", JLabel.CENTER);
+                emptyLabel.setFont(new Font("Nunito SemiBold", Font.ITALIC, 14));
+                emptyLabel.setForeground(Color.GRAY);
+
+                emptyPanel.add(emptyLabel, BorderLayout.CENTER);
+                schedulePanel.add(emptyPanel);
+            }
+
+            schedulePanel.revalidate();
+            schedulePanel.repaint();
+
+        } catch (SQLException e) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Error loading schedules: " + e.getMessage());
+        }
+    }
+
+    public void setManagementPanel(DoctorManagementPanel managementPanel) {
+        this.managementPanel = managementPanel;
     }
 
     private void populateFields(ResultSet doctorData) {
@@ -153,16 +371,35 @@ public class DoctorProfile extends javax.swing.JDialog {
             availableBtn1.setVisible(false);
             scheduleText.setVisible(true);
             jLabel18.setVisible(false);
-            
+            loadOutpatientSchedules();
+
         } else {
-            
+
             schedulePanel.setVisible(false);
             jPanel3.setVisible(true);
             availableBtn.setVisible(false);
             availableBtn1.setVisible(true);
             scheduleText.setVisible(false);
             jLabel18.setVisible(true);
-            
+            loadShiftSchedules();
+
+        }
+    }
+
+    private void availableBtnSwitch() {
+        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        if (isOutpatient) {
+            AddSchedule dialog = new AddSchedule(parentFrame, true, doctorId);
+            dialog.setLocationRelativeTo(parentFrame);
+            dialog.setVisible(true);
+            dialog.dispose();
+            loadOutpatientSchedules();
+        } else {
+            DoctorShift dialog = new DoctorShift(parentFrame, true, doctorId);
+            dialog.setLocationRelativeTo(parentFrame);
+            dialog.setVisible(true);
+            dialog.dispose();
+            loadShiftSchedules();
         }
     }
 
@@ -269,7 +506,7 @@ public class DoctorProfile extends javax.swing.JDialog {
         schedulePanelLayout.setVerticalGroup(
             schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(schedulePanelLayout.createSequentialGroup()
-                .addGap(7, 7, 7)
+                .addGap(15, 15, 15)
                 .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel12)
                     .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -459,7 +696,7 @@ public class DoctorProfile extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(slmcId, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(password, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
+                                .addComponent(password, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(scheduleText)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -474,7 +711,7 @@ public class DoctorProfile extends javax.swing.JDialog {
                                     .addComponent(qualification)
                                     .addComponent(lastName)
                                     .addComponent(contact))))))
-                .addGap(28, 28, 28))
+                .addGap(34, 34, 34))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -530,7 +767,7 @@ public class DoctorProfile extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
         );
 
         pack();
@@ -538,16 +775,7 @@ public class DoctorProfile extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void availableBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_availableBtnActionPerformed
-//        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-//        if (isOutpatient) {
-//            AddSchedule dialog = new AddSchedule(parentFrame, true, doctorId);
-//            dialog.setLocationRelativeTo(parentFrame);
-//            dialog.setVisible(true);
-//        } else {
-//            DoctorShift dialog = new DoctorShift(parentFrame, true, doctorId);
-//            dialog.setLocationRelativeTo(parentFrame);
-//            dialog.setVisible(true);
-//        }
+        availableBtnSwitch();
     }//GEN-LAST:event_availableBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
@@ -555,7 +783,7 @@ public class DoctorProfile extends javax.swing.JDialog {
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void availableBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_availableBtn1ActionPerformed
-        availableBtnActionPerformed(evt);
+        availableBtnSwitch();
     }//GEN-LAST:event_availableBtn1ActionPerformed
 
     private void firstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameActionPerformed

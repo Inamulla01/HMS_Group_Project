@@ -64,7 +64,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="DAvailableDateCombo" pref="281" max="32767" attributes="0"/>
-                                      <Component id="getAppointmentNo" max="32767" attributes="0"/>
+                                      <Component id="getAppointmentRoomNo" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -112,13 +112,13 @@
                   </Group>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="getAppointmentNo" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="getAppointmentRoomNo" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                       <Component id="getappointmentFree" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="addBtn" pref="47" max="32767" attributes="0"/>
-                      <Component id="cancelBtn" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="addBtn" min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="cancelBtn" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
@@ -336,7 +336,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="getAppointmentNo">
+        <Component class="javax.swing.JTextField" name="getAppointmentRoomNo">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

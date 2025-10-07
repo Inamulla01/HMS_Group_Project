@@ -68,21 +68,21 @@ public class AddDoctor extends javax.swing.JDialog {
     }
 
     private void loadDoctorTypes() {
-        try {
-            ResultSet rs = MySQL.executeSearch("SELECT * FROM doctor_type");
-            Vector<String> doctorTypes = new Vector();
-            doctorTypes.add("Select Doctor Type");
+            try {
+                ResultSet rs = MySQL.executeSearch("SELECT * FROM doctor_type");
+                Vector<String> doctorTypes = new Vector();
+                doctorTypes.add("Select Doctor Type");
 
-            while (rs.next()) {
-                String doctorTypeName = rs.getString("doctor_type");
-                doctorTypes.add(doctorTypeName);
+                while (rs.next()) {
+                    String doctorTypeName = rs.getString("doctor_type");
+                    doctorTypes.add(doctorTypeName);
+                }
+
+                DefaultComboBoxModel dcm = new DefaultComboBoxModel(doctorTypes);
+                jComboBox2.setModel(dcm);
+            } catch (Exception e) {
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Error loading doctor types: " + e.getMessage());
             }
-
-            DefaultComboBoxModel dcm = new DefaultComboBoxModel(doctorTypes);
-            jComboBox2.setModel(dcm);
-        } catch (Exception e) {
-            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, "Error loading doctor types: " + e.getMessage());
-        }
     }
 
     private void generatePassword() {

@@ -8,16 +8,23 @@ import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import javax.swing.JOptionPane;
 import lk.avinam.util.AppIconUtil;
-import java.sql.SQLException;
-import lk.avinam.connection.MySQL;
-import java.sql.Connection;
-import java.sql.ResultSet;
 
 /**
  *
  * @author Inaamul Hasan
  */
 public class loginScreen extends javax.swing.JFrame {
+
+    String labUser = "lab";
+    String labPassword = "123";
+    String adminUser = "admin";
+    String adminPassword = "123";
+    String doctorUser = "doctor";
+    String doctorPassword = "123";
+    String pharmaUser = "pharma";
+    String pharmaPassword = "123";
+    String staffUser = "staff";
+    String staffPassword = "123";
 
     /**
      * Creates new form loginScreen
@@ -28,7 +35,7 @@ public class loginScreen extends javax.swing.JFrame {
     }
 
     private void init() {
-        AppIconUtil.applyIcon(this);
+AppIconUtil.applyIcon(this);
     }
 
     /**
@@ -132,70 +139,45 @@ public class loginScreen extends javax.swing.JFrame {
 
     private void logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInActionPerformed
         // TODO add your handling code here:
+
         String UserName = userName.getText().trim();
         String passwordText = new String(password.getPassword()).trim();
-
         if (UserName.isEmpty() || passwordText.isEmpty()) {
+            // Show error message if fields are empty
             JOptionPane.showMessageDialog(
                     this,
                     "Username and Password cannot be empty!",
                     "Login Error",
                     JOptionPane.ERROR_MESSAGE
             );
-            return;
-        }
+        } else {
+            System.out.println(UserName);
+            System.out.println(passwordText);
 
-        try (Connection con = MySQL.getConnection()) {
-            String sql = "SELECT role_id FROM staff WHERE email=? AND password=?";
-            java.sql.PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, UserName);
-            pst.setString(2, passwordText);
-
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                int roleId = rs.getInt("role_id");
+            if (UserName.equals(labUser) && passwordText.equals(labPassword)) {
                 this.dispose();
-
-                switch (roleId) {
-                    case 1:
-                        new ReceptionDashboard().setVisible(true);
-                        break;
-                    case 2:
-                        new PharmacistDashboard().setVisible(true);
-                        break;
-                    case 3:
-                        new DoctorDashboard().setVisible(true);
-                        break;
-                    case 4:
-                        new LaboratoryDashboard().setVisible(true);
-                        break;
-                    case 6:
-                        new AdminDashboard().setVisible(true);
-                        break;
-                    default:
-                        JOptionPane.showMessageDialog(this,
-                                "Unknown role ID",
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                }
+                new LaboratoryDashboard().setVisible(true);
+            } else if (UserName.equals(adminUser) && passwordText.equals(adminPassword)) {
+                this.dispose();
+                new AdminDashboard().setVisible(true);
+            } else if (UserName.equals(doctorUser) && passwordText.equals(doctorPassword)) {
+                this.dispose();
+                new DoctorDashboard().setVisible(true);
+            } else if (UserName.equals(pharmaUser) && passwordText.equals(pharmaPassword)) {
+                this.dispose();
+                new PharmacistDashboard().setVisible(true);
+            } else if (UserName.equals(staffUser) && passwordText.equals(staffPassword)) {
+                this.dispose();
+            
             } else {
-                JOptionPane.showMessageDialog(this,
+                JOptionPane.showMessageDialog(
+                        this,
                         "Invalid Username or Password!",
                         "Login Failed",
-                        JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.ERROR_MESSAGE
+                );
             }
 
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this,
-                    "Database error: " + e.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,
-                    "Unexpected error: " + e.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
         }
 
 

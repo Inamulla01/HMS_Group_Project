@@ -8,16 +8,23 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import lk.avinam.connection.MySQL;
 import lk.avinam.dialog.ViewMorePatient;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -30,6 +37,8 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
         init();
         loadDoctorAppointmentDetails();
         radioButtonListener();
+        addAppointmentNoListener();
+        addDateChooserListener();
         viewBtn.setVisible(false);
     }
 
@@ -68,6 +77,45 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
             }
         });
     }
+    
+    private void addAppointmentNoListener() {
+        jTextField1.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            private void search() {
+                SearchFilters();
+            }
+
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+        });
+    }
+
+
+    private void addDateChooserListener() {
+    jDateChooser.getDateEditor().getUiComponent().addKeyListener(new java.awt.event.KeyAdapter() {
+        @Override
+        public void keyReleased(java.awt.event.KeyEvent e) {
+            SearchFilters();
+        }
+    });
+
+    jDateChooser.getDateEditor().addPropertyChangeListener(evt -> {
+        if ("date".equals(evt.getPropertyName())) {
+            SearchFilters();
+        }
+    });
+}
     
     private void SearchFilters() {
         String sAppointmentNo = jTextField1.getText().trim();
@@ -249,6 +297,8 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
             }
         });
 
+        jDateChooser.setForeground(new java.awt.Color(3, 4, 94));
+        jDateChooser.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         jDateChooser.setOpaque(false);
         jDateChooser.setPreferredSize(new java.awt.Dimension(106, 53));
 
@@ -368,10 +418,11 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jDateChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jRadioButtonCancelled)
-                        .addComponent(jRadioButtonCompleted)
-                        .addComponent(jRadioButtonPending))
-                    .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButtonCancelled)
+                            .addComponent(jRadioButtonCompleted)
+                            .addComponent(jRadioButtonPending))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
                 .addGap(14, 14, 14))
@@ -389,7 +440,17 @@ public class DoctorDashboardAppointment extends javax.swing.JPanel {
     }//GEN-LAST:event_viewBtnActionPerformed
 
     private void reportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportBtnActionPerformed
-        // TODO add your handling code here:
+        try{
+            InputStream filePath = getClass().getResourceAsStream("/lk/avinam/report/LoadAppointmentDetailsDoctorTable.jasper");
+
+            HashMap<String, Object> parameters = new HashMap<>();
+            
+            JRTableModelDataSource jrTMDataSourse = new JRTableModelDataSource(dAppointmentTable.getModel());
+            JasperPrint fillReport = JasperFillManager.fillReport(filePath, parameters,jrTMDataSourse);
+            JasperViewer.viewReport(fillReport,false);
+        }catch(JRException e){
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reportBtnActionPerformed
 
     private void jRadioButtonPendingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPendingActionPerformed

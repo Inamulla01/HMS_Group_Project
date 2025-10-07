@@ -10,18 +10,26 @@ import lk.avinam.dialog.UpdateAppointment;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import lk.avinam.connection.MySQL;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.view.JasperViewer;
+import org.springframework.beans.propertyeditors.InputSourceEditor;
 import raven.toast.Notifications;
 
 /**
@@ -38,6 +46,10 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         cancelBtn.setVisible(false);
         completedBtn.setVisible(false);
         radioButtonListener();
+        addAppointmentNoListener();
+        addDoctorIdListener();
+        addDateChooserListener();
+
     }
 
     private void init() {
@@ -74,7 +86,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         arAppointmentTable.getSelectionModel().addListSelectionListener(event -> {
             if (!event.getValueIsAdjusting()) {
                 int selectedRow = arAppointmentTable.getSelectedRow();
-                if (selectedRow == -1) { // nothing selected
+                if (selectedRow == -1) {
                     updateBtn.setVisible(false);
                     cancelBtn.setVisible(false);
                     completedBtn.setVisible(false);
@@ -91,11 +103,73 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
 
     }
 
+    private void addAppointmentNoListener() {
+        jTextField1.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            private void search() {
+                SearchFilters();
+            }
+
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+        });
+    }
+
+    private void addDoctorIdListener() {
+        jTextField2.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            private void search() {
+                SearchFilters();
+            }
+
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                search();
+            }
+        });
+    }
+
+    private void addDateChooserListener() {
+    jDateChooser.getDateEditor().getUiComponent().addKeyListener(new java.awt.event.KeyAdapter() {
+        @Override
+        public void keyReleased(java.awt.event.KeyEvent e) {
+            SearchFilters();
+        }
+    });
+
+    jDateChooser.getDateEditor().addPropertyChangeListener(evt -> {
+        if ("date".equals(evt.getPropertyName())) {
+            SearchFilters();
+        }
+    });
+}
+
+
     private void SearchFilters() {
         String sAppointmentNo = jTextField1.getText().trim();
         String sslmcId = jTextField2.getText().trim();
         Date selectedDate = jDateChooser.getDate();
-        
+
         String status = "all";
 
         if (jRadioButtonPending.isSelected()) {
@@ -110,12 +184,12 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
     }
 
     private void loadAppointmentDetails() {
-        loadAppointmentDetails("", "",null, "all");
+        loadAppointmentDetails("", "", null, "all");
     }
 
     private void loadAppointmentDetails(String sAppointmentNo, String sslmcId, Date selectedDate, String status) {
         try {
-            String query = "SELECT appointment_no,patient_name,slmc_id,doctor_name,specialization,appointment_room_no,availability_date,time_slot,appointment_status,price FROM appointment_view WHERE 1=1 ";
+            String query = "SELECT appointment_no,patient_name,slmc_id,doctor_name,appointment_room_no,availability_date,time_slot,appointment_status,price FROM appointment_view WHERE 1=1 ";
 
             if (sAppointmentNo != null && !sAppointmentNo.trim().isEmpty() && !sAppointmentNo.equals("Search By Appointment No")) {
                 query += " AND appointment_no LIKE '%" + sAppointmentNo + "%'";
@@ -124,10 +198,9 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
                 query += " AND slmc_id LIKE '%" + sslmcId + "%'";
             }
             if (selectedDate != null) {
-                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                 String dateToString = dateFormat.format(selectedDate);
-                 query += " AND availability_date = '"+dateToString+"' ";
-                 
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String dateToString = dateFormat.format(selectedDate);
+                query += " AND availability_date = '" + dateToString + "' ";
             }
 
             if (!status.equals("all")) {
@@ -149,7 +222,6 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
                 v.add(rs.getString("patient_name"));
                 v.add(rs.getString("slmc_id"));
                 v.add(rs.getString("doctor_name"));
-                v.add(rs.getString("specialization"));
                 v.add(rs.getString("appointment_room_no"));
                 v.add(rs.getString("availability_date"));
                 v.add(rs.getString("time_slot"));
@@ -180,7 +252,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         jRadioButtonPending.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 if (jRadioButtonPending.isSelected()) {
-                    buttonGroup1.clearSelection();;
+                    buttonGroup1.clearSelection();
                     loadAppointmentDetails();
                     evt.consume();
                 }
@@ -190,7 +262,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         jRadioButtonCompleted.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 if (jRadioButtonCompleted.isSelected()) {
-                    buttonGroup1.clearSelection();;
+                    buttonGroup1.clearSelection();
                     loadAppointmentDetails();
                     evt.consume();
                 }
@@ -200,7 +272,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         jRadioButtonCancelled.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 if (jRadioButtonCancelled.isSelected()) {
-                    buttonGroup1.clearSelection();;
+                    buttonGroup1.clearSelection();
                     loadAppointmentDetails();
                     evt.consume();
                 }
@@ -268,11 +340,11 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Appointment No", "Patient", "Doctor SLMC ID", "Doctor", "Doctor Specialized In", "Room", "Date", "Time Solt", "Price", "Status"
+                "Appointment No", "Patient", "Doctor SLMC ID", "Doctor", "Room", "Date", "Time Solt", "Price", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -287,7 +359,8 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(arAppointmentTable);
         if (arAppointmentTable.getColumnModel().getColumnCount() > 0) {
-            arAppointmentTable.getColumnModel().getColumn(4).setPreferredWidth(100);
+            arAppointmentTable.getColumnModel().getColumn(6).setMinWidth(120);
+            arAppointmentTable.getColumnModel().getColumn(6).setPreferredWidth(120);
         }
 
         updateBtn.setBackground(new java.awt.Color(0, 119, 182));
@@ -325,6 +398,11 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
                 jTextField1ActionPerformed(evt);
             }
         });
+        jTextField1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTextField1PropertyChange(evt);
+            }
+        });
 
         jTextField2.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         jTextField2.setText("Search By Doctor SLMC ID");
@@ -346,6 +424,14 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         jDateChooser.setFont(new java.awt.Font("Nunito SemiBold", 1, 16)); // NOI18N
         jDateChooser.setOpaque(false);
         jDateChooser.setPreferredSize(new java.awt.Dimension(106, 53));
+        jDateChooser.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jDateChooserFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jDateChooserFocusLost(evt);
+            }
+        });
         jDateChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jDateChooserPropertyChange(evt);
@@ -420,7 +506,8 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextField1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(9, 9, 9))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -501,7 +588,17 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void reportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportBtnActionPerformed
-        // TODO add your handling code here:
+        try {
+            InputStream filePath = getClass().getResourceAsStream("/lk/avinam/report/LoadAppointmentDetailsTable1.jasper");
+
+            HashMap<String, Object> parameters = new HashMap<>();
+
+            JRTableModelDataSource jrTMDataSourse = new JRTableModelDataSource(arAppointmentTable.getModel());
+            JasperPrint fillReport = JasperFillManager.fillReport(filePath, parameters, jrTMDataSourse);
+            JasperViewer.viewReport(fillReport, false);
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_reportBtnActionPerformed
 
     private void jRadioButtonCompletedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonCompletedActionPerformed
@@ -521,7 +618,7 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
         if (evt.getClickCount() == 1) {
             int row = arAppointmentTable.getSelectedRow();
             selectedAppointmentNo = (String) arAppointmentTable.getValueAt(row, 0);
-            selectedAppoinmentStatus = (String) arAppointmentTable.getValueAt(row, 9);
+            selectedAppoinmentStatus = (String) arAppointmentTable.getValueAt(row, 8);
             updateBtn.setVisible(true);
 
             try {
@@ -538,9 +635,11 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
             if ("Pending".equals(databaseStatus)) {
                 cancelBtn.setVisible(true);
                 completedBtn.setVisible(true);
+                updateBtn.setVisible(true);
             } else {
                 cancelBtn.setVisible(false);
                 completedBtn.setVisible(false);
+                updateBtn.setVisible(false);
             }
         }
 
@@ -587,14 +686,26 @@ public class AdminAndReceptionistAppointment extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserPropertyChange
-   
+
 
     }//GEN-LAST:event_jDateChooserPropertyChange
+
+    private void jTextField1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTextField1PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1PropertyChange
+
+    private void jDateChooserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDateChooserFocusGained
+
+    }//GEN-LAST:event_jDateChooserFocusGained
+
+    private void jDateChooserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDateChooserFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDateChooserFocusLost
 
     private synchronized void cancelAppointment() {
         String appointmentNo = getselectedAppointmentNo();
         MySQL.executeIUD("UPDATE appointment SET appointment.appointment_status_id = (SELECT appointment_status.appointment_status_id FROM appointment_status WHERE appointment_status = 'Cancelled') WHERE appointment.appointment_no = '" + appointmentNo + "'; ");
-        Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_RIGHT, "Appointment status updated to Cancelled.");
+        Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.TOP_RIGHT, "Appointment status updated to Cancelled.");
         loadAppointmentDetails();
         updateBtn.setVisible(false);
         cancelBtn.setVisible(false);
