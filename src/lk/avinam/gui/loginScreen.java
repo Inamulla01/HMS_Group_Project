@@ -19,6 +19,7 @@ import java.sql.ResultSet;
  */
 public class loginScreen extends javax.swing.JFrame {
 
+
     /**
      * Creates new form loginScreen
      */
@@ -28,7 +29,7 @@ public class loginScreen extends javax.swing.JFrame {
     }
 
     private void init() {
-        AppIconUtil.applyIcon(this);
+AppIconUtil.applyIcon(this);
     }
 
     /**
@@ -131,7 +132,7 @@ public class loginScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInActionPerformed
-        // TODO add your handling code here:
+         // TODO add your handling code here:
         String UserName = userName.getText().trim();
         String passwordText = new String(password.getPassword()).trim();
 
@@ -160,10 +161,10 @@ public class loginScreen extends javax.swing.JFrame {
                 switch (roleId) {
                     case 1:
                         new AdminDashboard().setVisible(true);
-                        break;          
+                        break;
                     case 2:
                         new AdminDashboard().setVisible(true);
-                        break;                
+                        break;
                     case 3:
                         new ReceptionDashboard().setVisible(true);
                         break;
@@ -171,7 +172,7 @@ public class loginScreen extends javax.swing.JFrame {
                         new LaboratoryDashboard().setVisible(true);
                         break;
                     case 5:
-                         new PharmacistDashboard().setVisible(true);
+                        new PharmacistDashboard().setVisible(true);
                         break;
                     default:
                         JOptionPane.showMessageDialog(this,
@@ -197,6 +198,8 @@ public class loginScreen extends javax.swing.JFrame {
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
+
+
 
     }//GEN-LAST:event_logInActionPerformed
 
